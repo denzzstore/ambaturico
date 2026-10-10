@@ -108,7 +108,7 @@
         }
         .game-title { font-weight: 800; font-size: 11px; color: #f8fafc; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-        /* Halaman LokTV & Pencarian Dracin */
+        /* Halaman KlikFilm & Pencarian */
         .search-box-stream {
             width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.3); background: rgba(15, 23, 42, 0.9); color: white; font-size: 13px; font-weight: 700; margin-bottom: 12px; outline: none;
         }
@@ -313,7 +313,7 @@
                 <button onclick="closeAiChat()" style="background:none; border:none; color:white; font-size:16px; font-weight:900; cursor:pointer;">✕</button>
             </div>
             <div class="ai-chat-body" id="chatBody">
-                <div class="chat-bubble bot">Halo kak Rico! Ada yang bisa dibantu seputar penelusuran LokTV, dracin, atau top up game?</div>
+                <div class="chat-bubble bot">Halo kak Rico! Ada yang bisa dibantu seputar penelusuran KlikFilm atau top up game?</div>
             </div>
             <div class="ai-chat-footer">
                 <input type="text" id="chatInput" placeholder="Ketik pesan..." onkeypress="if(event.key === 'Enter') sendAiMessage()">
@@ -350,7 +350,7 @@
                     <div class="quick-icon">🎬</div>
                     <div>
                         <div class="quick-text-title">Nonton Film</div>
-                        <div class="quick-text-desc">LokTV Bioskop & Dracin</div>
+                        <div class="quick-text-desc">KlikFilm & Bioskop</div>
                     </div>
                 </div>
                 <div class="quick-btn-card tv" onclick="openStreamingPage()">
@@ -424,29 +424,33 @@
             </div>
         </div>
 
-        <!-- HALAMAN LOKTV & PENCARIAN DRACIN EKSKLUSIF -->
+        <!-- HALAMAN PENCARIAN & PEMUTARAN KLIKFILM -->
         <div id="streamingPage">
             <button class="back-btn" onclick="goHome()">⬅ Kembali ke Beranda</button>
             
             <div class="card-box">
-                <div class="box-title"><span>🔍</span> LokTV - Cari Judul Film / Dracin Unik</div>
-                <input type="text" id="filmSearchInput" class="search-box-stream" placeholder="Ketik judul, CEO, balas dendam, fantasi..." oninput="filterStreamCatalog()">
+                <div class="box-title"><span>🔍</span> Cari Film / Dracin (Sumber: KlikFilm)</div>
+                <input type="text" id="filmSearchInput" class="search-box-stream" placeholder="Ketik judul film yang ingin dicari..." oninput="filterStreamCatalog()">
             </div>
 
-            <!-- Kotak Pemutar Video Pemutaran Film -->
+            <!-- Kotak Interaktif KlikFilm (Frame Langsung ke Sumber Web KlikFilm) -->
             <div id="activePlayerBox" class="card-box" style="display: none; text-align: center;">
-                <div id="nowPlayingTitle" style="font-size: 15px; font-weight: 900; color: #f8fafc; margin-bottom: 10px;">Judul Film</div>
-                <div style="width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 10px; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2);">
-                    <video id="playerVideo" controls autoplay style="width: 100%; height: 100%; object-fit: cover;">
-                        <source src="" type="video/mp4">
-                        Browser Anda tidak mendukung pemutar video.
-                    </video>
+                <div id="nowPlayingTitle" style="font-size: 15px; font-weight: 900; color: #f8fafc; margin-bottom: 10px;">Pemutaran KlikFilm</div>
+                
+                <!-- Menggunakan Iframe Resmi Langsung ke Link KlikFilm Search/Mobile -->
+                <div style="width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 10px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.2);">
+                    <iframe id="klikFilmFrame" src="" style="width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
                 </div>
+
+                <div style="margin-top: 10px; font-size: 11px; color: #94a3b8;">
+                    Menonton langsung terhubung ke database <a href="https://klikfilm.com/v3/mobile/search" target="_blank" style="color: #60a5fa; text-decoration: underline;">KlikFilm Mobile</a>
+                </div>
+
                 <button onclick="closeActivePlayer()" class="back-btn" style="margin-top: 10px; width: 100%;">Tutup Pemutar / Cari Film Lain</button>
             </div>
 
-            <!-- Katalog Film & Dracin Lengkap -->
-            <div class="section-header" style="margin-top: 15px;">📺 LokTV - Pilihan Dracin & Film Eksklusif</div>
+            <!-- Katalog Film & Dracin Asli -->
+            <div class="section-header" style="margin-top: 15px;">📺 Katalog Film & Dracin KlikFilm</div>
             <div id="streamCatalogGrid" class="stream-catalog-grid"></div>
         </div>
 
@@ -550,16 +554,16 @@
     </div>
 
     <script>
-        // Data Katalog LokTV & Dracin Eksklusif dengan link video terpisah/unik
+        // Data Katalog Film & Dracin dengan integrasi link KlikFilm
         const streamMoviesData = [
-            { title: 'The Double (Mo Yu Yun Jian)', genre: 'Dracin • Balas Dendam Kerajaan', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
-            { title: 'Hidden Love (Cinta Rahasia Sang CEO)', genre: 'Dracin Modern • Romantis Manis', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
-            { title: 'Unforgettable Love (Cinta Abadi Mafia)', genre: 'Dracin Pendek • CEO Dingin & Anak Kecil', img: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4' },
-            { title: 'The Eternal Love (Takdir Cinta Abadi)', genre: 'Dracin Fantasi • Time Travel Kerajaan', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
-            { title: 'My Fake Wife is a Billionaire', genre: 'Dracin • Komedi Romantis Perjodohan', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
-            { title: 'The Legend of Shen Li (Legenda Shen Li)', genre: 'Dracin Kolosal • Dewa & Siluman', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4' },
-            { title: 'The King\'s Avatar (Quan Zhi Gao Shou)', genre: 'Anime / Dracin eSports • Game Online', img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
-            { title: 'Accidentally in Love (Jatuh Cinta Karena Sial)', genre: 'Dracin Sekolah • Idola Populer', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' }
+            { title: 'The Double (Mo Yu Yun Jian)', genre: 'Dracin • Balas Dendam Kerajaan', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
+            { title: 'Hidden Love (Cinta Rahasia Sang CEO)', genre: 'Dracin Modern • Romantis Manis', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
+            { title: 'Unforgettable Love (Cinta Abadi Mafia)', genre: 'Dracin Pendek • CEO Dingin & Anak Kecil', img: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
+            { title: 'The Eternal Love (Takdir Cinta Abadi)', genre: 'Dracin Fantasi • Time Travel Kerajaan', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
+            { title: 'My Fake Wife is a Billionaire', genre: 'Dracin • Komedi Romantis Perjodohan', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
+            { title: 'The Legend of Shen Li (Legenda Shen Li)', genre: 'Dracin Kolosal • Dewa & Siluman', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
+            { title: 'The King\'s Avatar (Quan Zhi Gao Shou)', genre: 'Anime / Dracin eSports • Game Online', img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
+            { title: 'Accidentally in Love (Jatuh Cinta Karena Sial)', genre: 'Dracin Sekolah • Idola Populer', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' }
         ];
 
         const productsData = {
@@ -659,19 +663,16 @@
                 updateWatchBadge();
             }
 
-            document.getElementById('nowPlayingTitle').innerText = movie.title;
-            const videoElem = document.getElementById('playerVideo');
-            videoElem.src = movie.videoUrl;
-            videoElem.load();
-            videoElem.play();
+            document.getElementById('nowPlayingTitle').innerText = movie.title + " (KlikFilm Source)";
+            const frameElem = document.getElementById('klikFilmFrame');
+            frameElem.src = movie.searchUrl;
 
             document.getElementById('activePlayerBox').style.display = 'block';
             window.scrollTo({ top: 120, behavior: 'smooth' });
         }
 
         function closeActivePlayer() {
-            const videoElem = document.getElementById('playerVideo');
-            videoElem.pause();
+            document.getElementById('klikFilmFrame').src = "";
             document.getElementById('activePlayerBox').style.display = 'none';
         }
 
@@ -708,7 +709,7 @@
             isPremiumUser = true;
             localStorage.setItem('ambaturico_is_premium', 'true');
             updateWatchBadge();
-            alert('🎉 Akun kamu berhasil di-upgrade ke status PREMIUM. Nikmati streaming LokTV sepuasnya tanpa batas!');
+            alert('🎉 Akun kamu berhasil di-upgrade ke status PREMIUM. Nikmati streaming sepuasnya tanpa batas!');
         }
 
         function resetWatchLimitForDemo() {
@@ -884,7 +885,7 @@
             chatBody.innerHTML += `<div class="chat-bubble user">${input.value}</div>`;
             input.value = '';
             setTimeout(() => {
-                chatBody.innerHTML += `<div class="chat-bubble bot">Halo kak Rico! Cari dracin atau film unik apa di LokTV? Coba ketik judulnya di kolom pencarian menu Nonton ya!</div>`;
+                chatBody.innerHTML += `<div class="chat-bubble bot">Halo kak Rico! Cari film atau dracin apa di menu Nonton? Ketik judulnya ya!</div>`;
                 chatBody.scrollTop = chatBody.scrollHeight;
             }, 800);
         }

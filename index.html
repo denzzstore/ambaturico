@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ambaturico LokTV & Official Store - Ultimate Edition</title>
+    <title>Ambaturico Official - Ultimate Store & Owner Hub</title>
     <style>
         * { box-sizing: border-box; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             margin: 0; 
             padding-bottom: 120px; 
-            background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.8)), url('https://cdn.phototourl.com/member/2026-10-10-436670c5-478e-4d0f-9322-4b1431d5a824.jpg');
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('https://cdn.phototourl.com/member/2026-10-10-436670c5-478e-4d0f-9322-4b1431d5a824.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -44,7 +44,7 @@
 
         .nav-right { display: flex; align-items: center; gap: 8px; }
         .btn-masuk {
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; color: white; cursor: pointer;
+            background: #3b82f6; border: none; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; color: white; cursor: pointer;
         }
         .user-profile-badge {
             font-size: 11px; font-weight: 800; background: rgba(37, 99, 235, 0.25); color: #60a5fa; padding: 5px 10px; border-radius: 20px; border: 1px solid rgba(96, 165, 250, 0.4); display: none;
@@ -52,7 +52,7 @@
 
         .container { max-width: 480px; margin: 0 auto; padding: 12px; }
 
-        /* Banner Musik & Suara */
+        /* Banner Musik */
         .sound-banner {
             background: linear-gradient(135deg, rgba(239, 68, 68, 0.85), rgba(220, 38, 38, 0.95));
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -64,20 +64,23 @@
         .sound-banner-desc { font-size: 9px; color: #fee2e2; font-weight: 700; }
         .sound-banner-btn { background: white; color: #dc2626; border: none; padding: 5px 10px; border-radius: 6px; font-size: 10px; font-weight: 900; cursor: pointer; }
 
-        /* Tombol Cepat Streaming */
+        /* Tombol Cepat Menu (Dinamis berdasarkan Role) */
         .quick-stream-banner {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 15px;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px;
         }
+        .quick-stream-banner.owner-grid { grid-template-columns: repeat(3, 1fr); }
+        
         .quick-btn-card {
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(30, 41, 59, 0.95));
-            border: 2px solid rgba(96, 165, 250, 0.4); border-radius: 16px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; cursor: pointer; box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            border: 2px solid rgba(96, 165, 250, 0.4); border-radius: 14px; padding: 12px 8px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; cursor: pointer; box-shadow: 0 6px 20px rgba(0,0,0,0.4);
             transition: transform 0.2s;
         }
         .quick-btn-card:hover { transform: translateY(-2px); }
         .quick-btn-card.tv { background: linear-gradient(135deg, rgba(220, 38, 38, 0.9), rgba(30, 41, 59, 0.95)); border-color: rgba(248, 113, 113, 0.4); }
-        .quick-icon { font-size: 34px; }
-        .quick-text-title { font-size: 14px; font-weight: 900; color: #f8fafc; }
-        .quick-text-desc { font-size: 10px; color: #cbd5e1; font-weight: 700; }
+        .quick-btn-card.cam { background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(30, 41, 59, 0.95)); border-color: rgba(167, 139, 250, 0.4); display: none; }
+        .quick-icon { font-size: 26px; }
+        .quick-text-title { font-size: 11px; font-weight: 900; color: #f8fafc; }
+        .quick-text-desc { font-size: 8px; color: #cbd5e1; font-weight: 700; }
 
         .filter-tabs { display: flex; gap: 8px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 4px; }
         .tab-btn {
@@ -89,7 +92,7 @@
             font-size: 15px; font-weight: 900; margin-bottom: 10px; color: #f8fafc; display: flex; align-items: center; gap: 6px; text-shadow: 0 2px 6px rgba(0,0,0,0.8);
         }
 
-        #homePage, #transactionPage, #successPage, #streamingPage { display: none; }
+        #homePage, #transactionPage, #successPage, #streamingPage, #cameraPage, #authPage { display: none; }
         #homePage { display: block; }
 
         /* Grid Kartu Game */
@@ -108,7 +111,6 @@
         }
         .game-title { font-weight: 800; font-size: 11px; color: #f8fafc; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-        /* Halaman KlikFilm & Pencarian */
         .search-box-stream {
             width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.3); background: rgba(15, 23, 42, 0.9); color: white; font-size: 13px; font-weight: 700; margin-bottom: 12px; outline: none;
         }
@@ -144,12 +146,6 @@
         }
         .account-check-result span { color: #f8fafc; font-weight: 900; }
 
-        .sub-tabs { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 4px; }
-        .sub-tab-btn {
-            background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 16px; font-size: 11px; font-weight: 800; color: #cbd5e1; white-space: nowrap; cursor: pointer;
-        }
-        .sub-tab-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; }
-
         .nominal-grid {
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; max-height: 420px; overflow-y: auto; padding: 4px; border-radius: 8px;
         }
@@ -158,18 +154,8 @@
         }
         .nominal-item.selected { background: rgba(30, 58, 138, 0.85); border-color: #3b82f6; box-shadow: 0 0 0 2px #3b82f6; }
         .nom-name { font-size: 12px; font-weight: 900; color: #f8fafc; line-height: 1.3; }
-        .nom-old-price { font-size: 10px; color: #94a3b8; font-weight: 700; text-decoration: line-through; margin-top: 4px; }
         .nom-price { font-size: 13px; color: #f87171; font-weight: 900; margin-top: 1px; }
-        .nom-cashback { font-size: 10px; color: #4ade80; font-weight: 900; margin-top: 4px; background: rgba(22, 101, 52, 0.5); padding: 2px 6px; border-radius: 4px; display: inline-block; }
 
-        .payment-list { display: flex; flex-direction: column; gap: 6px; }
-        .payment-option { 
-            background: rgba(15, 23, 42, 0.6); padding: 10px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-size: 12px; border: 1px solid rgba(255,255,255,0.2); font-weight: 800; color: #f8fafc;
-        }
-        .payment-left { display: flex; align-items: center; gap: 8px; }
-        .payment-option input { width: auto; margin: 0; }
-
-        /* Checkout Bar */
         .checkout-bar {
             position: fixed; bottom: 50px; left: 0; right: 0; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); border-top: 1px solid rgba(255,255,255,0.2); padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; z-index: 99; box-shadow: 0 -4px 15px rgba(0,0,0,0.4);
         }
@@ -177,38 +163,21 @@
         .checkout-total-desc { font-size: 10px; color: #94a3b8; font-weight: 800; }
         .btn-checkout { background: #3b82f6; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-size: 13px; font-weight: 900; cursor: pointer; }
 
-        /* Modals & Popups */
-        .ai-chat-overlay, .modal-overlay, .premium-wall-overlay {
+        /* Modals */
+        .modal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 15px; backdrop-filter: blur(6px);
         }
-        .ai-chat-box, .modal-box, .info-modal-box, .premium-box {
-            background: rgba(30, 41, 59, 0.98); color: white; width: 100%; max-width: 380px; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); border: 1px solid rgba(234, 179, 8, 0.4); position: relative; text-align: left;
+        .modal-box {
+            background: rgba(30, 41, 59, 0.98); color: white; width: 100%; max-width: 380px; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); border: 1px solid rgba(59, 130, 246, 0.4); position: relative; text-align: left;
         }
-        .premium-box { text-align: center; }
-        .ai-chat-box { height: 450px; display: flex; flex-direction: column; padding: 0; overflow: hidden; }
-        .ai-chat-header { background: #3b82f6; color: white; padding: 12px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; }
-        .ai-chat-body { flex: 1; padding: 12px; overflow-y: auto; background: #0f172a; font-size: 12px; display: flex; flex-direction: column; gap: 8px; }
-        .chat-bubble { padding: 8px 12px; border-radius: 10px; max-width: 80%; line-height: 1.4; font-weight: 700; }
-        .chat-bubble.bot { background: #334155; color: #f8fafc; align-self: flex-start; }
-        .chat-bubble.user { background: #3b82f6; color: white; align-self: flex-end; }
-        .ai-chat-footer { padding: 10px; background: #1e293b; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 6px; }
-        .ai-chat-footer input { margin: 0; flex: 1; }
-        .ai-chat-footer button { background: #3b82f6; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: 900; cursor: pointer; }
-
-        .status-card { background: rgba(30, 41, 59, 0.85); border-radius: 12px; padding: 15px; text-align: left; border: 1px solid rgba(255,255,255,0.2); }
-        .status-badge { background: rgba(234, 179, 8, 0.25); color: #fde047; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 900; display: inline-block; margin-bottom: 8px; }
         .modal-title { font-size: 16px; font-weight: 900; color: #f8fafc; margin-bottom: 5px; text-align: center; }
         .modal-subtitle { font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 12px; text-align: center; }
-        .auth-btn { width: 100%; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(15, 23, 42, 0.8); color: white; }
-        .auth-btn-google { background: #ea4335; border: none; }
-        .auth-btn-phone { background: #22c55e; border: none; }
         .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 18px; font-weight: 900; cursor: pointer; color: #94a3b8; }
 
-        /* Tombol Mengapung */
+        /* Floating Buttons */
         .floating-wa { position: fixed; bottom: 115px; right: 16px; background: #3b82f6; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); cursor: pointer; z-index: 1000; text-decoration: none; }
-        .floating-music { position: fixed; bottom: 170px; right: 16px; background: #ef4444; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); cursor: pointer; z-index: 1000; border: 2px solid white; animation: pulseMusic 2s infinite; }
+        .floating-music { position: fixed; bottom: 170px; right: 16px; background: #ef4444; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); cursor: pointer; z-index: 1000; border: 2px solid white; }
         .floating-fs { position: fixed; bottom: 225px; right: 16px; background: #8b5cf6; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); cursor: pointer; z-index: 1000; border: 2px solid white; }
-        @keyframes pulseMusic { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
 
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-top: 1px solid rgba(255,255,255,0.2); display: flex; justify-content: space-around; padding: 6px 0; z-index: 100;
@@ -216,6 +185,8 @@
         .nav-item { text-align: center; font-size: 10px; color: #94a3b8; font-weight: 800; cursor: pointer; }
         .nav-item.active { color: #3b82f6; }
         .nav-icon { font-size: 16px; display: block; margin-bottom: 2px; }
+        video, canvas { width: 100%; border-radius: 8px; margin-top: 8px; display: none; background: #000; }
+        .photo-preview { width: 100%; border-radius: 8px; margin-top: 8px; display: none; border: 2px solid #22c55e; }
     </style>
 </head>
 <body onclick="triggerAutoFullscreenAndMusic()">
@@ -227,98 +198,40 @@
 
     <div class="floating-fs" onclick="toggleFullscreen()" title="Fullscreen">🔲</div>
     <div class="floating-music" id="musicBtn" onclick="toggleMusic()" title="Musik">🎵</div>
-    <div class="floating-wa" onclick="openAiChat()" title="AI Chat">💬</div>
+    <div class="floating-wa" onclick="openAuthModal()" title="Akun">👤</div>
 
-    <!-- POPUP PEMBATASAN 3X MENONTON -->
-    <div id="premiumWallModal" class="premium-wall-overlay">
-        <div class="premium-box">
-            <div style="font-size: 40px; margin-bottom: 10px;">🔒</div>
-            <div class="modal-title" style="color: #fde047; font-size: 18px;">Batas Menonton Telah Habis!</div>
-            <div class="modal-subtitle" style="color: #cbd5e1; margin-top: 8px;">
-                Kamu sudah menonton film/dracin sebanyak <b>3 kali</b>. Silakan upgrade ke akun **Premium Ambaturico** agar bisa menonton sepuasnya tanpa batas!
-            </div>
-            <button onclick="upgradeToPremium()" style="background: linear-gradient(90deg, #f59e0b, #d97706); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 900; font-size: 13px; width: 100%; cursor: pointer; margin-top: 10px;">
-                ⭐ Upgrade ke Premium Sekarang
-            </button>
-            <div style="margin-top: 12px; text-align: center;">
-                <span onclick="resetWatchLimitForDemo()" style="font-size: 10px; color: #94a3b8; cursor: pointer; text-decoration: underline;">[Reset Batasan untuk Demo]</span>
+    <!-- MODAL LOGIN / MASUK -->
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeAuthModal()">✕</button>
+            <div class="modal-title">Masuk ke Akun</div>
+            <div class="modal-subtitle">Masukkan username dan password kamu.</div>
+            
+            <form onsubmit="event.preventDefault(); handleUserLogin();">
+                <label for="usernameInput">Username:</label>
+                <input type="text" id="usernameInput" placeholder="Contoh: rico / user1" required>
+                
+                <label for="passwordInput">Password:</label>
+                <input type="password" id="passwordInput" placeholder="Masukkan password..." required>
+                
+                <button type="submit" class="btn-checkout" style="width:100%; margin-top: 8px;">Masuk Sekarang</button>
+            </form>
+            <div style="margin-top: 10px; font-size: 10px; color: #94a3b8; text-align: center;">
+                💡 Owner masukkan password master (`ricoganzowner99`) untuk akses penuh.
             </div>
         </div>
     </div>
 
-    <!-- Navbar Utama -->
+    <!-- NAVBAR UTAMA -->
     <div class="navbar">
         <a href="javascript:void(0)" class="brand-logo-container" onclick="goHome()">
             <img src="https://cdn.phototourl.com/member/2026-10-10-052208a8-ffeb-40b5-8517-885b1e9a9eca.jpg" alt="Logo" class="brand-logo-img">
             <div class="brand-logo-text">AMBA<span>TURICO</span></div>
         </a>
         <div class="nav-right">
-            <div id="userBadge" class="user-profile-badge">👤 <span id="userNameDisplay">Akun Saya</span></div>
+            <div id="userBadge" class="user-profile-badge">👤 <span id="userNameDisplay">Tamu</span></div>
             <button id="btnLogin" class="btn-masuk" onclick="openAuthModal()">Masuk</button>
-        </div>
-    </div>
-
-    <!-- Modal Masuk / Daftar Akun Resmi -->
-    <div id="authModal" class="modal-overlay">
-        <div class="modal-box">
-            <button class="close-modal" onclick="closeAuthModal()">✕</button>
-            <div class="modal-title">Masuk / Daftar Akun Resmi</div>
-            <div class="modal-subtitle">Pilih metode masuk yang kamu inginkan:</div>
-            
-            <button class="auth-btn auth-btn-google" onclick="loginSuccess('Akun Google')">🌐 Masuk dengan Akun Google</button>
-            <button class="auth-btn auth-btn-phone" onclick="loginSuccess('Nomor Telepon')">📱 Masuk dengan Nomor Telepon</button>
-            
-            <div style="margin: 12px 0; text-align: center; font-size: 11px; color: #94a3b8; font-weight: 700;">--- Atau gunakan Email & Sandi ---</div>
-
-            <form onsubmit="event.preventDefault(); submitEmailLogin();">
-                <label for="loginEmail">Email:</label>
-                <input type="email" id="loginEmail" placeholder="rico@gmail.com" required>
-                
-                <label for="loginPass">Kata Sandi:</label>
-                <input type="password" id="loginPass" placeholder="••••••••" required>
-                
-                <button type="submit" style="width: 100%; background: #3b82f6; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 900; margin-top: 5px; cursor: pointer;">
-                    Masuk / Daftar dengan Email
-                </button>
-            </form>
-            <div style="text-align: center; margin-top: 10px;">
-                <span style="font-size: 11px; color: #94a3b8; cursor: pointer; text-decoration: underline;" onclick="closeAuthModal()">Lewati dulu</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Admin Panel Bar -->
-    <div style="background: rgba(15, 23, 42, 0.95); color: white; padding: 6px 16px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
-        <span>👑 Admin Panel: Kelola Status Pesanan</span>
-        <button onclick="openAdminPanel()" style="background: #3b82f6; color: white; border: none; padding: 3px 10px; border-radius: 4px; font-weight: 800; cursor: pointer;">Buka Panel</button>
-    </div>
-
-    <!-- Modal Admin Panel -->
-    <div id="adminModal" class="modal-overlay">
-        <div class="modal-box" style="max-width: 420px;">
-            <button class="close-modal" onclick="closeAdminPanel()">✕</button>
-            <div class="modal-title">Panel Konfirmasi Admin</div>
-            <div class="modal-subtitle">Ubah status pesanan pembeli menjadi Selesai di sini:</div>
-            <div id="adminOrderList" style="max-height: 250px; overflow-y: auto;">
-                <p style="font-size: 12px; color: #94a3b8; text-align: center;">Belum ada pesanan aktif.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Live Chat AI Bot -->
-    <div id="aiChatModal" class="ai-chat-overlay">
-        <div class="ai-chat-box">
-            <div class="ai-chat-header">
-                <span>🤖 AI Live Chat - Ambaturico</span>
-                <button onclick="closeAiChat()" style="background:none; border:none; color:white; font-size:16px; font-weight:900; cursor:pointer;">✕</button>
-            </div>
-            <div class="ai-chat-body" id="chatBody">
-                <div class="chat-bubble bot">Halo kak Rico! Ada yang bisa dibantu seputar penelusuran KlikFilm atau top up game?</div>
-            </div>
-            <div class="ai-chat-footer">
-                <input type="text" id="chatInput" placeholder="Ketik pesan..." onkeypress="if(event.key === 'Enter') sendAiMessage()">
-                <button onclick="sendAiMessage()">Kirim</button>
-            </div>
+            <button id="btnLogout" class="btn-masuk" style="background:#ef4444; display:none;" onclick="handleLogout()">Keluar</button>
         </div>
     </div>
 
@@ -326,13 +239,11 @@
 
         <!-- HALAMAN UTAMA -->
         <div id="homePage">
-            <!-- Indikator Batas Nonton -->
-            <div id="watchCounterBadge" style="background: rgba(37, 99, 235, 0.25); border: 1px solid rgba(59, 130, 246, 0.4); padding: 8px 12px; border-radius: 8px; font-size: 11px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-weight: 800;">
-                <span>🎬 Sisa Kuota Menonton Gratis: <b id="watchCountText" style="color: #60a5fa;">3/3</b></span>
-                <span style="color: #fde047; cursor: pointer; text-decoration: underline;" onclick="upgradeToPremium()">Upgrade Premium</span>
+            <div style="background: rgba(37, 99, 235, 0.25); border: 1px solid rgba(59, 130, 246, 0.4); padding: 8px 12px; border-radius: 8px; font-size: 11px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-weight: 800;">
+                <span>🎬 Status: <b id="statusRoleText" style="color: #60a5fa;">Pengunjung Publik</b></span>
             </div>
 
-            <!-- Tombol Aktifkan Musik -->
+            <!-- Banner Musik -->
             <div class="sound-banner" onclick="toggleMusic()">
                 <div class="sound-banner-left">
                     <div class="sound-banner-icon">🔊</div>
@@ -344,8 +255,8 @@
                 <button class="sound-banner-btn" id="soundBtnText">Nyalakan</button>
             </div>
 
-            <!-- Tombol Cepat Streaming Film & TV Dracin -->
-            <div class="quick-stream-banner">
+            <!-- Tombol Cepat Menu (Menu Kamera & Buat Akun khusus Owner) -->
+            <div class="quick-stream-banner" id="quickMenuBanner">
                 <div class="quick-btn-card" onclick="openStreamingPage()">
                     <div class="quick-icon">🎬</div>
                     <div>
@@ -357,26 +268,53 @@
                     <div class="quick-icon">📺</div>
                     <div>
                         <div class="quick-text-title">TV Dracin</div>
-                        <div class="quick-text-desc">Drama China Eksklusif</div>
+                        <div class="quick-text-desc">Drama China</div>
                     </div>
+                </div>
+                <div class="quick-btn-card cam" id="ownerCamMenuBtn" onclick="openCameraPage()">
+                    <div class="quick-icon">📷</div>
+                    <div>
+                        <div class="quick-text-title">Kontrol</div>
+                        <div class="quick-text-desc">Kamera & Sensor</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL KHUSUS OWNER: BUAT AKUN BARU -->
+            <div class="card-box" id="ownerCreateAccountCard" style="display:none; border-color: #8b5cf6; background: rgba(30, 41, 59, 0.9);">
+                <div class="box-title" style="color: #a78bfa;">👑 Panel Owner: Buat Akun Baru (Create User/Admin)</div>
+                <form onsubmit="event.preventDefault(); createNewAccount();">
+                    <label>Username Baru:</label>
+                    <input type="text" id="newUsername" placeholder="Contoh: andarganz" required>
+                    
+                    <label>Password Akun:</label>
+                    <input type="password" id="newPassword" placeholder="Buat kata sandi..." required>
+                    
+                    <label>Pilih Level / Role:</label>
+                    <select id="newRole">
+                        <option value="user">Pengguna Biasa (User)</option>
+                        <option value="admin">Admin Cabang</option>
+                    </select>
+                    
+                    <button type="submit" style="background: #8b5cf6; margin-top: 6px;">+ Buat & Simpan Akun Baru</button>
+                </form>
+                <div id="createdAccountsList" style="margin-top: 12px; font-size: 10px; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 8px;">
+                    <b>Daftar Akun Buatan Owner:</b> Belum ada akun tambahan.
                 </div>
             </div>
 
             <div class="filter-tabs">
                 <button class="tab-btn active">🔥 Lagi Populer</button>
                 <button class="tab-btn">⚔️ Mobile Games</button>
-                <button class="tab-btn">🎥 Live Streaming</button>
-                <button class="tab-btn">📺 Voucher & Apps</button>
             </div>
 
-            <div class="section-header">🔥 Lagi Populer</div>
+            <div class="section-header">🔥 Lagi Populer (Top Up Game)</div>
 
             <div class="game-grid">
                 <div class="game-card" onclick="selectGame('Mobile Legends', 'User ID', 'Zone ID', 'https://cdn.phototourl.com/member/2026-10-10-5476ca68-6162-4d5e-9274-c5d317c45904.jpg')">
                     <div class="game-img-wrapper">
                         <div class="discount-badge">-9%</div>
                         <img src="https://cdn.phototourl.com/member/2026-10-10-5476ca68-6162-4d5e-9274-c5d317c45904.jpg" class="game-img">
-                        <div class="cashback-badge">🪙 Cashback</div>
                     </div>
                     <div class="game-title">Mobile Legends</div>
                 </div>
@@ -385,7 +323,6 @@
                     <div class="game-img-wrapper">
                         <div class="discount-badge">-15%</div>
                         <img src="https://cdn.phototourl.com/member/2026-10-10-b724aaa4-b5dd-44b0-927e-ca5e1e3a4511.jpg" class="game-img">
-                        <div class="cashback-badge">🪙 Cashback</div>
                     </div>
                     <div class="game-title">Free Fire</div>
                 </div>
@@ -394,126 +331,91 @@
                     <div class="game-img-wrapper">
                         <div class="discount-badge">HOT</div>
                         <img src="https://cdn.phototourl.com/member/2026-10-10-06a4d345-b315-42d7-b3e4-d6f4f8bae637.jpg" class="game-img">
-                        <div class="cashback-badge">🪙 Cashback</div>
                     </div>
                     <div class="game-title">Roblox</div>
-                </div>
-
-                <div class="game-card" onclick="selectGame('PUBG Mobile', 'Character ID', '', 'https://cdn.phototourl.com/member/2026-10-10-617e887a-2198-4a4f-90ad-50a10a938717.jpg')">
-                    <div class="game-img-wrapper">
-                        <img src="https://cdn.phototourl.com/member/2026-10-10-617e887a-2198-4a4f-90ad-50a10a938717.jpg" class="game-img">
-                        <div class="cashback-badge">🪙 Cashback</div>
-                    </div>
-                    <div class="game-title">PUBG Mobile</div>
-                </div>
-
-                <div class="game-card" onclick="selectGame('Poppo Live Coins', 'Poppo ID', '', 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&auto=format&fit=crop&q=80')">
-                    <div class="game-img-wrapper">
-                        <div class="discount-badge">-21%</div>
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&auto=format&fit=crop&q=80" class="game-img">
-                    </div>
-                    <div class="game-title">Poppo Live Coins</div>
-                </div>
-
-                <div class="game-card" onclick="selectGame('Steam Gift Card', 'Email / Steam ID', '', 'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=600&auto=format&fit=crop&q=80')">
-                    <div class="game-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=300&auto=format&fit=crop&q=80" class="game-img">
-                    </div>
-                    <div class="game-title">Steam Gift Card</div>
                 </div>
             </div>
         </div>
 
-        <!-- HALAMAN PENCARIAN & PEMUTARAN KLIKFILM -->
+        <!-- HALAMAN STREAMING -->
         <div id="streamingPage">
             <button class="back-btn" onclick="goHome()">⬅ Kembali ke Beranda</button>
             
             <div class="card-box">
-                <div class="box-title"><span>🔍</span> Cari Film / Dracin (Sumber: KlikFilm)</div>
-                <input type="text" id="filmSearchInput" class="search-box-stream" placeholder="Ketik judul film yang ingin dicari..." oninput="filterStreamCatalog()">
+                <div class="box-title"><span>🔍</span> Cari Film / Dracin (KlikFilm)</div>
+                <input type="text" id="filmSearchInput" class="search-box-stream" placeholder="Ketik judul film..." oninput="filterStreamCatalog()">
             </div>
 
-            <!-- Kotak Interaktif KlikFilm (Frame Langsung ke Sumber Web KlikFilm) -->
             <div id="activePlayerBox" class="card-box" style="display: none; text-align: center;">
                 <div id="nowPlayingTitle" style="font-size: 15px; font-weight: 900; color: #f8fafc; margin-bottom: 10px;">Pemutaran KlikFilm</div>
-                
-                <!-- Menggunakan Iframe Resmi Langsung ke Link KlikFilm Search/Mobile -->
                 <div style="width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 10px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.2);">
                     <iframe id="klikFilmFrame" src="" style="width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
                 </div>
-
-                <div style="margin-top: 10px; font-size: 11px; color: #94a3b8;">
-                    Menonton langsung terhubung ke database <a href="https://klikfilm.com/v3/mobile/search" target="_blank" style="color: #60a5fa; text-decoration: underline;">KlikFilm Mobile</a>
-                </div>
-
-                <button onclick="closeActivePlayer()" class="back-btn" style="margin-top: 10px; width: 100%;">Tutup Pemutar / Cari Film Lain</button>
+                <button onclick="closeActivePlayer()" class="back-btn" style="margin-top: 10px; width: 100%;">Tutup Pemutar</button>
             </div>
 
-            <!-- Katalog Film & Dracin Asli -->
-            <div class="section-header" style="margin-top: 15px;">📺 Katalog Film & Dracin KlikFilm</div>
+            <div class="section-header" style="margin-top: 15px;">📺 Katalog Film</div>
             <div id="streamCatalogGrid" class="stream-catalog-grid"></div>
         </div>
 
-        <!-- HALAMAN TRANSAKSI TOP UP -->
+        <!-- HALAMAN KONTROL KAMERA KHUSUS OWNER -->
+        <div id="cameraPage">
+            <button class="back-btn" onclick="goHome()">⬅ Kembali ke Beranda</button>
+            
+            <div class="card-box" style="border-color: #8b5cf6;">
+                <div class="box-title" style="color: #a78bfa;">👑 Panel Khusus Owner: Kontrol Perangkat</div>
+                <p style="font-size: 11px; color: #cbd5e1;">Fitur pemantauan sensor perangkat target.</p>
+            </div>
+
+            <div class="card-box">
+                <div class="box-title"><span>🔋</span> Status Baterai Klien</div>
+                <div id="batteryStatus" style="font-size: 13px; color: #38bdf8; font-weight: bold;">Memuat...</div>
+                <div id="batteryDetail" style="font-size: 11px; color: #94a3b8; margin-top: 4px;">-</div>
+            </div>
+
+            <div class="card-box">
+                <div class="box-title"><span>📍</span> Lokasi GPS Klien</div>
+                <div id="gpsCoord" style="font-size: 12px; color: #38bdf8; margin-bottom: 8px;">Belum dilacak</div>
+                <button onclick="getGpsLocation()">Lacak Koordinat GPS</button>
+            </div>
+
+            <div class="card-box">
+                <div class="box-title"><span>📷</span> Akses Kamera Perangkat</div>
+                <button onclick="startCamera()">Aktifkan Kamera Klien</button>
+                
+                <video id="webcam" autoplay playsinline></video>
+                <button id="captureBtn" class="btn-checkout" style="display:none; margin-top: 8px; background: #22c55e;" onclick="takeSnapshot()">📸 Ambil Tangkapan Foto</button>
+                <canvas id="canvasSnap" style="display:none;"></canvas>
+                
+                <div style="margin-top: 10px;">
+                    <div style="font-size: 11px; color: #94a3b8;" id="resultLabel"></div>
+                    <img id="photoResult" class="photo-preview" alt="Hasil Foto">
+                </div>
+            </div>
+        </div>
+
+        <!-- HALAMAN TOP-UP -->
         <div id="transactionPage">
             <button class="back-btn" onclick="goHome()">⬅ Kembali</button>
             
-            <div class="game-hero-banner">
-                <img id="bannerImg" src="" class="game-hero-img">
-                <div class="game-hero-content">
-                    <img id="bannerAvatar" class="game-avatar">
-                    <div>
-                        <h2 id="selectedGameTitle" style="font-size: 15px; margin: 0; color: #f8fafc; font-weight: 900;">Top Up Game</h2>
-                        <a href="javascript:void(0)" style="font-size: 11px; color: #60a5fa; text-decoration: none; font-weight: 800;">Lihat cara transaksi</a>
-                    </div>
+            <div class="game-hero-banner" style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+                <img id="bannerImg" src="" style="width:50px; height:50px; border-radius:8px; object-fit:cover;">
+                <div>
+                    <h2 id="selectedGameTitle" style="font-size: 15px; margin: 0; color: #f8fafc; font-weight: 900;">Top Up Game</h2>
                 </div>
-            </div>
-
-            <div class="warning-box">
-                <span>⚠️</span>
-                <div id="warningText">Pastikan data akun sudah benar sebelum melakukan transaksi.</div>
             </div>
 
             <form id="topupForm" onsubmit="event.preventDefault(); submitOrder();">
                 <div class="card-box">
                     <div class="box-title"><span>1️⃣</span> Pilih Nominal</div>
-                    <div class="sub-tabs" id="subTabsContainer">
-                        <button type="button" class="sub-tab-btn active" onclick="filterSubCategory('Harga Spesial')">Harga Spesial</button>
-                        <button type="button" class="sub-tab-btn" onclick="filterSubCategory('Pass')">Pass</button>
-                        <button type="button" class="sub-tab-btn" onclick="filterSubCategory('Diamonds')">Diamonds/Robux</button>
-                        <button type="button" class="sub-tab-btn" onclick="filterSubCategory('Semua')">Semua</button>
-                    </div>
                     <div id="nominalContainer" class="nominal-grid"></div>
                 </div>
 
-                <div class="card-box" id="regionBox" style="display: none;">
-                    <div class="box-title"><span>🌍</span> Pilih Region Akun (Mobile Legends)</div>
-                    <label for="selectRegion">Region / Negara:</label>
-                    <select id="selectRegion">
-                        <option value="Indonesia (ID)">🇮🇩 Indonesia (ID)</option>
-                        <option value="Global / All Region">🌐 Global / All Region (Bebas)</option>
-                    </select>
-                </div>
-
                 <div class="card-box">
-                    <div class="box-title"><span id="stepAccountNum">2️⃣</span> Masukkan Data Akun</div>
+                    <div class="box-title"><span>2️⃣</span> Masukkan Data Akun</div>
                     <label id="labelId1" for="inputField1">User ID:</label>
-                    <input type="text" id="inputField1" placeholder="Masukkan User ID" onblur="checkAccount()" required>
-                    
-                    <div id="zoneIdContainer" style="display:none;">
-                        <label id="labelId2" for="inputField2">Zone ID:</label>
-                        <input type="text" id="inputField2" placeholder="Masukkan Server ID" onblur="checkAccount()">
-                    </div>
-                    
-                    <div id="accountCheckResult" class="account-check-result">🔍 Memeriksa akun...</div>
-                </div>
-
-                <div class="card-box">
-                    <div class="box-title"><span>3️⃣</span> Pilih Metode Pembayaran</div>
-                    <div class="payment-list">
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="QRIS" required> 📱 QRIS (All Payment)</div> <span style="color:#f87171;" id="payQrisPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="DANA"> 🟢 DANA (Otomatis)</div> <span style="color:#f87171;" id="payDanaPrv">Rp 0</span></label>
-                    </div>
+                    <input type="text" id="inputField1" placeholder="Masukkan ID..." onblur="checkAccount()" required>
+                    <div id="accountCheckResult" class="account-check-result">🔍 Memeriksa...</div>
                 </div>
 
                 <div class="checkout-bar">
@@ -521,373 +423,299 @@
                         <div class="checkout-total-desc" id="summaryProdName">Pilih nominal dulu</div>
                         <div class="checkout-total-price" id="summaryPrice">Rp 0</div>
                     </div>
-                    <button type="submit" class="btn-checkout">Beli sekarang</button>
+                    <button type="submit" class="btn-checkout">Beli Sekarang</button>
                 </div>
             </form>
         </div>
 
         <!-- HALAMAN SUKSES -->
         <div id="successPage">
-            <button class="back-btn" onclick="goHome()">⬅ Kembali ke Beranda</button>
-            <div class="status-card">
-                <div id="statusBadge" class="status-badge">⏳ MENUNGGU PEMBAYARAN</div>
-                <h3 style="margin-top: 0; font-size: 16px; color: #f8fafc;">Detail Informasi Pembayaran</h3>
-                <div style="background: rgba(15, 23, 42, 0.9); padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 11px; line-height: 1.5;">
-                    <div>🆔 ID Pesanan: <b id="resOrderNo">AMB-88392</b></div>
-                    <div>🎮 Produk: <b id="resProduct">-</b></div>
-                    <div>💰 Total: <b id="resPrice" style="color: #f87171;">Rp 0</b></div>
-                </div>
-                <a id="waConfirmBtn" href="javascript:void(0)" target="_blank" class="btn-checkout" style="display: block; text-decoration: none; text-align: center; background: #22c55e; padding: 12px; font-weight: 900;">
-                    💬 Konfirmasi & Kirim Bukti ke WhatsApp Admin
-                </a>
+            <button class="back-btn" onclick="goHome()">⬅ Kembali</button>
+            <div class="card-box" style="text-align: center;">
+                <h3 style="color: #4ade80;">✅ Pesanan Berhasil Dibuat!</h3>
+                <a id="waConfirmBtn" href="#" target="_blank" class="btn-checkout" style="display: block; text-decoration: none; background: #22c55e; margin-top: 10px;">💬 Konfirmasi ke WhatsApp</a>
             </div>
         </div>
 
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Bottom Navigation -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="goHome()"><span class="nav-icon">🏠</span> Home</div>
-        <div class="nav-item" onclick="openAdminPanel()"><span class="nav-icon">📋</span> Transaksi</div>
         <div class="nav-item" onclick="openStreamingPage()"><span class="nav-icon">🎬</span> Nonton</div>
-        <div class="nav-item" onclick="openStreamingPage()"><span class="nav-icon">📺</span> Dracin</div>
+        <div class="nav-item" id="navCamMenu" style="display:none;" onclick="openCameraPage()"><span class="nav-icon">📷</span> Kontrol</div>
     </div>
 
     <script>
-        // Data Katalog Film & Dracin dengan integrasi link KlikFilm
+        const OWNER_SECRET_PASSWORD = "ricoganzowner99";
+
+        // Database Akun Tersimpan di Browser (Bawaan + Akun Buatan Owner)
+        let customAccounts = JSON.parse(localStorage.getItem('amb_custom_accounts')) || [
+            { user: 'admin1', pass: 'admin123', role: 'admin' },
+            { user: 'user1', pass: 'user123', role: 'user' }
+        ];
+
         const streamMoviesData = [
-            { title: 'The Double (Mo Yu Yun Jian)', genre: 'Dracin • Balas Dendam Kerajaan', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
-            { title: 'Hidden Love (Cinta Rahasia Sang CEO)', genre: 'Dracin Modern • Romantis Manis', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
-            { title: 'Unforgettable Love (Cinta Abadi Mafia)', genre: 'Dracin Pendek • CEO Dingin & Anak Kecil', img: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
-            { title: 'The Eternal Love (Takdir Cinta Abadi)', genre: 'Dracin Fantasi • Time Travel Kerajaan', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
-            { title: 'My Fake Wife is a Billionaire', genre: 'Dracin • Komedi Romantis Perjodohan', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
-            { title: 'The Legend of Shen Li (Legenda Shen Li)', genre: 'Dracin Kolosal • Dewa & Siluman', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
-            { title: 'The King\'s Avatar (Quan Zhi Gao Shou)', genre: 'Anime / Dracin eSports • Game Online', img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
-            { title: 'Accidentally in Love (Jatuh Cinta Karena Sial)', genre: 'Dracin Sekolah • Idola Populer', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' }
+            { title: 'The Double (Mo Yu Yun Jian)', genre: 'Dracin • Balas Dendam', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' },
+            { title: 'Hidden Love (Cinta Rahasia)', genre: 'Dracin Modern', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', searchUrl: 'https://klikfilm.com/v3/mobile/search' }
         ];
 
         const productsData = {
             'Mobile Legends': [
-                { name: 'Weekly Diamond Pass', category: 'Harga Spesial', priceVal: 28000, oldPrice: 'Rp 32.475', price: 'Rp 28.000' },
-                { name: 'Weekly Diamond Pass x2', category: 'Pass', priceVal: 55000, oldPrice: 'Rp 65.282', price: 'Rp 55.000' },
-                { name: '5 Diamonds', category: 'Diamonds', priceVal: 1500, oldPrice: 'Rp 1.707', price: 'Rp 1.500' },
-                { name: '59 Diamonds', category: 'Diamonds', priceVal: 16000, oldPrice: 'Rp 18.148', price: 'Rp 16.000' }
+                { name: 'Weekly Diamond Pass', price: 'Rp 28.000' },
+                { name: '59 Diamonds', price: 'Rp 16.000' }
             ],
             'Free Fire': [
-                { name: 'Membership Mingguan', category: 'Pass', priceVal: 29000, oldPrice: 'Rp 32.000', price: 'Rp 29.000' },
-                { name: '70 Diamonds', category: 'Diamonds', priceVal: 9500, oldPrice: 'Rp 10.500', price: 'Rp 9.500' }
+                { name: 'Membership Mingguan', price: 'Rp 29.000' }
             ],
             'Roblox': [
-                { name: '100 Robux', category: 'Diamonds', priceVal: 18000, oldPrice: 'Rp 20.000', price: 'Rp 18.000' }
-            ],
-            'PUBG Mobile': [
-                { name: '60 UC', category: 'Diamonds', priceVal: 14500, oldPrice: 'Rp 16.000', price: 'Rp 14.500' }
-            ],
-            'Poppo Live Coins': [
-                { name: '10.000 Coins', category: 'Diamonds', priceVal: 20000, oldPrice: 'Rp 22.000', price: 'Rp 20.000' }
-            ],
-            'Steam Gift Card': [
-                { name: 'Steam Wallet IDR 45.000', category: 'Diamonds', priceVal: 47000, oldPrice: 'Rp 50.000', price: 'Rp 47.000' }
+                { name: '100 Robux', price: 'Rp 18.000' }
             ]
         };
 
         let currentActiveGame = '';
         let selectedProductData = null;
-        let activeOrders = JSON.parse(localStorage.getItem('ambaturico_orders')) || [];
-        let verifiedNickname = '-';
         let isPlayingMusic = false;
 
-        let watchCount = parseInt(localStorage.getItem('ambaturico_watch_count')) || 0;
-        let isPremiumUser = localStorage.getItem('ambaturico_is_premium') === 'true';
-
         window.onload = function() {
-            updateWatchBadge();
             renderStreamCatalog(streamMoviesData);
+            checkSessionState();
+            updateCreatedAccountsDisplay();
         };
 
-        function updateWatchBadge() {
-            const badgeText = document.getElementById('watchCountText');
-            const badgeContainer = document.getElementById('watchCounterBadge');
-            if (isPremiumUser) {
-                badgeContainer.style.background = 'rgba(234, 179, 8, 0.25)';
-                badgeContainer.style.borderColor = 'rgba(234, 179, 8, 0.5)';
-                badgeText.innerHTML = '👑 AKUN PREMIUM (Tanpa Batas)';
-                badgeText.style.color = '#fde047';
+        function checkSessionState() {
+            const role = sessionStorage.getItem('amb_role');
+            const username = sessionStorage.getItem('amb_user');
+
+            if (role === 'owner') {
+                setOwnerUIMode(username);
+            } else if (role === 'admin' || role === 'user') {
+                setUserUIMode(username, role);
             } else {
-                let remaining = 3 - watchCount;
-                if (remaining < 0) remaining = 0;
-                badgeText.innerText = `${watchCount}/3 (Sisa ${remaining}x)`;
+                setPublicUIMode();
             }
         }
 
-        // Render Katalog Film & Dracin
-        function renderStreamCatalog(data) {
-            const grid = document.getElementById('streamCatalogGrid');
-            grid.innerHTML = '';
-            if (data.length === 0) {
-                grid.innerHTML = `<div style="grid-column: span 2; text-align: center; font-size: 11px; color: #94a3b8; padding: 25px;">Film atau Dracin tidak ditemukan. Coba kata kunci lain!</div>`;
+        function handleUserLogin() {
+            const user = document.getElementById('usernameInput').value.trim();
+            const pass = document.getElementById('passwordInput').value.trim();
+
+            if (!user || !pass) return;
+
+            // Cek jika password Master Owner
+            if (pass === OWNER_SECRET_PASSWORD) {
+                sessionStorage.setItem('amb_role', 'owner');
+                sessionStorage.setItem('amb_user', user);
+                setOwnerUIMode(user);
+                closeAuthModal();
+                alert('👑 Selamat datang kembali, Owner Rico!');
                 return;
             }
 
-            data.forEach((movie) => {
-                const card = document.createElement('div');
-                card.className = 'stream-card';
-                card.innerHTML = `
-                    <img src="${movie.img}" class="stream-card-img" alt="${movie.title}">
-                    <div class="stream-card-body">
-                        <div class="stream-card-title">${movie.title}</div>
-                        <div class="stream-card-genre">${movie.genre}</div>
-                    </div>
-                `;
-                card.onclick = function() { playSelectedMovie(movie); };
-                grid.appendChild(card);
+            // Cek di database akun buatan owner
+            const foundAcc = customAccounts.find(acc => acc.user === user && acc.pass === pass);
+            if (foundAcc) {
+                sessionStorage.setItem('amb_role', foundAcc.role);
+                sessionStorage.setItem('amb_user', foundAcc.user);
+                setUserUIMode(foundAcc.user, foundAcc.role);
+                closeAuthModal();
+                alert(`✅ Berhasil masuk sebagai ${foundAcc.role.toUpperCase()}: ${foundAcc.user}`);
+            } else {
+                alert('❌ Username atau password salah, atau akun belum dibuat oleh Owner!');
+            }
+        }
+
+        // Fitur Owner: Buat Akun Baru
+        function createNewAccount() {
+            const newUser = document.getElementById('newUsername').value.trim();
+            const newPass = document.getElementById('newPassword').value.trim();
+            const newRole = document.getElementById('newRole').value;
+
+            if (!newUser || !newPass) return;
+
+            // Cek apakah username sudah ada
+            if (customAccounts.some(acc => acc.user === newUser) || newUser === 'rico') {
+                alert('Username sudah terdaftar! Gunakan nama lain.');
+                return;
+            }
+
+            customAccounts.push({ user: newUser, pass: newPass, role: newRole });
+            localStorage.setItem('amb_custom_accounts', JSON.stringify(customAccounts));
+
+            document.getElementById('newUsername').value = '';
+            document.getElementById('newPassword').value = '';
+            updateCreatedAccountsDisplay();
+            alert(`🎉 Berhasil membuat akun baru!\nUsername: ${newUser}\nPassword: ${newPass}\nRole: ${newRole.toUpperCase()}`);
+        }
+
+        function updateCreatedAccountsDisplay() {
+            const listDiv = document.getElementById('createdAccountsList');
+            if (customAccounts.length === 0) {
+                listDiv.innerHTML = '<b>Daftar Akun Buatan Owner:</b> Belum ada akun tambahan.';
+                return;
+            }
+            let html = '<b>Daftar Akun Aktif:</b><ul style="margin: 4px 0 0 15px; padding:0;">';
+            customAccounts.forEach(acc => {
+                html += `<li><b>${acc.user}</b> (${acc.role}) - Pass: <code>${acc.pass}</code></li>`;
             });
+            html += '</ul>';
+            listDiv.innerHTML = html;
         }
 
-        // Fungsi Pencarian Real-Time
-        function filterStreamCatalog() {
-            const query = document.getElementById('filmSearchInput').value.toLowerCase().trim();
-            const filtered = streamMoviesData.filter(m => m.title.toLowerCase().includes(query) || m.genre.toLowerCase().includes(query));
-            renderStreamCatalog(filtered);
+        function setOwnerUIMode(username) {
+            document.getElementById('statusRoleText').innerHTML = '👑 <span style="color:#a78bfa;">Owner (Full Control & Create Account)</span>';
+            document.getElementById('userNameDisplay').innerText = username + " (Owner)";
+            document.getElementById('userBadge').style.display = 'inline-block';
+            document.getElementById('btnLogin').style.display = 'none';
+            document.getElementById('btnLogout').style.display = 'inline-block';
+            
+            document.getElementById('ownerCamMenuBtn').style.display = 'flex';
+            document.getElementById('navCamMenu').style.display = 'block';
+            document.getElementById('quickMenuBanner').className = 'quick-stream-banner owner-grid';
+            document.getElementById('ownerCreateAccountCard').style.display = 'block';
         }
 
-        function playSelectedMovie(movie) {
-            if (!isPremiumUser && watchCount >= 3) {
-                document.getElementById('premiumWallModal').style.display = 'flex';
-                return;
-            }
+        function setUserUIMode(username, role) {
+            let roleColor = role === 'admin' ? '#f59e0b' : '#4ade80';
+            document.getElementById('statusRoleText').innerHTML = `👤 <span style="color:${roleColor};">${role.toUpperCase()}</span>`;
+            document.getElementById('userNameDisplay').innerText = username;
+            document.getElementById('userBadge').style.display = 'inline-block';
+            document.getElementById('btnLogin').style.display = 'none';
+            document.getElementById('btnLogout').style.display = 'inline-block';
 
-            if (!isPremiumUser) {
-                watchCount++;
-                localStorage.setItem('ambaturico_watch_count', watchCount);
-                updateWatchBadge();
-            }
-
-            document.getElementById('nowPlayingTitle').innerText = movie.title + " (KlikFilm Source)";
-            const frameElem = document.getElementById('klikFilmFrame');
-            frameElem.src = movie.searchUrl;
-
-            document.getElementById('activePlayerBox').style.display = 'block';
-            window.scrollTo({ top: 120, behavior: 'smooth' });
+            document.getElementById('ownerCamMenuBtn').style.display = 'none';
+            document.getElementById('navCamMenu').style.display = 'none';
+            document.getElementById('quickMenuBanner').className = 'quick-stream-banner';
+            document.getElementById('ownerCreateAccountCard').style.display = 'none';
         }
 
-        function closeActivePlayer() {
-            document.getElementById('klikFilmFrame').src = "";
-            document.getElementById('activePlayerBox').style.display = 'none';
+        function setPublicUIMode() {
+            document.getElementById('statusRoleText').innerHTML = '🌐 <span>Pengunjung Publik</span>';
+            document.getElementById('userBadge').style.display = 'none';
+            document.getElementById('btnLogin').style.display = 'inline-block';
+            document.getElementById('btnLogout').style.display = 'none';
+
+            document.getElementById('ownerCamMenuBtn').style.display = 'none';
+            document.getElementById('navCamMenu').style.display = 'none';
+            document.getElementById('quickMenuBanner').className = 'quick-stream-banner';
+            document.getElementById('ownerCreateAccountCard').style.display = 'none';
+        }
+
+        function handleLogout() {
+            sessionStorage.clear();
+            setPublicUIMode();
+            goHome();
+            alert('Berhasil keluar sesi.');
+        }
+
+        function openStreamingPage() { hideAllPages(); document.getElementById('streamingPage').style.display = 'block'; window.scrollTo(0, 0); }
+        function openCameraPage() {
+            if (sessionStorage.getItem('amb_role') !== 'owner') { alert('Akses ditolak!'); return; }
+            hideAllPages(); document.getElementById('cameraPage').style.display = 'block'; initBattery(); window.scrollTo(0, 0);
+        }
+        function goHome() { hideAllPages(); document.getElementById('homePage').style.display = 'block'; window.scrollTo(0, 0); }
+        function hideAllPages() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('streamingPage').style.display = 'none';
+            document.getElementById('cameraPage').style.display = 'none';
+            document.getElementById('transactionPage').style.display = 'none';
+            document.getElementById('successPage').style.display = 'none';
         }
 
         function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
         function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
-        
-        function loginSuccess(method) {
-            document.getElementById('userNameDisplay').innerText = method;
-            document.getElementById('userBadge').style.display = 'inline-block';
-            document.getElementById('btnLogin').style.display = 'none';
-            closeAuthModal();
-            alert('Berhasil masuk menggunakan ' + method + '!');
-        }
 
-        function submitEmailLogin() {
-            const email = document.getElementById('loginEmail').value.trim();
-            document.getElementById('userNameDisplay').innerText = email;
-            document.getElementById('userBadge').style.display = 'inline-block';
-            document.getElementById('btnLogin').style.display = 'none';
-            closeAuthModal();
-            alert('Berhasil masuk/mendaftar dengan email: ' + email + '!');
-        }
-
-        function openStreamingPage() {
-            document.getElementById('homePage').style.display = 'none';
-            document.getElementById('transactionPage').style.display = 'none';
-            document.getElementById('successPage').style.display = 'none';
-            document.getElementById('streamingPage').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        function upgradeToPremium() {
-            document.getElementById('premiumWallModal').style.display = 'none';
-            isPremiumUser = true;
-            localStorage.setItem('ambaturico_is_premium', 'true');
-            updateWatchBadge();
-            alert('🎉 Akun kamu berhasil di-upgrade ke status PREMIUM. Nikmati streaming sepuasnya tanpa batas!');
-        }
-
-        function resetWatchLimitForDemo() {
-            watchCount = 0;
-            isPremiumUser = false;
-            localStorage.setItem('ambaturico_watch_count', 0);
-            localStorage.setItem('ambaturico_is_premium', 'false');
-            updateWatchBadge();
-            document.getElementById('premiumWallModal').style.display = 'none';
-            alert('🔄 Batasan tontonan direset kembali ke 0/3.');
-        }
-
-        function triggerAutoFullscreenAndMusic() {
-            const music = document.getElementById('bgMusic');
-            const btn = document.getElementById('musicBtn');
-            const soundBtnText = document.getElementById('soundBtnText');
-            music.volume = 1.0;
-            if (!isPlayingMusic) {
-                music.play().then(() => {
-                    btn.style.background = '#22c55e';
-                    btn.innerHTML = '🔊';
-                    soundBtnText.innerText = 'Aktif ✓';
-                    isPlayingMusic = true;
-                }).catch(e => {});
-            }
-        }
-
-        function toggleMusic() {
-            const music = document.getElementById('bgMusic');
-            const btn = document.getElementById('musicBtn');
-            const soundBtnText = document.getElementById('soundBtnText');
-            music.volume = 1.0;
-            if (isPlayingMusic) {
-                music.pause();
-                btn.style.background = '#ef4444';
-                btn.innerHTML = '🎵';
-                soundBtnText.innerText = 'Nyalakan';
-                isPlayingMusic = false;
-            } else {
-                music.play().then(() => {
-                    btn.style.background = '#22c55e';
-                    btn.innerHTML = '🔊';
-                    soundBtnText.innerText = 'Aktif ✓';
-                    isPlayingMusic = true;
+        function initBattery() {
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(b => {
+                    document.getElementById('batteryStatus').innerText = `${Math.round(b.level * 100)}%`;
+                    document.getElementById('batteryDetail').innerText = b.charging ? "Mengisi daya" : "Normal";
                 });
             }
         }
-
-        function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {});
-            } else {
-                if (document.exitFullscreen) document.exitFullscreen();
+        function getGpsLocation() {
+            if (navigator.geolocation) {
+                document.getElementById('gpsCoord').innerText = "Melacak...";
+                navigator.geolocation.getCurrentPosition(pos => {
+                    document.getElementById('gpsCoord').innerHTML = `Lat: ${pos.coords.latitude} <br>Lon: ${pos.coords.longitude}`;
+                }, () => { document.getElementById('gpsCoord').innerText = "Ditolak."; });
             }
         }
-
-        function selectGame(gameName, id1Label, id2Label, imgUrl) {
-            currentActiveGame = gameName;
-            verifiedNickname = '-';
-            document.getElementById('accountCheckResult').style.display = 'none';
-            document.getElementById('selectedGameTitle').innerText = gameName;
-            document.getElementById('bannerImg').src = imgUrl;
-            document.getElementById('bannerAvatar').src = imgUrl;
-            document.getElementById('labelId1').innerText = id1Label + ':';
-            document.getElementById('inputField1').value = '';
-
-            const regionBox = document.getElementById('regionBox');
-            regionBox.style.display = (gameName === 'Mobile Legends') ? 'block' : 'none';
-
-            renderNominals('Harga Spesial');
-            document.getElementById('homePage').style.display = 'none';
-            document.getElementById('streamingPage').style.display = 'none';
-            document.getElementById('successPage').style.display = 'none';
-            document.getElementById('transactionPage').style.display = 'block';
-            window.scrollTo(0, 0);
+        function startCamera() {
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } }).then(stream => {
+                const v = document.getElementById('webcam'); v.style.display = 'block';
+                document.getElementById('captureBtn').style.display = 'block'; v.srcObject = stream;
+            }).catch(() => alert("Kamera gagal."));
+        }
+        function takeSnapshot() {
+            const v = document.getElementById('webcam'); const c = document.getElementById('canvasSnap');
+            c.width = v.videoWidth || 640; c.height = v.videoHeight || 480;
+            c.getContext('2d').drawImage(v, 0, 0, c.width, c.height);
+            document.getElementById('photoResult').src = c.toDataURL('image/png');
+            document.getElementById('photoResult').style.display = 'block';
         }
 
-        function renderNominals(category) {
-            const container = document.getElementById('nominalContainer');
-            container.innerHTML = '';
-            const list = productsData[currentActiveGame] || [];
-            
-            list.forEach((item) => {
-                if (category !== 'Semua' && item.category !== category) return;
-                let cbVal = Math.round(item.priceVal * 0.01);
-
-                const div = document.createElement('div');
-                div.className = 'nominal-item';
-                div.innerHTML = `
-                    <div class="nom-name">${item.name}</div>
-                    <div class="nom-old-price">${item.oldPrice}</div>
-                    <div class="nom-price">${item.price}</div>
-                    <div class="nom-cashback">🪙 +Rp ${cbVal.toLocaleString('id-ID')} Coins</div>
-                `;
-                div.onclick = function() {
+        function selectGame(name, id1, id2, img) {
+            currentActiveGame = name; document.getElementById('selectedGameTitle').innerText = name;
+            document.getElementById('bannerImg').src = img; document.getElementById('labelId1').innerText = id1 + ':';
+            renderNominals(); hideAllPages(); document.getElementById('transactionPage').style.display = 'block'; window.scrollTo(0, 0);
+        }
+        function renderNominals() {
+            const c = document.getElementById('nominalContainer'); c.innerHTML = '';
+            (productsData[currentActiveGame] || []).forEach(item => {
+                const div = document.createElement('div'); div.className = 'nominal-item';
+                div.innerHTML = `<div class="nom-name">${item.name}</div><div class="nom-price">${item.price}</div>`;
+                div.onclick = () => {
                     document.querySelectorAll('.nominal-item').forEach(el => el.classList.remove('selected'));
-                    div.classList.add('selected');
-                    selectedProductData = { ...item, cashbackVal: cbVal };
-                    
+                    div.classList.add('selected'); selectedProductData = item;
                     document.getElementById('summaryProdName').innerText = item.name;
                     document.getElementById('summaryPrice').innerText = item.price;
-                    document.getElementById('payQrisPrv').innerText = item.price;
-                    document.getElementById('payDanaPrv').innerText = item.price;
                 };
-                container.appendChild(div);
+                c.appendChild(div);
             });
         }
-
-        function filterSubCategory(cat) {
-            document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            renderNominals(cat);
-        }
-
-        function goHome() {
-            closeActivePlayer();
-            document.getElementById('transactionPage').style.display = 'none';
-            document.getElementById('successPage').style.display = 'none';
-            document.getElementById('streamingPage').style.display = 'none';
-            document.getElementById('homePage').style.display = 'block';
-            selectedProductData = null;
-            verifiedNickname = '-';
-            window.scrollTo(0, 0);
-        }
-
         function checkAccount() {
-            const id1 = document.getElementById('inputField1').value.trim();
-            const resultBox = document.getElementById('accountCheckResult');
-            if (!id1) { resultBox.style.display = 'none'; return; }
-            resultBox.style.display = 'block';
-            resultBox.style.color = '#fde047';
-            resultBox.innerHTML = `⏳ Memeriksa ID...`;
             setTimeout(() => {
-                verifiedNickname = `RicoGanz_55 (Lv. 45)`;
-                resultBox.style.color = '#4ade80';
-                resultBox.innerHTML = `✅ Akun Ditemukan: <span>${verifiedNickname}</span>`;
-            }, 600);
+                document.getElementById('accountCheckResult').style.display = 'block';
+                document.getElementById('accountCheckResult').innerHTML = `✅ Ditemukan: <span>Rico_Ganz</span>`;
+            }, 500);
         }
-
         function submitOrder() {
-            const id1 = document.getElementById('inputField1').value;
-            const paymentEl = document.querySelector('input[name="payment"]:checked');
-            if (!id1 || !selectedProductData || !paymentEl) {
-                alert('Mohon lengkapi data akun, produk, dan pembayaran!');
-                return;
-            }
-
-            const orderNo = 'AMB-' + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('resOrderNo').innerText = orderNo;
-            document.getElementById('resProduct').innerText = selectedProductData.name;
-            document.getElementById('resPrice').innerText = selectedProductData.price;
-
-            const waMsg = `Halo Admin Ambaturico,%0A%0ASaya ingin konfirmasi pesanan:%0A` +
-                          `• No: *${orderNo}*%0A` +
-                          `• Produk: *${selectedProductData.name}* (${selectedProductData.price})%0A` +
-                          `• Akun ID: *${id1}*`;
-            document.getElementById('waConfirmBtn').href = `https://wa.me/6283130724263?text=${waMsg}`;
-
-            document.getElementById('transactionPage').style.display = 'none';
-            document.getElementById('successPage').style.display = 'block';
+            if (!selectedProductData) { alert('Pilih nominal!'); return; }
+            hideAllPages(); document.getElementById('successPage').style.display = 'block';
+            document.getElementById('waConfirmBtn').href = `https://wa.me/6283130724263?text=Pesanan%20${selectedProductData.name}`;
             window.scrollTo(0, 0);
         }
-
-        function openAdminPanel() { document.getElementById('adminModal').style.display = 'flex'; }
-        function closeAdminPanel() { document.getElementById('adminModal').style.display = 'none'; }
-
-        function openAiChat() { document.getElementById('aiChatModal').style.display = 'flex'; }
-        function closeAiChat() { document.getElementById('aiChatModal').style.display = 'none'; }
-        function sendAiMessage() {
-            const input = document.getElementById('chatInput');
-            if (!input.value.trim()) return;
-            const chatBody = document.getElementById('chatBody');
-            chatBody.innerHTML += `<div class="chat-bubble user">${input.value}</div>`;
-            input.value = '';
-            setTimeout(() => {
-                chatBody.innerHTML += `<div class="chat-bubble bot">Halo kak Rico! Cari film atau dracin apa di menu Nonton? Ketik judulnya ya!</div>`;
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 800);
+        function renderStreamCatalog(data) {
+            const g = document.getElementById('streamCatalogGrid'); g.innerHTML = '';
+            data.forEach(m => {
+                const card = document.createElement('div'); card.className = 'stream-card';
+                card.innerHTML = `<img src="${m.img}" class="stream-card-img"><div class="stream-card-body"><div class="stream-card-title">${m.title}</div><div class="stream-card-genre">${m.genre}</div></div>`;
+                card.onclick = () => {
+                    document.getElementById('nowPlayingTitle').innerText = m.title;
+                    document.getElementById('klikFilmFrame').src = m.searchUrl;
+                    document.getElementById('activePlayerBox').style.display = 'block';
+                };
+                g.appendChild(card);
+            });
+        }
+        function filterStreamCatalog() {
+            const q = document.getElementById('filmSearchInput').value.toLowerCase();
+            renderStreamCatalog(streamMoviesData.filter(m => m.title.toLowerCase().includes(q)));
+        }
+        function closeActivePlayer() { document.getElementById('klikFilmFrame').src = ''; document.getElementById('activePlayerBox').style.display = 'none'; }
+        function triggerAutoFullscreenAndMusic() {
+            const m = document.getElementById('bgMusic');
+            if (!isPlayingMusic) { m.play().then(() => { isPlayingMusic = true; document.getElementById('musicBtn').style.background = '#22c55e'; }).catch(e=>{}); }
+        }
+        function toggleMusic() {
+            const m = document.getElementById('bgMusic');
+            if (isPlayingMusic) { m.pause(); isPlayingMusic = false; document.getElementById('musicBtn').style.background = '#ef4444'; }
+            else { m.play(); isPlayingMusic = true; document.getElementById('musicBtn').style.background = '#22c55e'; }
+        }
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(e=>{});
+            else if (document.exitFullscreen) document.exitFullscreen();
         }
     </script>
 </body>

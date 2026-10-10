@@ -64,7 +64,7 @@
         .sound-banner-desc { font-size: 9px; color: #fee2e2; font-weight: 700; }
         .sound-banner-btn { background: white; color: #dc2626; border: none; padding: 5px 10px; border-radius: 6px; font-size: 10px; font-weight: 900; cursor: pointer; }
 
-        /* Tombol Cepat Streaming / LokTV */
+        /* Tombol Cepat Streaming */
         .quick-stream-banner {
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 15px;
         }
@@ -258,7 +258,7 @@
         </div>
     </div>
 
-    <!-- Modal Masuk / Daftar Akun Resmi (Google, No HP, Email) -->
+    <!-- Modal Masuk / Daftar Akun Resmi -->
     <div id="authModal" class="modal-overlay">
         <div class="modal-box">
             <button class="close-modal" onclick="closeAuthModal()">✕</button>
@@ -438,7 +438,7 @@
                 <div id="nowPlayingTitle" style="font-size: 15px; font-weight: 900; color: #f8fafc; margin-bottom: 10px;">Judul Film</div>
                 <div style="width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 10px; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2);">
                     <video id="playerVideo" controls autoplay style="width: 100%; height: 100%; object-fit: cover;">
-                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        <source src="" type="video/mp4">
                         Browser Anda tidak mendukung pemutar video.
                     </video>
                 </div>
@@ -550,16 +550,16 @@
     </div>
 
     <script>
-        // Data Katalog LokTV & Dracin Eksklusif
+        // Data Katalog LokTV & Dracin Eksklusif dengan link video terpisah/unik
         const streamMoviesData = [
-            { title: 'The Double (Mo Yu Yun Jian)', genre: 'Dracin • Balas Dendam Kerajaan', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-            { title: 'Hidden Love (Cinta Rahasia Sang CEO)', genre: 'Dracin Modern • Romantis Manis', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://www.w3schools.com/html/movie.mp4' },
-            { title: 'Unforgettable Love (Cinta Abadi Mafia)', genre: 'Dracin Pendek • CEO Dingin & Anak Kecil', img: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-            { title: 'The Eternal Love (Takdir Cinta Abadi)', genre: 'Dracin Fantasi • Time Travel Kerajaan', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://www.w3schools.com/html/movie.mp4' },
-            { title: 'My Fake Wife is a Billionaire', genre: 'Dracin • Komedi Romantis Perjodohan', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-            { title: 'The Legend of Shen Li (Legenda Shen Li)', genre: 'Dracin Kolosal • Dewa & Siluman', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://www.w3schools.com/html/movie.mp4' },
-            { title: 'The King\'s Avatar (Quan Zhi Gao Shou)', genre: 'Anime / Dracin eSports • Game Online', img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-            { title: 'Accidentally in Love (Jatuh Cinta Karena Sial)', genre: 'Dracin Sekolah • Idola Populer', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://www.w3schools.com/html/movie.mp4' }
+            { title: 'The Double (Mo Yu Yun Jian)', genre: 'Dracin • Balas Dendam Kerajaan', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
+            { title: 'Hidden Love (Cinta Rahasia Sang CEO)', genre: 'Dracin Modern • Romantis Manis', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
+            { title: 'Unforgettable Love (Cinta Abadi Mafia)', genre: 'Dracin Pendek • CEO Dingin & Anak Kecil', img: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4' },
+            { title: 'The Eternal Love (Takdir Cinta Abadi)', genre: 'Dracin Fantasi • Time Travel Kerajaan', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
+            { title: 'My Fake Wife is a Billionaire', genre: 'Dracin • Komedi Romantis Perjodohan', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' },
+            { title: 'The Legend of Shen Li (Legenda Shen Li)', genre: 'Dracin Kolosal • Dewa & Siluman', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4' },
+            { title: 'The King\'s Avatar (Quan Zhi Gao Shou)', genre: 'Anime / Dracin eSports • Game Online', img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
+            { title: 'Accidentally in Love (Jatuh Cinta Karena Sial)', genre: 'Dracin Sekolah • Idola Populer', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&auto=format&fit=crop&q=80', videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4' }
         ];
 
         const productsData = {
@@ -662,6 +662,7 @@
             document.getElementById('nowPlayingTitle').innerText = movie.title;
             const videoElem = document.getElementById('playerVideo');
             videoElem.src = movie.videoUrl;
+            videoElem.load();
             videoElem.play();
 
             document.getElementById('activePlayerBox').style.display = 'block';

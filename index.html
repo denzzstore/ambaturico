@@ -136,7 +136,7 @@
         #homePage, #transactionPage, #successPage { display: none; }
         #homePage { display: block; }
 
-        /* Grid Kartu Game Lapakgaming Style */
+        /* Grid Kartu Game */
         .game-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
         }
@@ -552,16 +552,22 @@
                 <div class="card-box">
                     <div class="box-title"><span>4️⃣</span> Pilih Metode Pembayaran</div>
                     <div class="payment-list">
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="QRIS" onclick="toggleQris(true)" required> 📱 QRIS (All Payment)</div> <span style="color:#f87171;" id="payQrisPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="GoPay" onclick="toggleQris(true)"> 🟢 GoPay (via QRIS)</div> <span style="color:#f87171;" id="payGopayPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="OVO" onclick="toggleQris(true)"> 🟣 OVO (via QRIS)</div> <span style="color:#f87171;" id="payOvoPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="DANA" onclick="toggleQris(false)"> 🟢 DANA (Manual Transfer)</div> <span style="color:#f87171;" id="payDanaPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="Bank BCA" onclick="toggleQris(false)"> 🔵 Bank BCA (Manual Transfer)</div> <span style="color:#f87171;" id="payBcaPrv">Rp 0</span></label>
+                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="QRIS" onclick="handlePaymentChange('QRIS')" required> 📱 QRIS (All Payment)</div> <span style="color:#f87171;" id="payQrisPrv">Rp 0</span></label>
+                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="GoPay" onclick="handlePaymentChange('GoPay')"> 🟢 GoPay (via QRIS)</div> <span style="color:#f87171;" id="payGopayPrv">Rp 0</span></label>
+                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="OVO" onclick="handlePaymentChange('OVO')"> 🟣 OVO (via QRIS)</div> <span style="color:#f87171;" id="payOvoPrv">Rp 0</span></label>
+                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="DANA" onclick="handlePaymentChange('DANA')"> 🟢 DANA (Buka Aplikasi / Transfer)</div> <span style="color:#f87171;" id="payDanaPrv">Rp 0</span></label>
+                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="Bank BCA" onclick="handlePaymentChange('Bank BCA')"> 🔵 Bank BCA (Manual Transfer)</div> <span style="color:#f87171;" id="payBcaPrv">Rp 0</span></label>
                     </div>
 
+                    <!-- Kotak QRIS dengan link baru yang kamu berikan -->
                     <div id="qrisSection" class="qris-box">
-                        <img src="Screenshot_20260321_085538.jpg" alt="QRIS Ambaturico">
+                        <img src="https://cdn.phototourl.com/member/2026-10-10-bfb2147e-6044-4548-aa63-e6f285c140a8.jpg" alt="QRIS Ambaturico">
                         <p>Scan QR di atas lalu selesaikan pembayaran!</p>
+                    </div>
+
+                    <!-- Kotak khusus panduan DANA -->
+                    <div id="danaSection" class="qris-note" style="display: none; background: rgba(37, 99, 235, 0.2); color: #93c5fd; border-color: rgba(59, 130, 246, 0.4);">
+                        🟢 <b>Instruksi DANA:</b> Silakan klik tombol Beli Sekarang, lalu lakukan transfer ke nomor DANA Admin atau buka aplikasi DANA untuk menyelesaikan pembayaran.
                     </div>
 
                     <div id="qrisNote" class="qris-note">
@@ -937,13 +943,28 @@
             verifiedNickname = '-';
             document.getElementById('topupForm').reset();
             document.getElementById('accountCheckResult').style.display = 'none';
-            toggleQris(false);
+            handlePaymentChange('');
             window.scrollTo(0, 0);
         }
 
-        function toggleQris(show) {
-            document.getElementById('qrisSection').style.display = show ? 'block' : 'none';
-            document.getElementById('qrisNote').style.display = show ? 'block' : 'none';
+        function handlePaymentChange(method) {
+            const qrisBox = document.getElementById('qrisSection');
+            const qrisNote = document.getElementById('qrisNote');
+            const danaBox = document.getElementById('danaSection');
+
+            if (method === 'QRIS' || method === 'GoPay' || method === 'OVO') {
+                qrisBox.style.display = 'block';
+                qrisNote.style.display = 'block';
+                danaBox.style.display = 'none';
+            } else if (method === 'DANA') {
+                qrisBox.style.display = 'none';
+                qrisNote.style.display = 'none';
+                danaBox.style.display = 'block';
+            } else {
+                qrisBox.style.display = 'none';
+                qrisNote.style.display = 'none';
+                danaBox.style.display = 'none';
+            }
         }
 
         function submitOrder() {
@@ -988,6 +1009,7 @@
                           `• Pembayaran: *${payment}*%0A%0A` +
                           `Berikut bukti pembayaran saya. Mohon diproses ya kak!`;
 
+            // Arahkan chat WhatsApp ke nomor HP admin
             document.getElementById('waConfirmBtn').href = `https://wa.me/6283130724263?text=${waMsg}`;
 
             document.getElementById('transactionPage').style.display = 'none';

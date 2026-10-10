@@ -1,0 +1,116 @@
+     <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambaturico Top Up - All Payment Center</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #0f172a; color: #f8fafc; }
+        .container { max-width: 500px; margin: 0 auto; background: #1e293b; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); border: 1px solid #334155; }
+        h1 { color: #38bdf8; text-align: center; margin-bottom: 5px; font-size: 24px; }
+        p.subtitle { color: #94a3b8; text-align: center; margin-top: 0; font-size: 14px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #cbd5e1; font-weight: bold; font-size: 14px; }
+        input, select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box; font-size: 14px; }
+        .payment-list { display: flex; flex-direction: column; gap: 8px; margin-top: 5px; }
+        .payment-option { background: #334155; padding: 10px 12px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; font-size: 14px; }
+        .payment-option input { width: auto; margin-right: 10px; }
+        
+        .qris-box { background: #334155; padding: 15px; border-radius: 8px; margin-top: 10px; text-align: center; display: none; }
+        .qris-box img { width: 180px; height: auto; border-radius: 6px; background: white; padding: 5px; }
+        
+        .whatsapp-select { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-wa { flex: 1; background: #22c55e; color: white; padding: 12px; border: none; border-radius: 6px; font-weight: bold; font-size: 14px; cursor: pointer; text-align: center; text-decoration: none; display: block; }
+        .btn-wa:hover { background: #16a34a; }
+        .btn-wa-alt { background: #0284c7; }
+        .btn-wa-alt:hover { background: #0369a1; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Ambaturico Top Up</h1>
+        <p class="subtitle">Pusat Top Up Game & All Payment Terpercaya</p>
+
+        <form id="topupForm">
+            <!-- 1. Input ID Game -->
+            <div class="form-group">
+                <label for="gameId">ID Tujuan (User ID / Server ID):</label>
+                <input type="text" id="gameId" placeholder="Contoh: 12345678 (1234)" required>
+            </div>
+
+            <!-- 2. Pilih Nominal Produk -->
+            <div class="form-group">
+                <label for="product">Pilih Produk & Nominal:</label>
+                <select id="product" required>
+                    <option value="">-- Pilih Produk --</option>
+                    <option value="Mobile Legends - 85 Diamonds (Rp 20.000)">Mobile Legends: 85 Diamonds - Rp 20.000</option>
+                    <option value="Mobile Legends - 170 Diamonds (Rp 40.000)">Mobile Legends: 170 Diamonds - Rp 40.000</option>
+                    <option value="Free Fire - 140 Diamonds (Rp 20.000)">Free Fire: 140 Diamonds - Rp 20.000</option>
+                    <option value="Mobile Legends - Starlight Member (Rp 150.000)">Mobile Legends: Starlight Member - Rp 150.000</option>
+                    <option value="PUBG Mobile - 8100 UC (Rp 1.550.000)">PUBG Mobile: 8100 UC - Rp 1.550.000</option>
+                    <option value="Joki / Akun Sultan Bundle All Games (Rp 5.000.000)">Sultan Bundle / Joki All Games - Rp 5.000.000</option>
+                </select>
+            </div>
+
+            <!-- 3. Pilih Metode Pembayaran (QRIS, GoPay, OVO pakai QRIS) -->
+            <div class="form-group">
+                <label>Pilih Metode Pembayaran:</label>
+                <div class="payment-list">
+                    <label class="payment-option"><input type="radio" name="payment" value="QRIS (All Payment)" onclick="toggleQris(true)" required> 📱 QRIS (Scan Semua Dompet Digital / Bank)</label>
+                    <label class="payment-option"><input type="radio" name="payment" value="GoPay (via QRIS)" onclick="toggleQris(true)"> 🟢 GoPay (Scan QRIS Otomatis)</label>
+                    <label class="payment-option"><input type="radio" name="payment" value="OVO (via QRIS)" onclick="toggleQris(true)"> 🟣 OVO (Scan QRIS Otomatis)</label>
+                    <label class="payment-option"><input type="radio" name="payment" value="DANA" onclick="toggleQris(false)"> 🟢 DANA</label>
+                    <label class="payment-option"><input type="radio" name="payment" value="Bank BCA" onclick="toggleQris(false)"> 🔵 Bank BCA</label>
+                    <label class="payment-option"><input type="radio" name="payment" value="Bank BRI" onclick="toggleQris(false)"> 🔵 Bank BRI</label>
+                </div>
+            </div>
+
+            <!-- Kotak Tampil Gambar QRIS (Muncul jika QRIS, GoPay, atau OVO dipilih) -->
+            <div id="qrisSection" class="qris-box">
+                <p style="color: #f8fafc; font-weight: bold; margin-bottom: 8px; font-size: 13px;">Scan QRIS di Bawah Ini:</p>
+                <img src="Screenshot_20260321_085538.jpg" alt="QRIS Ambaturico">
+                <p style="font-size: 11px; color: #cbd5e1; margin-top: 6px;">Bisa pakai QRIS, GoPay, atau OVO. Setelah bayar, kirim bukti ke WhatsApp.</p>
+            </div>
+
+            <!-- 4. Tombol Kirim ke WhatsApp (2 Nomor Pilihan) -->
+            <label style="margin-top: 20px;">Pilih Tujuan WhatsApp Admin:</label>
+            <div class="whatsapp-select">
+                <button type="button" class="btn-wa" onclick="sendWhatsApp('6283130724263')">Order ke WA 1</button>
+                <button type="button" class="btn-wa btn-wa-alt" onclick="sendWhatsApp('6283865519736')">Order ke WA 2</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function toggleQris(show) {
+            const qrisBox = document.getElementById('qrisSection');
+            qrisBox.style.display = show ? 'block' : 'none';
+        }
+
+        function sendWhatsApp(phoneNum) {
+            const gameId = document.getElementById('gameId').value;
+            const productSelect = document.getElementById('product');
+            const product = productSelect.value;
+            const paymentEl = document.querySelector('input[name="payment"]:checked');
+
+            if (!gameId || !product || !paymentEl) {
+                alert('Mohon lengkapi ID Game, pilih Produk, dan Metode Pembayaran terlebih dahulu!');
+                return;
+            }
+
+            const payment = paymentEl.value;
+
+            const message = `Halo Ambaturico, saya ingin konfirmasi top-up:%0A%0A` +
+                            `• ID Game: *${gameId}*%0A` +
+                            `• Produk: *${product}*%0A` +
+                            `• Pembayaran via: *${payment}*%0A%0A` +
+                            `Berikut saya lampirkan bukti pembayarannya. Mohon segera diproses ya kak!`;
+
+            window.open(`https://wa.me/${phoneNum}?text=${message}`, '_blank');
+        }
+    </script>
+
+</body>
+</html>
+                                               

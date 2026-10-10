@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ambaturico Top Up - Official Store</title>
+    <title>Ambaturico Official - Top Up & Streaming Film</title>
     <style>
         * { box-sizing: border-box; }
         body { 
@@ -83,6 +83,31 @@
             padding: 12px; 
         }
 
+        /* Tombol Cepat Streaming Film & TV Dracin */
+        .quick-stream-banner {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .quick-btn-card {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(30, 41, 59, 0.9));
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        .quick-btn-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
+        .quick-btn-card.tv { background: linear-gradient(135deg, rgba(220, 38, 38, 0.85), rgba(30, 41, 59, 0.9)); }
+        .quick-icon { font-size: 24px; }
+        .quick-text-title { font-size: 13px; font-weight: 900; color: #f8fafc; }
+        .quick-text-desc { font-size: 10px; color: #cbd5e1; font-weight: 700; }
+
         /* Banner Detail Game */
         .game-hero-banner {
             background: rgba(30, 41, 59, 0.7);
@@ -135,7 +160,7 @@
             font-size: 15px; font-weight: 900; margin-bottom: 10px; color: #f8fafc; display: flex; align-items: center; gap: 6px; text-shadow: 0 2px 6px rgba(0,0,0,0.8);
         }
 
-        #homePage, #transactionPage, #successPage { display: none; }
+        #homePage, #transactionPage, #successPage, #streamingPage { display: none; }
         #homePage { display: block; }
 
         /* Grid Kartu Game */
@@ -177,36 +202,23 @@
         input:focus, select:focus { outline: none; border-color: #3b82f6; background: rgba(15, 23, 42, 0.9); }
 
         .account-check-result {
-            background: rgba(22, 101, 52, 0.35);
-            border: 1px solid rgba(74, 222, 128, 0.5);
-            border-radius: 8px;
-            padding: 10px 12px;
-            margin-top: 6px;
-            margin-bottom: 10px;
-            display: none;
-            font-size: 12px;
-            color: #4ade80;
-            font-weight: 800;
+            background: rgba(22, 101, 52, 0.35); border: 1px solid rgba(74, 222, 128, 0.5); border-radius: 8px; padding: 10px 12px; margin-top: 6px; margin-bottom: 10px; display: none; font-size: 12px; color: #4ade80; font-weight: 800;
         }
         .account-check-result span { color: #f8fafc; font-weight: 900; }
 
-        .sub-tabs {
-            display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 4px;
-        }
+        .sub-tabs { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 4px; }
         .sub-tab-btn {
             background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 16px; font-size: 11px; font-weight: 800; color: #cbd5e1; white-space: nowrap; cursor: pointer;
         }
         .sub-tab-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; }
 
         .nominal-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; max-height: 420px; overflow-y: auto; padding-right: 4px; border: 1px solid rgba(255,255,255,0.05); padding: 4px; border-radius: 8px;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; max-height: 420px; overflow-y: auto; padding: 4px; border-radius: 8px;
         }
         .nominal-item {
             background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 10px; cursor: pointer; position: relative;
         }
-        .nominal-item.selected {
-            background: rgba(30, 58, 138, 0.85); border-color: #3b82f6; box-shadow: 0 0 0 2px #3b82f6;
-        }
+        .nominal-item.selected { background: rgba(30, 58, 138, 0.85); border-color: #3b82f6; box-shadow: 0 0 0 2px #3b82f6; }
         .nom-name { font-size: 12px; font-weight: 900; color: #f8fafc; line-height: 1.3; }
         .nom-old-price { font-size: 10px; color: #94a3b8; font-weight: 700; text-decoration: line-through; margin-top: 4px; }
         .nom-price { font-size: 13px; color: #f87171; font-weight: 900; margin-top: 1px; }
@@ -221,20 +233,11 @@
 
         /* Footer Style */
         .footer-section {
-            background: rgba(30, 41, 59, 0.8);
-            border-top: 1px solid rgba(255,255,255,0.2);
-            padding: 20px 16px;
-            margin-top: 20px;
-            font-size: 12px;
-            color: #cbd5e1;
-            border-radius: 12px 12px 0 0;
-            backdrop-filter: blur(10px);
+            background: rgba(30, 41, 59, 0.8); border-top: 1px solid rgba(255,255,255,0.2); padding: 20px 16px; margin-top: 20px; font-size: 12px; color: #cbd5e1; border-radius: 12px 12px 0 0; backdrop-filter: blur(10px);
         }
         .footer-title { font-size: 14px; font-weight: 900; color: #f8fafc; margin-bottom: 6px; }
         .footer-desc { font-size: 11px; color: #94a3b8; font-weight: 700; line-height: 1.4; margin-bottom: 12px; }
-        .footer-badge-box {
-            display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 10px; margin-bottom: 15px; background: rgba(15, 23, 42, 0.5); font-weight: 800;
-        }
+        .footer-badge-box { display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 10px; margin-bottom: 15px; background: rgba(15, 23, 42, 0.5); font-weight: 800; }
         .payment-icons-grid { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; align-items: center; }
         .pay-badge-tag { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 6px; font-size: 10px; font-weight: 800; color: #f8fafc; }
         .footer-links-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 15px; }
@@ -248,18 +251,17 @@
         }
         .checkout-total-price { font-size: 15px; font-weight: 900; color: #f87171; }
         .checkout-total-desc { font-size: 10px; color: #94a3b8; font-weight: 800; }
-        .btn-checkout {
-            background: #3b82f6; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-size: 13px; font-weight: 900; cursor: pointer;
-        }
+        .btn-checkout { background: #3b82f6; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-size: 13px; font-weight: 900; cursor: pointer; }
 
         /* Modals */
         .ai-chat-overlay, .modal-overlay, .premium-wall-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 15px; backdrop-filter: blur(6px);
         }
         .ai-chat-box, .modal-box, .info-modal-box, .premium-box {
-            background: rgba(30, 41, 59, 0.98); color: white; width: 100%; max-width: 380px; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); border: 1px solid rgba(234, 179, 8, 0.4); position: relative; text-align: center;
+            background: rgba(30, 41, 59, 0.98); color: white; width: 100%; max-width: 380px; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); border: 1px solid rgba(234, 179, 8, 0.4); position: relative; text-align: left;
         }
-        .ai-chat-box { height: 450px; display: flex; flex-direction: column; padding: 0; overflow: hidden; text-align: left; }
+        .premium-box { text-align: center; }
+        .ai-chat-box { height: 450px; display: flex; flex-direction: column; padding: 0; overflow: hidden; }
         .ai-chat-header { background: #3b82f6; color: white; padding: 12px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; }
         .ai-chat-body { flex: 1; padding: 12px; overflow-y: auto; background: #0f172a; font-size: 12px; display: flex; flex-direction: column; gap: 8px; }
         .chat-bubble { padding: 8px 12px; border-radius: 10px; max-width: 80%; line-height: 1.4; font-weight: 700; }
@@ -274,20 +276,14 @@
         .modal-title { font-size: 16px; font-weight: 900; color: #f8fafc; margin-bottom: 5px; text-align: center; }
         .modal-subtitle { font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 12px; text-align: center; }
         .auth-btn { width: 100%; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(15, 23, 42, 0.8); color: white; }
-        .auth-btn-fb { background: #1877f2; border: none; }
+        .auth-btn-google { background: #ea4335; border: none; }
         .auth-btn-phone { background: #22c55e; border: none; }
         .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 18px; font-weight: 900; cursor: pointer; color: #94a3b8; }
 
-        /* Tombol Mengapung (WhatsApp, Musik, Fullscreen) */
-        .floating-wa {
-            position: fixed; bottom: 115px; right: 16px; background: #3b82f6; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); cursor: pointer; z-index: 1000; text-decoration: none;
-        }
-        .floating-music {
-            position: fixed; bottom: 170px; right: 16px; background: #ef4444; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); cursor: pointer; z-index: 1000; border: 2px solid white; animation: pulseMusic 2s infinite;
-        }
-        .floating-fs {
-            position: fixed; bottom: 225px; right: 16px; background: #8b5cf6; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); cursor: pointer; z-index: 1000; border: 2px solid white;
-        }
+        /* Tombol Mengapung */
+        .floating-wa { position: fixed; bottom: 115px; right: 16px; background: #3b82f6; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); cursor: pointer; z-index: 1000; text-decoration: none; }
+        .floating-music { position: fixed; bottom: 170px; right: 16px; background: #ef4444; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); cursor: pointer; z-index: 1000; border: 2px solid white; animation: pulseMusic 2s infinite; }
+        .floating-fs { position: fixed; bottom: 225px; right: 16px; background: #8b5cf6; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); cursor: pointer; z-index: 1000; border: 2px solid white; }
         @keyframes pulseMusic { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
 
         .bottom-nav {
@@ -300,35 +296,27 @@
 </head>
 <body onclick="triggerAutoFullscreenAndMusic()">
 
-    <!-- ELEMEN AUDIO / MUSIK LATAR BELAKANG -->
+    <!-- AUDIO LATAR BELAKANG -->
     <audio id="bgMusic" loop preload="auto">
         <source src="https://mp3tourl.com/audio/1791631849745-630f7454-9bcd-4cb1-830a-cbfd3f5a8d24.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
 
-    <!-- Tombol Mengapung (Fullscreen, Musik, AI Chat) -->
-    <div class="floating-fs" onclick="toggleFullscreen()" title="Layar Penuh (Fullscreen)">
-        🔲
-    </div>
-    <div class="floating-music" id="musicBtn" onclick="toggleMusic()" title="Putar / Matikan Musik">
-        🎵
-    </div>
-    <div class="floating-wa" onclick="openAiChat()" title="Live Chat AI Assistant">
-        💬
-    </div>
+    <div class="floating-fs" onclick="toggleFullscreen()" title="Fullscreen">🔲</div>
+    <div class="floating-music" id="musicBtn" onclick="toggleMusic()" title="Musik">🎵</div>
+    <div class="floating-wa" onclick="openAiChat()" title="AI Chat">💬</div>
 
-    <!-- POPUP PEMBATASAN 3X MENONTON (UPGRADE PREMIUM) -->
+    <!-- POPUP PEMBATASAN 3X MENONTON -->
     <div id="premiumWallModal" class="premium-wall-overlay">
         <div class="premium-box">
             <div style="font-size: 40px; margin-bottom: 10px;">🔒</div>
             <div class="modal-title" style="color: #fde047; font-size: 18px;">Batas Menonton Telah Habis!</div>
             <div class="modal-subtitle" style="color: #cbd5e1; margin-top: 8px;">
-                Kamu sudah menonton film sebanyak <b>3 kali</b>. Akses gratis kamu telah berakhir. Silakan upgrade ke akun **Premium Ambaturico** untuk menonton sepuasnya tanpa batas!
+                Kamu sudah mengakses film/dracin sebanyak <b>3 kali</b>. Silakan upgrade ke akun **Premium Ambaturico** agar bisa menonton sepuasnya tanpa batas!
             </div>
-            <button onclick="upgradeToPremium()" style="background: linear-gradient(90deg, #f59e0b, #d97706); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 900; font-size: 13px; width: 100%; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);">
+            <button onclick="upgradeToPremium()" style="background: linear-gradient(90deg, #f59e0b, #d97706); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 900; font-size: 13px; width: 100%; cursor: pointer; margin-top: 10px;">
                 ⭐ Upgrade ke Premium Sekarang
             </button>
-            <div style="margin-top: 12px;">
+            <div style="margin-top: 12px; text-align: center;">
                 <span onclick="resetWatchLimitForDemo()" style="font-size: 10px; color: #94a3b8; cursor: pointer; text-decoration: underline;">[Reset Batasan untuk Demo]</span>
             </div>
         </div>
@@ -336,7 +324,7 @@
 
     <div class="navbar">
         <a href="javascript:void(0)" class="brand-logo-container" onclick="goHome()">
-            <img src="https://cdn.phototourl.com/member/2026-10-10-052208a8-ffeb-40b5-8517-885b1e9a9eca.jpg" alt="Logo Ambaturico" class="brand-logo-img">
+            <img src="https://cdn.phototourl.com/member/2026-10-10-052208a8-ffeb-40b5-8517-885b1e9a9eca.jpg" alt="Logo" class="brand-logo-img">
             <div class="brand-logo-text">AMBA<span>TURICO</span></div>
         </a>
         <div class="nav-right">
@@ -345,16 +333,30 @@
         </div>
     </div>
 
-    <!-- Modal Login -->
+    <!-- Modal Masuk / Daftar Resmi (Google, No HP, Email) -->
     <div id="authModal" class="modal-overlay">
-        <div class="modal-box" style="text-align: left;">
+        <div class="modal-box">
             <button class="close-modal" onclick="closeAuthModal()">✕</button>
-            <div class="modal-title">Masuk / Daftar Akun</div>
-            <div class="modal-subtitle">Pilih metode masuk untuk transaksi di Ambaturico Top Up!</div>
-            <button class="auth-btn" onclick="loginSuccess('Akun Google')">🌐 Masuk dengan Google</button>
-            <button class="auth-btn auth-btn-fb" onclick="loginSuccess('Akun Facebook')">📘 Masuk dengan Facebook</button>
-            <button class="auth-btn auth-btn-phone" onclick="loginSuccess('Nomor Telepon')">📱 Masuk dengan No. Telepon</button>
-            <div style="text-align: center; margin-top: 15px;">
+            <div class="modal-title">Masuk / Daftar Akun Resmi</div>
+            <div class="modal-subtitle">Pilih metode masuk yang kamu inginkan:</div>
+            
+            <button class="auth-btn auth-btn-google" onclick="loginSuccess('Akun Google')">🌐 Masuk dengan Akun Google</button>
+            <button class="auth-btn auth-btn-phone" onclick="loginSuccess('Nomor Telepon')">📱 Masuk dengan Nomor Telepon</button>
+            
+            <div style="margin: 12px 0; text-align: center; font-size: 11px; color: #94a3b8; font-weight: 700;">--- Atau gunakan Email & Sandi ---</div>
+
+            <form onsubmit="event.preventDefault(); submitEmailLogin();">
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" placeholder="rico@gmail.com" required>
+                
+                <label for="loginPass">Kata Sandi:</label>
+                <input type="password" id="loginPass" placeholder="••••••••" required>
+                
+                <button type="submit" style="width: 100%; background: #3b82f6; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 900; margin-top: 5px; cursor: pointer;">
+                    Masuk / Daftar dengan Email
+                </button>
+            </form>
+            <div style="text-align: center; margin-top: 10px;">
                 <span style="font-size: 11px; color: #94a3b8; cursor: pointer; text-decoration: underline;" onclick="closeAuthModal()">Lewati dulu</span>
             </div>
         </div>
@@ -368,7 +370,7 @@
 
     <!-- Modal Admin Panel -->
     <div id="adminModal" class="modal-overlay">
-        <div class="modal-box" style="max-width: 420px; text-align: left;">
+        <div class="modal-box" style="max-width: 420px;">
             <button class="close-modal" onclick="closeAdminPanel()">✕</button>
             <div class="modal-title">Panel Konfirmasi Admin</div>
             <div class="modal-subtitle">Ubah status pesanan pembeli menjadi Selesai di sini:</div>
@@ -386,10 +388,10 @@
                 <button onclick="closeAiChat()" style="background:none; border:none; color:white; font-size:16px; font-weight:900; cursor:pointer;">✕</button>
             </div>
             <div class="ai-chat-body" id="chatBody">
-                <div class="chat-bubble bot">Halo! Saya AI Assistant Ambaturico Store. Ada yang bisa saya bantu seputar top up game atau kendala pesanan kamu?</div>
+                <div class="chat-bubble bot">Halo! Saya AI Assistant Ambaturico. Ada yang bisa saya bantu seputar film, dracin, atau top up game?</div>
             </div>
             <div class="ai-chat-footer">
-                <input type="text" id="chatInput" placeholder="Ketik pesan di sini..." onkeypress="if(event.key === 'Enter') sendAiMessage()">
+                <input type="text" id="chatInput" placeholder="Ketik pesan..." onkeypress="if(event.key === 'Enter') sendAiMessage()">
                 <button onclick="sendAiMessage()">Kirim</button>
             </div>
         </div>
@@ -397,12 +399,10 @@
 
     <!-- Modal Informasi Popup -->
     <div id="infoModal" class="modal-overlay">
-        <div class="info-modal-box" style="text-align: left;">
+        <div class="info-modal-box">
             <button class="close-modal" onclick="closeInfoModal()">✕</button>
-            <div class="modal-title" id="infoTitle">Informasi Ambaturico</div>
-            <div id="infoContent" style="font-size: 12px; color: #cbd5e1; line-height: 1.6; font-weight: 700; margin-top: 10px;">
-                Isi informasi...
-            </div>
+            <div class="modal-title" id="infoTitle">Informasi</div>
+            <div id="infoContent" style="font-size: 12px; color: #cbd5e1; line-height: 1.6; font-weight: 700; margin-top: 10px;"></div>
         </div>
     </div>
 
@@ -414,6 +414,24 @@
             <div id="watchCounterBadge" style="background: rgba(37, 99, 235, 0.25); border: 1px solid rgba(59, 130, 246, 0.4); padding: 8px 12px; border-radius: 8px; font-size: 11px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; font-weight: 800;">
                 <span>🎬 Sisa Kuota Menonton Gratis: <b id="watchCountText" style="color: #60a5fa;">3/3</b></span>
                 <span style="color: #fde047; cursor: pointer; text-decoration: underline;" onclick="upgradeToPremium()">Upgrade Premium</span>
+            </div>
+
+            <!-- Tombol Cepat Streaming Film & TV Dracin -->
+            <div class="quick-stream-banner">
+                <div class="quick-btn-card" onclick="openStreamingPage('Bioskop Ambaturico - Film Terbaru')">
+                    <div class="quick-icon">🎬</div>
+                    <div>
+                        <div class="quick-text-title">Nonton Film</div>
+                        <div class="quick-text-desc">Streaming Bioskop</div>
+                    </div>
+                </div>
+                <div class="quick-btn-card tv" onclick="openStreamingPage('Drama China (Dracin) Terpopuler')">
+                    <div class="quick-icon">📺</div>
+                    <div>
+                        <div class="quick-text-title">TV Dracin</div>
+                        <div class="quick-text-desc">Drama China Seru</div>
+                    </div>
+                </div>
             </div>
 
             <div class="filter-tabs">
@@ -430,7 +448,7 @@
                 <div class="game-card" onclick="selectGame('Mobile Legends', 'User ID', 'Zone ID', 'https://cdn.phototourl.com/member/2026-10-10-5476ca68-6162-4d5e-9274-c5d317c45904.jpg')">
                     <div class="game-img-wrapper">
                         <div class="discount-badge">-9%</div>
-                        <img src="https://cdn.phototourl.com/member/2026-10-10-5476ca68-6162-4d5e-9274-c5d317c45904.jpg" alt="Mobile Legends" class="game-img">
+                        <img src="https://cdn.phototourl.com/member/2026-10-10-5476ca68-6162-4d5e-9274-c5d317c45904.jpg" class="game-img">
                         <div class="cashback-badge">🪙 Cashback</div>
                     </div>
                     <div class="game-title">Mobile Legends</div>
@@ -440,7 +458,7 @@
                 <div class="game-card" onclick="selectGame('Free Fire', 'Player ID (UID)', '', 'https://cdn.phototourl.com/member/2026-10-10-b724aaa4-b5dd-44b0-927e-ca5e1e3a4511.jpg')">
                     <div class="game-img-wrapper">
                         <div class="discount-badge">-15%</div>
-                        <img src="https://cdn.phototourl.com/member/2026-10-10-b724aaa4-b5dd-44b0-927e-ca5e1e3a4511.jpg" alt="Free Fire" class="game-img">
+                        <img src="https://cdn.phototourl.com/member/2026-10-10-b724aaa4-b5dd-44b0-927e-ca5e1e3a4511.jpg" class="game-img">
                         <div class="cashback-badge">🪙 Cashback</div>
                     </div>
                     <div class="game-title">Free Fire</div>
@@ -450,7 +468,7 @@
                 <div class="game-card" onclick="selectGame('Roblox', 'Roblox Username', '', 'https://cdn.phototourl.com/member/2026-10-10-06a4d345-b315-42d7-b3e4-d6f4f8bae637.jpg')">
                     <div class="game-img-wrapper">
                         <div class="discount-badge">HOT</div>
-                        <img src="https://cdn.phototourl.com/member/2026-10-10-06a4d345-b315-42d7-b3e4-d6f4f8bae637.jpg" alt="Roblox" class="game-img">
+                        <img src="https://cdn.phototourl.com/member/2026-10-10-06a4d345-b315-42d7-b3e4-d6f4f8bae637.jpg" class="game-img">
                         <div class="cashback-badge">🪙 Cashback</div>
                     </div>
                     <div class="game-title">Roblox</div>
@@ -459,7 +477,7 @@
                 <!-- 4. PUBG Mobile -->
                 <div class="game-card" onclick="selectGame('PUBG Mobile', 'Character ID', '', 'https://cdn.phototourl.com/member/2026-10-10-617e887a-2198-4a4f-90ad-50a10a938717.jpg')">
                     <div class="game-img-wrapper">
-                        <img src="https://cdn.phototourl.com/member/2026-10-10-617e887a-2198-4a4f-90ad-50a10a938717.jpg" alt="PUBG Mobile" class="game-img">
+                        <img src="https://cdn.phototourl.com/member/2026-10-10-617e887a-2198-4a4f-90ad-50a10a938717.jpg" class="game-img">
                         <div class="cashback-badge">🪙 Cashback</div>
                     </div>
                     <div class="game-title">PUBG Mobile</div>
@@ -469,7 +487,7 @@
                 <div class="game-card" onclick="selectGame('Poppo Live Coins', 'Poppo ID', '', 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&auto=format&fit=crop&q=80')">
                     <div class="game-img-wrapper">
                         <div class="discount-badge">-21%</div>
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&auto=format&fit=crop&q=80" alt="Poppo Live" class="game-img">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&auto=format&fit=crop&q=80" class="game-img">
                     </div>
                     <div class="game-title">Poppo Live Coins</div>
                 </div>
@@ -477,47 +495,38 @@
                 <!-- 6. Steam Gift Card -->
                 <div class="game-card" onclick="selectGame('Steam Gift Card', 'Email / Steam ID', '', 'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=600&auto=format&fit=crop&q=80')">
                     <div class="game-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=300&auto=format&fit=crop&q=80" alt="Steam" class="game-img">
+                        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=300&auto=format&fit=crop&q=80" class="game-img">
                     </div>
                     <div class="game-title">Steam Gift Card</div>
-                </div>
-
-                <!-- 7. Bigo Live -->
-                <div class="game-card" onclick="selectGame('Bigo Live', 'Bigo ID', '', 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&auto=format&fit=crop&q=80')">
-                    <div class="game-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&auto=format&fit=crop&q=80" alt="Bigo Live" class="game-img">
-                    </div>
-                    <div class="game-title">Bigo Live</div>
-                </div>
-
-                <!-- 8. Voucher Dramabox -->
-                <div class="game-card" onclick="selectGame('Voucher Dramabox', 'Account Email / ID', '', 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80')">
-                    <div class="game-img-wrapper">
-                        <div class="discount-badge">-20%</div>
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300&auto=format&fit=crop&q=80" alt="Dramabox" class="game-img">
-                    </div>
-                    <div class="game-title">Voucher Dramabox</div>
-                </div>
-
-                <!-- 9. PC Game Pass -->
-                <div class="game-card" onclick="selectGame('PC Game Pass', 'Microsoft Email', '', 'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=600&auto=format&fit=crop&q=80')">
-                    <div class="game-img-wrapper">
-                        <div class="discount-badge">-13%</div>
-                        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=300&auto=format&fit=crop&q=80" alt="Game Pass" class="game-img">
-                    </div>
-                    <div class="game-title">PC Game Pass</div>
                 </div>
             </div>
         </div>
 
-        <!-- HALAMAN TRANSAKSI -->
+        <!-- HALAMAN PEMUTARAN STREAMING / FILM / DRACIN -->
+        <div id="streamingPage">
+            <button class="back-btn" onclick="goHome()">⬅ Kembali ke Beranda</button>
+            <div class="card-box" style="text-align: center;">
+                <div id="streamTitle" style="font-size: 16px; font-weight: 900; color: #f8fafc; margin-bottom: 12px;">Pemutaran Film</div>
+                <div style="width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 10px; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2);">
+                    <video id="playerVideo" controls style="width: 100%; height: 100%; object-fit: cover;" poster="https://cdn.phototourl.com/member/2026-10-10-436670c5-478e-4d0f-9322-4b1431d5a824.jpg">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung pemutar video.
+                    </video>
+                </div>
+                <div style="font-size: 11px; color: #94a3b8; margin-top: 10px; font-weight: 700;">
+                    Selamat menikmati tontonan eksklusif dari Ambaturico Streaming 24 Jam!
+                </div>
+            </div>
+        </div>
+
+        <!-- HALAMAN TRANSAKSI TOP UP -->
         <div id="transactionPage">
             <button class="back-btn" onclick="goHome()">⬅ Kembali</button>
             
             <div class="game-hero-banner">
-                <img id="bannerImg" src="" alt="Game Poster" class="game-hero-img">
+                <img id="bannerImg" src="" class="game-hero-img">
                 <div class="game-hero-content">
-                    <img id="bannerAvatar" src="" alt="Avatar" class="game-avatar">
+                    <img id="bannerAvatar" class="game-avatar">
                     <div>
                         <h2 id="selectedGameTitle" style="font-size: 15px; margin: 0; color: #f8fafc; font-weight: 900;">Top Up Game</h2>
                         <a href="javascript:void(0)" style="font-size: 11px; color: #60a5fa; text-decoration: none; font-weight: 800;">Lihat cara transaksi</a>
@@ -531,35 +540,26 @@
             </div>
 
             <form id="topupForm" onsubmit="event.preventDefault(); submitOrder();">
-                
-                <!-- 1. Pilih Nominal -->
                 <div class="card-box">
                     <div class="box-title"><span>1️⃣</span> Pilih Nominal</div>
-                    
                     <div class="sub-tabs" id="subTabsContainer">
                         <button type="button" class="sub-tab-btn active" onclick="filterSubCategory('Harga Spesial')">Harga Spesial</button>
                         <button type="button" class="sub-tab-btn" onclick="filterSubCategory('Pass')">Pass</button>
-                        <button type="button" class="sub-tab-btn" onclick="filterSubCategory('Elite Bundle')">Elite Bundle</button>
                         <button type="button" class="sub-tab-btn" onclick="filterSubCategory('Diamonds')">Diamonds/Robux</button>
                         <button type="button" class="sub-tab-btn" onclick="filterSubCategory('Semua')">Semua</button>
                     </div>
-
                     <div id="nominalContainer" class="nominal-grid"></div>
                 </div>
 
-                <!-- 2. Pilih Region / Server (KHUSUS MOBILE LEGENDS) -->
                 <div class="card-box" id="regionBox" style="display: none;">
                     <div class="box-title"><span>🌍</span> Pilih Region Akun (Mobile Legends)</div>
-                    <label for="selectRegion">Region / Negara Akun:</label>
+                    <label for="selectRegion">Region / Negara:</label>
                     <select id="selectRegion">
                         <option value="Indonesia (ID)">🇮🇩 Indonesia (ID)</option>
-                        <option value="Malaysia / SG (SEA)">🇲🇾 Malaysia / Singapura / SEA</option>
-                        <option value="Filipina (PH)">🇵🇭 Filipina (PH)</option>
-                        <option value="Global / All Region (Bebas)">🌐 Global / All Region (Bebas Semua Negara)</option>
+                        <option value="Global / All Region">🌐 Global / All Region (Bebas)</option>
                     </select>
                 </div>
 
-                <!-- 3. Masukkan Data Akun & Cek Otomatis -->
                 <div class="card-box">
                     <div class="box-title"><span id="stepAccountNum">2️⃣</span> Masukkan Data Akun</div>
                     <label id="labelId1" for="inputField1">User ID:</label>
@@ -567,78 +567,20 @@
                     
                     <div id="zoneIdContainer" style="display:none;">
                         <label id="labelId2" for="inputField2">Zone ID:</label>
-                        <input type="text" id="inputField2" placeholder="Masukkan Server ID (ex: 1234)" onblur="checkAccount()">
+                        <input type="text" id="inputField2" placeholder="Masukkan Server ID" onblur="checkAccount()">
                     </div>
                     
-                    <!-- Kotak hasil cek akun otomatis -->
-                    <div id="accountCheckResult" class="account-check-result">
-                        🔍 Memeriksa akun...
-                    </div>
-
-                    <span id="idHelpText" style="font-size: 10px; color: #94a3b8; font-weight: 700;">Ketuk di luar kolom ID untuk cek nama akun otomatis.</span>
+                    <div id="accountCheckResult" class="account-check-result">🔍 Memeriksa akun...</div>
                 </div>
 
-                <!-- 4. Masukkan Info Kontak (Email) -->
                 <div class="card-box">
-                    <div class="box-title"><span id="stepContactNum">3️⃣</span> Masukkan Info Kontak</div>
-                    <label for="userEmail">Email (opsional):</label>
-                    <input type="email" id="userEmail" placeholder="akunepepdenzz@gmail.com">
-                    <span style="font-size: 10px; color: #94a3b8; font-weight: 700;">Kamu bisa isi ini ya buat terima bukti transaksi.</span>
-                </div>
-
-                <!-- 5. Pilih Metode Pembayaran -->
-                <div class="card-box">
-                    <div class="box-title"><span id="stepPaymentNum">4️⃣</span> Pilih Metode Pembayaran</div>
+                    <div class="box-title"><span>3️⃣</span> Pilih Metode Pembayaran</div>
                     <div class="payment-list">
                         <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="QRIS" required> 📱 QRIS (All Payment)</div> <span style="color:#f87171;" id="payQrisPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="GoPay"> 🟢 GoPay (via QRIS)</div> <span style="color:#f87171;" id="payGopayPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="OVO"> 🟣 OVO (via QRIS)</div> <span style="color:#f87171;" id="payOvoPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="DANA"> 🟢 DANA (Otomatis / Bayar Langsung)</div> <span style="color:#f87171;" id="payDanaPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="Bank BCA"> 🔵 Bank BCA (Manual Transfer)</div> <span style="color:#f87171;" id="payBcaPrv">Rp 0</span></label>
+                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="DANA"> 🟢 DANA (Otomatis)</div> <span style="color:#f87171;" id="payDanaPrv">Rp 0</span></label>
                     </div>
                 </div>
 
-                <!-- Footer -->
-                <div class="footer-section">
-                    <div class="footer-title">Ambaturico Official Store</div>
-                    <div class="footer-desc">Website top up game termurah, aman, dan terpercaya di Indonesia.</div>
-                    
-                    <div class="footer-badge-box">
-                        <span>Wilayah & Bahasa</span>
-                        <span style="color: #60a5fa;">🇮🇩 Indonesia ❯</span>
-                    </div>
-
-                    <div class="footer-title" style="font-size: 12px; margin-bottom: 8px;">Pembayaran Aman</div>
-                    <div class="payment-icons-grid">
-                        <span class="pay-badge-tag">🟢 gopay</span>
-                        <span class="pay-badge-tag">🔵 DANA</span>
-                        <span class="pay-badge-tag">🟠 ShopeePay</span>
-                        <span class="pay-badge-tag">🟣 OVO</span>
-                        <span class="pay-badge-tag">🪙 Ambaturico Coins</span>
-                        <span class="pay-badge-tag">+ 20 lainnya</span>
-                    </div>
-
-                    <div class="footer-title" style="font-size: 12px; margin-top: 15px; margin-bottom: 8px;">Informasi</div>
-                    <div class="footer-links-grid">
-                        <span class="footer-link-item" onclick="showInfo('Program Affiliate')">Program Affiliate</span>
-                        <span class="footer-link-item" onclick="showInfo('Redeem Voucher')">Redeem Voucher</span>
-                        <span class="footer-link-item" onclick="showInfo('Tentang Kami')">Tentang Kami</span>
-                        <span class="footer-link-item" onclick="showInfo('Syarat & Ketentuan')">Syarat & Ketentuan</span>
-                        <span class="footer-link-item" onclick="showInfo('Kebijakan Privasi')">Kebijakan Privasi</span>
-                        <span class="footer-link-item" onclick="showInfo('Blog')">Blog</span>
-                    </div>
-
-                    <div class="footer-title" style="font-size: 12px; margin-top: 15px; margin-bottom: 6px;">Ikuti Kami</div>
-                    <div class="social-icons">
-                        <a href="https://www.instagram.com/ricoo55555?srtk=MWE5OXZmMXVuNDQzZA==" target="_blank" class="social-btn" title="Instagram Rico">📷</a>
-                    </div>
-
-                    <div class="footer-title" style="font-size: 12px; margin-top: 15px; margin-bottom: 4px;">Hubungi Kami</div>
-                    <div style="font-size: 11px; color: #cbd5e1; font-weight: 700;">✉️ akunepepdenzz@gmail.com</div>
-                    <div style="font-size: 11px; color: #60a5fa; font-weight: 700; cursor: pointer; margin-top: 2px;" onclick="openAiChat()">💬 Live Chat AI Support</div>
-                </div>
-
-                <!-- Bottom Sticky Checkout Bar -->
                 <div class="checkout-bar">
                     <div>
                         <div class="checkout-total-desc" id="summaryProdName">Pilih nominal dulu</div>
@@ -649,66 +591,30 @@
             </form>
         </div>
 
-        <!-- HALAMAN SUKSES / KONFIRMASI PEMBAYARAN -->
+        <!-- HALAMAN SUKSES -->
         <div id="successPage">
             <button class="back-btn" onclick="goHome()">⬅ Kembali ke Beranda</button>
             <div class="status-card">
                 <div id="statusBadge" class="status-badge">⏳ MENUNGGU PEMBAYARAN</div>
-                <h3 style="margin-top: 0; font-size: 16px; color: #f8fafc;">Detail Informasi & Pembayaran</h3>
-                <p style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 12px;">Periksa kembali data akun Anda di bawah ini:</p>
-                
-                <div style="background: rgba(15, 23, 42, 0.9); padding: 12px; border-radius: 8px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1); font-size: 11px; line-height: 1.5;">
+                <h3 style="margin-top: 0; font-size: 16px; color: #f8fafc;">Detail Informasi Pembayaran</h3>
+                <div style="background: rgba(15, 23, 42, 0.9); padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 11px; line-height: 1.5;">
                     <div>🆔 ID Pesanan: <b id="resOrderNo">AMB-88392</b></div>
-                    <div>🎮 Game: <b id="resGame">Mobile Legends</b></div>
-                    <div id="resRegionContainer">🌍 Region Akun: <b id="resRegion" style="color: #60a5fa;">-</b></div>
-                    <div>👤 ID Akun: <b id="resId">12345678</b></div>
-                    <div>🏷️ Nama Nickname Akun: <b id="resNickname" style="color: #4ade80; font-size: 12px;">-</b></div>
-                    <div>📦 Produk Dipilih: <b id="resProduct">Weekly Pass</b></div>
-                    <div>💰 Total Harga: <b id="resPrice" style="color: #f87171; font-size: 13px;">Rp 28.000</b></div>
-                    <div style="color: #4ade80; margin-top: 2px;">🪙 Bonus Cashback 1%: <b id="resCashback">Rp 280</b></div>
+                    <div>🎮 Produk: <b id="resProduct">-</b></div>
+                    <div>💰 Total: <b id="resPrice" style="color: #f87171;">Rp 0</b></div>
                 </div>
-
-                <!-- BAGIAN PEMBAYARAN DINAMIS -->
-                <div id="paymentDisplayContainer" style="text-align: center; margin-bottom: 15px; background: rgba(15, 23, 42, 0.7); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
-                </div>
-
-                <!-- KOTAK PERTANYAAN SETELAH 3-5 MENIT -->
-                <div id="paymentPromptBox" style="display: none; background: rgba(37, 99, 235, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); padding: 12px; border-radius: 8px; margin-bottom: 15px; text-align: center;">
-                    <div style="font-size: 12px; font-weight: 900; color: #f8fafc; margin-bottom: 8px;">🤔 Apakah Anda sudah melakukan pembayaran?</div>
-                    <div style="display: flex; gap: 8px; justify-content: center;">
-                        <button type="button" onclick="handlePaidAnswer(true)" style="background: #22c55e; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 900; font-size: 11px; cursor: pointer;">Ya, Saya Sudah Membayar</button>
-                        <button type="button" onclick="handlePaidAnswer(false)" style="background: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 900; font-size: 11px; cursor: pointer;">Belum</button>
-                    </div>
-                </div>
-
-                <!-- TOMBOL KONFIRMASI WA (MUNCUL JIKA SUDAH KLIK "YA") -->
-                <div id="waConfirmContainer" style="display: none;">
-                    <p style="font-size: 11px; color: #4ade80; font-weight: 800; text-align: center; margin-bottom: 8px;">✅ Silakan berikan bukti ke Ambaturico agar pesanan kamu bisa langsung diproses!</p>
-                    <a id="waConfirmBtn" href="javascript:void(0)" target="_blank" class="btn-checkout" style="display: block; text-decoration: none; text-align: center; background: #22c55e; padding: 12px; font-weight: 900;">
-                        💬 Konfirmasi & Kirim Bukti ke WhatsApp Admin
-                    </a>
-                </div>
+                <a id="waConfirmBtn" href="javascript:void(0)" target="_blank" class="btn-checkout" style="display: block; text-decoration: none; text-align: center; background: #22c55e; padding: 12px; font-weight: 900;">
+                    💬 Konfirmasi & Kirim Bukti ke WhatsApp Admin
+                </a>
             </div>
         </div>
 
     </div>
 
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="goHome()">
-            <span class="nav-icon">🏠</span> Home
-        </div>
-        <div class="nav-item" onclick="openAdminPanel()">
-            <span class="nav-icon">📋</span> Transaksi
-        </div>
-        <div class="nav-item" onclick="alert('Nikmati cashback 1% di setiap transaksi minimal Rp 50.000!')">
-            <span class="nav-icon">🏷️</span> Promo
-        </div>
-        <div class="nav-item" onclick="alert('Kumpulkan hadiah menarik setiap minggu!')">
-            <span class="nav-icon">🎁</span> Hadiahku
-        </div>
-        <div class="nav-item" onclick="alert('Hubungi admin untuk gabung program affiliate.')">
-            <span class="nav-icon">🤝</span> Affiliate
-        </div>
+        <div class="nav-item active" onclick="goHome()"><span class="nav-icon">🏠</span> Home</div>
+        <div class="nav-item" onclick="openAdminPanel()"><span class="nav-icon">📋</span> Transaksi</div>
+        <div class="nav-item" onclick="openStreamingPage('Bioskop Ambaturico - Film Terbaru')"><span class="nav-icon">🎬</span> Nonton</div>
+        <div class="nav-item" onclick="openStreamingPage('Drama China (Dracin) Terpopuler')"><span class="nav-icon">📺</span> Dracin</div>
     </div>
 
     <script>
@@ -716,85 +622,24 @@
             'Mobile Legends': [
                 { name: 'Weekly Diamond Pass', category: 'Harga Spesial', priceVal: 28000, oldPrice: 'Rp 32.475', price: 'Rp 28.000' },
                 { name: 'Weekly Diamond Pass x2', category: 'Pass', priceVal: 55000, oldPrice: 'Rp 65.282', price: 'Rp 55.000' },
-                { name: 'Twilight Pass', category: 'Pass', priceVal: 145000, oldPrice: 'Rp 169.169', price: 'Rp 145.000' },
-                { name: 'Weekly Elite Bundle', category: 'Elite Bundle', priceVal: 16000, oldPrice: 'Rp 16.917', price: 'Rp 16.900' },
-                { name: 'Monthly Epic Bundle', category: 'Elite Bundle', priceVal: 84000, oldPrice: 'Rp 84.094', price: 'Rp 84.000' },
                 { name: '5 Diamonds', category: 'Diamonds', priceVal: 1500, oldPrice: 'Rp 1.707', price: 'Rp 1.500' },
-                { name: '12 Diamonds', category: 'Diamonds', priceVal: 3500, oldPrice: 'Rp 3.975', price: 'Rp 3.500' },
-                { name: '19 Diamonds', category: 'Diamonds', priceVal: 5500, oldPrice: 'Rp 6.249', price: 'Rp 5.500' },
-                { name: '28 Diamonds', category: 'Diamonds', priceVal: 8500, oldPrice: 'Rp 9.151', price: 'Rp 8.500' },
-                { name: '44 Diamonds', category: 'Diamonds', priceVal: 11500, oldPrice: 'Rp 13.638', price: 'Rp 11.500' },
-                { name: '59 Diamonds', category: 'Diamonds', priceVal: 16000, oldPrice: 'Rp 18.148', price: 'Rp 16.000' },
-                { name: '85 Diamonds', category: 'Diamonds', priceVal: 22000, oldPrice: 'Rp 26.116', price: 'Rp 22.000' },
-                { name: '113 Diamonds', category: 'Diamonds', priceVal: 30000, oldPrice: 'Rp 35.240', price: 'Rp 30.000' },
-                { name: '170 Diamonds', category: 'Diamonds', priceVal: 45000, oldPrice: 'Rp 52.233', price: 'Rp 45.000' },
-                { name: '296 Diamonds', category: 'Diamonds', priceVal: 78000, oldPrice: 'Rp 90.826', price: 'Rp 78.000' },
-                { name: '408 Diamonds', category: 'Diamonds', priceVal: 105000, oldPrice: 'Rp 124.955', price: 'Rp 105.000' },
-                { name: '568 Diamonds', category: 'Diamonds', priceVal: 145000, oldPrice: 'Rp 170.273', price: 'Rp 145.000' },
-                { name: '878 Diamonds', category: 'Diamonds', priceVal: 220000, oldPrice: 'Rp 261.025', price: 'Rp 220.000' },
-                { name: '1135 Diamonds', category: 'Diamonds', priceVal: 290000, oldPrice: 'Rp 342.127', price: 'Rp 290.000' },
-                { name: '2010 Diamonds', category: 'Diamonds', priceVal: 530000, oldPrice: 'Rp 630.040', price: 'Rp 530.000' },
-                { name: '4830 Diamonds', category: 'Diamonds', priceVal: 1150000, oldPrice: 'Rp 1.365.146', price: 'Rp 1.150.000' }
+                { name: '59 Diamonds', category: 'Diamonds', priceVal: 16000, oldPrice: 'Rp 18.148', price: 'Rp 16.000' }
             ],
             'Free Fire': [
                 { name: 'Membership Mingguan', category: 'Pass', priceVal: 29000, oldPrice: 'Rp 32.000', price: 'Rp 29.000' },
-                { name: 'Membership Bulanan', category: 'Pass', priceVal: 90000, oldPrice: 'Rp 98.000', price: 'Rp 90.000' },
-                { name: '5 Diamonds', category: 'Diamonds', priceVal: 1000, oldPrice: 'Rp 1.200', price: 'Rp 1.000' },
-                { name: '10 Diamonds', category: 'Diamonds', priceVal: 1800, oldPrice: 'Rp 2.100', price: 'Rp 1.800' },
-                { name: '20 Diamonds', category: 'Diamonds', priceVal: 3200, oldPrice: 'Rp 3.800', price: 'Rp 3.200' },
-                { name: '50 Diamonds', category: 'Diamonds', priceVal: 7000, oldPrice: 'Rp 8.000', price: 'Rp 7.000' },
-                { name: '70 Diamonds', category: 'Diamonds', priceVal: 9500, oldPrice: 'Rp 10.500', price: 'Rp 9.500' },
-                { name: '100 Diamonds', category: 'Diamonds', priceVal: 13500, oldPrice: 'Rp 15.000', price: 'Rp 13.500' },
-                { name: '140 Diamonds', category: 'Diamonds', priceVal: 19000, oldPrice: 'Rp 21.000', price: 'Rp 19.000' },
-                { name: '210 Diamonds', category: 'Diamonds', priceVal: 28500, oldPrice: 'Rp 31.500', price: 'Rp 28.500' },
-                { name: '355 Diamonds', category: 'Diamonds', priceVal: 48000, oldPrice: 'Rp 52.000', price: 'Rp 48.000' },
-                { name: '500 Diamonds', category: 'Diamonds', priceVal: 67000, oldPrice: 'Rp 74.000', price: 'Rp 67.000' },
-                { name: '720 Diamonds', category: 'Diamonds', priceVal: 95000, oldPrice: 'Rp 105.000', price: 'Rp 95.000' },
-                { name: '1000 Diamonds', category: 'Diamonds', priceVal: 132000, oldPrice: 'Rp 145.000', price: 'Rp 132.000' },
-                { name: '1450 Diamonds', category: 'Diamonds', priceVal: 190000, oldPrice: 'Rp 210.000', price: 'Rp 190.000' },
-                { name: '2180 Diamonds', category: 'Diamonds', priceVal: 285000, oldPrice: 'Rp 315.000', price: 'Rp 285.000' },
-                { name: '3640 Diamonds', category: 'Diamonds', priceVal: 475000, oldPrice: 'Rp 520.000', price: 'Rp 475.000' }
+                { name: '70 Diamonds', category: 'Diamonds', priceVal: 9500, oldPrice: 'Rp 10.500', price: 'Rp 9.500' }
             ],
             'Roblox': [
-                { name: 'Roblox Premium 450', category: 'Pass', priceVal: 68000, oldPrice: 'Rp 75.000', price: 'Rp 68.000' },
-                { name: '100 Robux', category: 'Diamonds', priceVal: 18000, oldPrice: 'Rp 20.000', price: 'Rp 18.000' },
-                { name: '200 Robux', category: 'Diamonds', priceVal: 36000, oldPrice: 'Rp 40.000', price: 'Rp 36.000' },
-                { name: '400 Robux', category: 'Diamonds', priceVal: 72000, oldPrice: 'Rp 80.000', price: 'Rp 72.000' },
-                { name: '800 Robux', category: 'Diamonds', priceVal: 140000, oldPrice: 'Rp 155.000', price: 'Rp 140.000' },
-                { name: '1200 Robux', category: 'Diamonds', priceVal: 210000, oldPrice: 'Rp 230.000', price: 'Rp 210.000' },
-                { name: '1700 Robux', category: 'Diamonds', priceVal: 280000, oldPrice: 'Rp 310.000', price: 'Rp 280.000' },
-                { name: '2000 Robux', category: 'Diamonds', priceVal: 330000, oldPrice: 'Rp 365.000', price: 'Rp 330.000' },
-                { name: '2500 Robux', category: 'Diamonds', priceVal: 410000, oldPrice: 'Rp 450.000', price: 'Rp 410.000' },
-                { name: '4500 Robux', category: 'Diamonds', priceVal: 710000, oldPrice: 'Rp 780.000', price: 'Rp 710.000' }
+                { name: '100 Robux', category: 'Diamonds', priceVal: 18000, oldPrice: 'Rp 20.000', price: 'Rp 18.000' }
             ],
             'PUBG Mobile': [
-                { name: 'Royale Pass', category: 'Pass', priceVal: 145000, oldPrice: 'Rp 160.000', price: 'Rp 145.000' },
-                { name: '60 UC', category: 'Diamonds', priceVal: 14500, oldPrice: 'Rp 16.000', price: 'Rp 14.500' },
-                { name: '325 UC', category: 'Diamonds', priceVal: 72000, oldPrice: 'Rp 80.000', price: 'Rp 72.000' },
-                { name: '660 UC', category: 'Diamonds', priceVal: 145000, oldPrice: 'Rp 160.000', price: 'Rp 145.000' },
-                { name: '1800 UC', category: 'Diamonds', priceVal: 365000, oldPrice: 'Rp 400.000', price: 'Rp 365.000' }
+                { name: '60 UC', category: 'Diamonds', priceVal: 14500, oldPrice: 'Rp 16.000', price: 'Rp 14.500' }
             ],
             'Poppo Live Coins': [
-                { name: '10.000 Coins', category: 'Diamonds', priceVal: 20000, oldPrice: 'Rp 22.000', price: 'Rp 20.000' },
-                { name: '50.000 Coins', category: 'Diamonds', priceVal: 92000, oldPrice: 'Rp 100.000', price: 'Rp 92.000' },
-                { name: '100.000 Coins', category: 'Diamonds', priceVal: 180000, oldPrice: 'Rp 195.000', price: 'Rp 180.000' }
+                { name: '10.000 Coins', category: 'Diamonds', priceVal: 20000, oldPrice: 'Rp 22.000', price: 'Rp 20.000' }
             ],
             'Steam Gift Card': [
-                { name: 'Steam Wallet IDR 45.000', category: 'Diamonds', priceVal: 47000, oldPrice: 'Rp 50.000', price: 'Rp 47.000' },
-                { name: 'Steam Wallet IDR 90.000', category: 'Diamonds', priceVal: 94000, oldPrice: 'Rp 100.000', price: 'Rp 94.000' },
-                { name: 'Steam Wallet IDR 250.000', category: 'Diamonds', priceVal: 258000, oldPrice: 'Rp 275.000', price: 'Rp 258.000' }
-            ],
-            'Bigo Live': [
-                { name: '50 Diamonds', category: 'Diamonds', priceVal: 15000, oldPrice: 'Rp 17.000', price: 'Rp 15.000' },
-                { name: '300 Diamonds', category: 'Diamonds', priceVal: 85000, oldPrice: 'Rp 92.000', price: 'Rp 85.000' }
-            ],
-            'Voucher Dramabox': [
-                { name: 'Weekly VIP Pass', category: 'Pass', priceVal: 29000, oldPrice: 'Rp 35.000', price: 'Rp 29.000' },
-                { name: 'Monthly VIP Pass', category: 'Pass', priceVal: 85000, oldPrice: 'Rp 105.000', price: 'Rp 85.000' }
-            ],
-            'PC Game Pass': [
-                { name: '1 Bulan Xbox Game Pass', category: 'Pass', priceVal: 55000, oldPrice: 'Rp 65.000', price: 'Rp 55.000' },
-                { name: '3 Bulan Xbox Game Pass', category: 'Pass', priceVal: 150000, oldPrice: 'Rp 175.000', price: 'Rp 150.000' }
+                { name: 'Steam Wallet IDR 45.000', category: 'Diamonds', priceVal: 47000, oldPrice: 'Rp 50.000', price: 'Rp 47.000' }
             ]
         };
 
@@ -802,10 +647,9 @@
         let selectedProductData = null;
         let activeOrders = JSON.parse(localStorage.getItem('ambaturico_orders')) || [];
         let verifiedNickname = '-';
-        let paymentTimer = null;
         let isPlayingMusic = false;
 
-        // Sistem Pembatasan Menonton Film (Maksimal 3x)
+        // Sistem Pembatasan Menonton (Maksimal 3x)
         let watchCount = parseInt(localStorage.getItem('ambaturico_watch_count')) || 0;
         let isPremiumUser = localStorage.getItem('ambaturico_is_premium') === 'true';
 
@@ -828,20 +672,76 @@
             }
         }
 
-        // Fungsi Otomatis Putar Musik & Set Volume Maksimal
+        // Fungsi Login & Pendaftaran Resmi
+        function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
+        function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
+        
+        function loginSuccess(method) {
+            document.getElementById('userNameDisplay').innerText = method;
+            document.getElementById('userBadge').style.display = 'inline-block';
+            document.getElementById('btnLogin').style.display = 'none';
+            closeAuthModal();
+            alert('Berhasil masuk menggunakan ' + method + '!');
+        }
+
+        function submitEmailLogin() {
+            const email = document.getElementById('loginEmail').value.trim();
+            document.getElementById('userNameDisplay').innerText = email;
+            document.getElementById('userBadge').style.display = 'inline-block';
+            document.getElementById('btnLogin').style.display = 'none';
+            closeAuthModal();
+            alert('Berhasil masuk/mendaftar dengan email: ' + email + '!');
+        }
+
+        // Fungsi Streaming Film / Dracin Sekali Klik (Cek Limit 3x)
+        function openStreamingPage(title) {
+            if (!isPremiumUser && watchCount >= 3) {
+                document.getElementById('premiumWallModal').style.display = 'flex';
+                return;
+            }
+
+            if (!isPremiumUser) {
+                watchCount++;
+                localStorage.setItem('ambaturico_watch_count', watchCount);
+                updateWatchBadge();
+            }
+
+            document.getElementById('streamTitle').innerText = title;
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('transactionPage').style.display = 'none';
+            document.getElementById('successPage').style.display = 'none';
+            document.getElementById('streamingPage').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function upgradeToPremium() {
+            document.getElementById('premiumWallModal').style.display = 'none';
+            isPremiumUser = true;
+            localStorage.setItem('ambaturico_is_premium', 'true');
+            updateWatchBadge();
+            alert('🎉 Akun kamu berhasil di-upgrade ke status PREMIUM. Nikmati streaming sepuasnya tanpa batas!');
+        }
+
+        function resetWatchLimitForDemo() {
+            watchCount = 0;
+            isPremiumUser = false;
+            localStorage.setItem('ambaturico_watch_count', 0);
+            localStorage.setItem('ambaturico_is_premium', 'false');
+            updateWatchBadge();
+            document.getElementById('premiumWallModal').style.display = 'none';
+            alert('🔄 Batasan tontonan direset kembali ke 0/3.');
+        }
+
         function triggerAutoFullscreenAndMusic() {
             const music = document.getElementById('bgMusic');
             const btn = document.getElementById('musicBtn');
             music.volume = 1.0;
-
             if (!isPlayingMusic) {
                 music.play().then(() => {
                     btn.style.background = '#22c55e';
                     btn.innerHTML = '🔊';
                     isPlayingMusic = true;
-                }).catch(e => {
-                    console.log("Menunggu interaksi.");
-                });
+                }).catch(e => {});
             }
         }
 
@@ -865,31 +765,13 @@
 
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    console.log("Fullscreen dibatasi perangkat.");
-                });
+                document.documentElement.requestFullscreen().catch(err => {});
             } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
+                if (document.exitFullscreen) document.exitFullscreen();
             }
         }
 
-        // Cek Batasan Saat Klik / Memilih Konten Film/Game
         function selectGame(gameName, id1Label, id2Label, imgUrl) {
-            // Cek apakah bukan user premium dan kuota nonton sudah mencapai 3x
-            if (!isPremiumUser && watchCount >= 3) {
-                document.getElementById('premiumWallModal').style.display = 'flex';
-                return;
-            }
-
-            // Jika belum premium, tambahkan hitungan menonton
-            if (!isPremiumUser) {
-                watchCount++;
-                localStorage.setItem('ambaturico_watch_count', watchCount);
-                updateWatchBadge();
-            }
-
             currentActiveGame = gameName;
             verifiedNickname = '-';
             document.getElementById('accountCheckResult').style.display = 'none';
@@ -897,153 +779,17 @@
             document.getElementById('bannerImg').src = imgUrl;
             document.getElementById('bannerAvatar').src = imgUrl;
             document.getElementById('labelId1').innerText = id1Label + ':';
-            document.getElementById('inputField1').placeholder = 'Masukkan ' + id1Label;
             document.getElementById('inputField1').value = '';
-            document.getElementById('inputField2').value = '';
 
             const regionBox = document.getElementById('regionBox');
-            if (gameName === 'Mobile Legends') {
-                regionBox.style.display = 'block';
-                document.getElementById('stepAccountNum').innerText = '3️⃣';
-                document.getElementById('stepContactNum').innerText = '4️⃣';
-                document.getElementById('stepPaymentNum').innerText = '5️⃣';
-                document.getElementById('warningText').innerText = 'Tersedia pilihan All Region / bebas semua negara untuk Mobile Legends.';
-            } else {
-                regionBox.style.display = 'none';
-                document.getElementById('stepAccountNum').innerText = '2️⃣';
-                document.getElementById('stepContactNum').innerText = '3️⃣';
-                document.getElementById('stepPaymentNum').innerText = '4️⃣';
-                document.getElementById('warningText').innerText = 'Pastikan data akun sudah benar sebelum melakukan transaksi.';
-            }
-
-            const zoneContainer = document.getElementById('zoneIdContainer');
-            if (id2Label && id2Label !== '') {
-                zoneContainer.style.display = 'block';
-                document.getElementById('labelId2').innerText = id2Label + ':';
-                document.getElementById('inputField2').placeholder = 'Masukkan ' + id2Label;
-                document.getElementById('idHelpText').innerText = 'Tap menu profile di pojok kiri atas dari menu utama game buat lihat ID.';
-            } else {
-                zoneContainer.style.display = 'none';
-                if (gameName === 'Free Fire') {
-                    document.getElementById('idHelpText').innerText = 'Klik profil akun Free Fire kamu di pojok kiri atas untuk melihat UID.';
-                } else if (gameName === 'Roblox') {
-                    document.getElementById('idHelpText').innerText = 'Masukkan username akun Roblox kamu dengan benar.';
-                } else {
-                    document.getElementById('idHelpText').innerText = 'Masukkan ID akun dengan benar.';
-                }
-            }
+            regionBox.style.display = (gameName === 'Mobile Legends') ? 'block' : 'none';
 
             renderNominals('Harga Spesial');
             document.getElementById('homePage').style.display = 'none';
+            document.getElementById('streamingPage').style.display = 'none';
             document.getElementById('successPage').style.display = 'none';
             document.getElementById('transactionPage').style.display = 'block';
             window.scrollTo(0, 0);
-        }
-
-        function upgradeToPremium() {
-            document.getElementById('premiumWallModal').style.display = 'none';
-            isPremiumUser = true;
-            localStorage.setItem('ambaturico_is_premium', 'true');
-            updateWatchBadge();
-            alert('🎉 Selamat! Akun kamu berhasil di-upgrade ke status PREMIUM. Nikmati akses tanpa batas!');
-        }
-
-        function resetWatchLimitForDemo() {
-            watchCount = 0;
-            isPremiumUser = false;
-            localStorage.setItem('ambaturico_watch_count', 0);
-            localStorage.setItem('ambaturico_is_premium', 'false');
-            updateWatchBadge();
-            document.getElementById('premiumWallModal').style.display = 'none';
-            alert('🔄 Batasan tontonan direset kembali ke 0/3.');
-        }
-
-        function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
-        function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
-        function loginSuccess(method) {
-            document.getElementById('userNameDisplay').innerText = method;
-            document.getElementById('userBadge').style.display = 'inline-block';
-            document.getElementById('btnLogin').style.display = 'none';
-            closeAuthModal();
-            alert('Berhasil masuk menggunakan ' + method + '!');
-        }
-
-        function openAdminPanel() {
-            renderAdminOrders();
-            document.getElementById('adminModal').style.display = 'flex';
-        }
-        function closeAdminPanel() { document.getElementById('adminModal').style.display = 'none'; }
-
-        // AI Chatbot Functions
-        function openAiChat() { document.getElementById('aiChatModal').style.display = 'flex'; }
-        function closeAiChat() { document.getElementById('aiChatModal').style.display = 'none'; }
-
-        function sendAiMessage() {
-            const input = document.getElementById('chatInput');
-            const text = input.value.trim();
-            if (!text) return;
-
-            const chatBody = document.getElementById('chatBody');
-            chatBody.innerHTML += `<div class="chat-bubble user">${text}</div>`;
-            input.value = '';
-            chatBody.scrollTop = chatBody.scrollHeight;
-
-            setTimeout(() => {
-                let reply = "Terima kasih sudah menghubungi Ambaturico Store! Pesanan kamu dijamin cepat, aman, dan legal 24 jam.";
-                const lower = text.toLowerCase();
-                if (lower.includes('harga') || lower.includes('murah')) {
-                    reply = "Semua harga diamond dan pass di Ambaturico dijamin paling murah dengan tambahan cashback 1% loh!";
-                } else if (lower.includes('proses') || lower.includes('lama')) {
-                    reply = "Proses top up otomatis instant 1-3 menit setelah pembayaran dikonfirmasi ke admin via WhatsApp.";
-                } else if (lower.includes('qris') || lower.includes('potongan')) {
-                    reply = "Untuk pembayaran via QRIS, disarankan untuk melebihkan 500p agar jumlahnya pas dan tidak terkena potongan!";
-                } else if (lower.includes('admin') || lower.includes('bantuan')) {
-                    reply = "Kamu bisa klik tombol WhatsApp di pojok untuk terhubung langsung dengan admin utama kami ya kak Rico!";
-                }
-                chatBody.innerHTML += `<div class="chat-bubble bot">${reply}</div>`;
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 800);
-        }
-
-        const infoTexts = {
-            'Program Affiliate': '<b>Program Affiliate Ambaturico</b><br>Ajak teman-temanmu top up di Ambaturico menggunakan link referensimu dan dapatkan komisi pasif setiap hari langsung cair!',
-            'Redeem Voucher': '<b>Redeem Voucher Ambaturico</b><br>Punya kode promo atau voucher diskon? Masukkan kodenya saat halaman checkout untuk menikmati potongan harga spesial.',
-            'Tentang Kami': '<b>Tentang Ambaturico</b><br>Ambaturico Store adalah platform penyedia layanan top up game online, voucher digital, dan hiburan terpercaya yang dikelola secara profesional oleh tim Rico.',
-            'Syarat & Ketentuan': '<b>Syarat & Ketentuan Ambaturico</b><br>1. Pastikan User ID dan Zone ID benar.<br>2. Kesalahan penulisan ID diluar tanggung jawab kami.<br>3. Hubungi admin via WhatsApp jika ada kendala.',
-            'Kebijakan Privasi': '<b>Kebijakan Privasi Ambaturico</b><br>Kami menjaga kerahasiaan data pribadi, email, serta nomor telepon seluruh pelanggan dengan sistem keamanan enkripsi tingkat tinggi.',
-            'Blog': '<b>Blog & Berita Game</b><br>Dapatkan tips seputar meta hero terbaru, trik diamond murah, serta info event turnamen game bergengsi setiap minggunya di Ambaturico.'
-        };
-
-        function showInfo(title) {
-            document.getElementById('infoTitle').innerText = title;
-            document.getElementById('infoContent').innerHTML = infoTexts[title] || 'Informasi resmi Ambaturico Store.';
-            document.getElementById('infoModal').style.display = 'flex';
-        }
-        function closeInfoModal() { document.getElementById('infoModal').style.display = 'none'; }
-
-        function checkAccount() {
-            const id1 = document.getElementById('inputField1').value.trim();
-            const resultBox = document.getElementById('accountCheckResult');
-
-            if (!id1) {
-                resultBox.style.display = 'none';
-                return;
-            }
-
-            resultBox.style.display = 'block';
-            resultBox.style.color = '#fde047';
-            resultBox.innerHTML = `⏳ Menghubungkan ke server ${currentActiveGame} untuk memeriksa ID...`;
-
-            setTimeout(() => {
-                let sampleNames = ['RicoGanz_55', 'AmbaturicoOfficial', 'SultanGaming99', 'NihBosKabor', 'ProPlayerIDN', 'ShadowKnight', 'CyberKing', 'EpicMaster'];
-                let randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)] + '_' + Math.floor(10 + Math.random() * 89);
-                let randomLevel = Math.floor(30 + Math.random() * 55);
-
-                verifiedNickname = `${randomName} (Lv. ${randomLevel})`;
-                
-                resultBox.style.color = '#4ade80';
-                resultBox.innerHTML = `✅ Akun Ditemukan: <span>${verifiedNickname}</span>`;
-            }, 600);
         }
 
         function renderNominals(category) {
@@ -1053,7 +799,6 @@
             
             list.forEach((item) => {
                 if (category !== 'Semua' && item.category !== category) return;
-                
                 let cbVal = Math.round(item.priceVal * 0.01);
 
                 const div = document.createElement('div');
@@ -1072,10 +817,7 @@
                     document.getElementById('summaryProdName').innerText = item.name;
                     document.getElementById('summaryPrice').innerText = item.price;
                     document.getElementById('payQrisPrv').innerText = item.price;
-                    document.getElementById('payGopayPrv').innerText = item.price;
-                    document.getElementById('payOvoPrv').innerText = item.price;
                     document.getElementById('payDanaPrv').innerText = item.price;
-                    document.getElementById('payBcaPrv').innerText = item.price;
                 };
                 container.appendChild(div);
             });
@@ -1088,174 +830,69 @@
         }
 
         function goHome() {
-            if (paymentTimer) clearTimeout(paymentTimer);
             document.getElementById('transactionPage').style.display = 'none';
             document.getElementById('successPage').style.display = 'none';
+            document.getElementById('streamingPage').style.display = 'none';
             document.getElementById('homePage').style.display = 'block';
             selectedProductData = null;
             verifiedNickname = '-';
-            document.getElementById('topupForm').reset();
-            document.getElementById('accountCheckResult').style.display = 'none';
             window.scrollTo(0, 0);
+        }
+
+        function checkAccount() {
+            const id1 = document.getElementById('inputField1').value.trim();
+            const resultBox = document.getElementById('accountCheckResult');
+            if (!id1) { resultBox.style.display = 'none'; return; }
+            resultBox.style.display = 'block';
+            resultBox.style.color = '#fde047';
+            resultBox.innerHTML = `⏳ Memeriksa ID...`;
+            setTimeout(() => {
+                verifiedNickname = `RicoGanz_55 (Lv. 45)`;
+                resultBox.style.color = '#4ade80';
+                resultBox.innerHTML = `✅ Akun Ditemukan: <span>${verifiedNickname}</span>`;
+            }, 600);
         }
 
         function submitOrder() {
             const id1 = document.getElementById('inputField1').value;
-            const id2 = document.getElementById('inputField2').value;
             const paymentEl = document.querySelector('input[name="payment"]:checked');
-            const regionVal = document.getElementById('selectRegion').value;
-
             if (!id1 || !selectedProductData || !paymentEl) {
-                alert('Mohon lengkapi Data Akun, pilih nominal produk, dan pilih metode pembayaran ya kak!');
+                alert('Mohon lengkapi data akun, produk, dan pembayaran!');
                 return;
             }
 
             const orderNo = 'AMB-' + Math.floor(100000 + Math.random() * 900000);
-            const payment = paymentEl.value;
-            let akunInfo = `${id1}` + (id2 ? ` (${id2})` : '');
-
-            const newOrder = {
-                id: orderNo,
-                game: currentActiveGame,
-                region: currentActiveGame === 'Mobile Legends' ? regionVal : 'N/A',
-                account: akunInfo,
-                nickname: verifiedNickname !== '-' ? verifiedNickname : `${id1} (Cek Manual)`,
-                product: selectedProductData.name,
-                price: selectedProductData.price,
-                status: 'Diproses'
-            };
-            activeOrders.push(newOrder);
-            localStorage.setItem('ambaturico_orders', JSON.stringify(activeOrders));
-
             document.getElementById('resOrderNo').innerText = orderNo;
-            document.getElementById('resGame').innerText = currentActiveGame;
-            
-            const resRegionContainer = document.getElementById('resRegionContainer');
-            if (currentActiveGame === 'Mobile Legends') {
-                resRegionContainer.style.display = 'block';
-                document.getElementById('resRegion').innerText = regionVal;
-            } else {
-                resRegionContainer.style.display = 'none';
-            }
-
-            document.getElementById('resId').innerText = akunInfo;
-            document.getElementById('resNickname').innerText = newOrder.nickname;
             document.getElementById('resProduct').innerText = selectedProductData.name;
             document.getElementById('resPrice').innerText = selectedProductData.price;
-            document.getElementById('resCashback').innerText = 'Rp ' + selectedProductData.cashbackVal.toLocaleString('id-ID');
-
-            const paymentDisplayContainer = document.getElementById('paymentDisplayContainer');
-            if (payment === 'QRIS' || payment === 'GoPay' || payment === 'OVO') {
-                paymentDisplayContainer.innerHTML = `
-                    <div style="font-size: 12px; font-weight: 900; color: #f8fafc; margin-bottom: 8px;">📱 Silakan Scan QRIS Di Bawah Ini:</div>
-                    <img src="https://cdn.phototourl.com/member/2026-10-10-bfb2147e-6044-4548-aa63-e6f285c140a8.jpg" alt="QRIS Ambaturico" style="width: 100%; max-width: 180px; border-radius: 6px; margin-bottom: 6px;">
-                    <div style="font-size: 10px; color: #fca5a5; font-weight: 800;">⚠️ Mohon lebihkan 500p saat pembayaran via QRIS agar tidak terkena potongan!</div>
-                `;
-            } else if (payment === 'DANA') {
-                paymentDisplayContainer.innerHTML = `
-                    <div style="font-size: 12px; font-weight: 900; color: #60a5fa; margin-bottom: 8px;">🟢 Pembayaran Otomatis DANA</div>
-                    <div style="font-size: 11px; color: #cbd5e1; margin-bottom: 10px;">Masukkan nomor DANA kamu untuk menerima otorisasi pembayaran otomatis:</div>
-                    <input type="text" id="buyerDanaNumber" placeholder="Contoh: 081234567890" style="padding: 8px; font-size: 12px; margin-bottom: 8px; text-align: center;">
-                    <button type="button" onclick="triggerDanaPayment()" style="background: #2563eb; color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 900; font-size: 12px; cursor: pointer; width: 100%;">
-                        🚀 Bayar Otomatis via DANA
-                    </button>
-                    <div id="danaNotificationStatus" style="font-size: 11px; color: #4ade80; font-weight: 800; margin-top: 8px; display: none;"></div>
-                `;
-            } else {
-                paymentDisplayContainer.innerHTML = `
-                    <div style="font-size: 12px; font-weight: 900; color: #60a5fa; margin-bottom: 6px;">🔵 Transfer Bank BCA</div>
-                    <div style="font-size: 11px; color: #f8fafc;">Silakan transfer manual ke Rekening BCA: <b>1234567890</b> a.n. Ambaturico Store senilai <b>${selectedProductData.price}</b></div>
-                `;
-            }
-
-            let regionTextMsg = currentActiveGame === 'Mobile Legends' ? `%0A• Region: *${regionVal}*` : '';
 
             const waMsg = `Halo Admin Ambaturico,%0A%0ASaya ingin konfirmasi pesanan:%0A` +
-                          `• No. Pesanan: *${orderNo}*%0A` +
-                          `• Game: *${currentActiveGame}*` + regionTextMsg + `%0A` +
-                          `• ID Akun: *${akunInfo}*%0A` +
-                          `• Nama Akun: *${newOrder.nickname}*%0A` +
+                          `• No: *${orderNo}*%0A` +
                           `• Produk: *${selectedProductData.name}* (${selectedProductData.price})%0A` +
-                          `• Pembayaran: *${payment}*%0A%0A` +
-                          `Berikut bukti pembayaran saya. Mohon diproses ya kak!`;
-
+                          `• Akun ID: *${id1}*`;
             document.getElementById('waConfirmBtn').href = `https://wa.me/6283130724263?text=${waMsg}`;
-
-            document.getElementById('paymentPromptBox').style.display = 'none';
-            document.getElementById('waConfirmContainer').style.display = 'none';
 
             document.getElementById('transactionPage').style.display = 'none';
             document.getElementById('successPage').style.display = 'block';
             window.scrollTo(0, 0);
-
-            if (paymentTimer) clearTimeout(paymentTimer);
-            paymentTimer = setTimeout(() => {
-                document.getElementById('paymentPromptBox').style.display = 'block';
-            }, 240000); 
         }
 
-        function handlePaidAnswer(isPaid) {
-            const promptBox = document.getElementById('paymentPromptBox');
-            const waContainer = document.getElementById('waConfirmContainer');
+        function openAdminPanel() { document.getElementById('adminModal').style.display = 'flex'; }
+        function closeAdminPanel() { document.getElementById('adminModal').style.display = 'none'; }
 
-            if (isPaid) {
-                promptBox.style.display = 'none';
-                waContainer.style.display = 'block';
-            } else {
-                alert('Silakan selesaikan pembayaran Anda terlebih dahulu sebelum mengonfirmasi.');
-                promptBox.style.display = 'none';
-            }
-        }
-
-        function triggerDanaPayment() {
-            const phone = document.getElementById('buyerDanaNumber').value.trim();
-            const statusBox = document.getElementById('danaNotificationStatus');
-
-            if (!phone || phone.length < 10) {
-                alert('Mohon masukkan nomor DANA yang valid terlebih dahulu!');
-                return;
-            }
-
-            statusBox.style.display = 'block';
-            statusBox.style.color = '#fde047';
-            statusBox.innerHTML = `⏳ Mengirim permintaan pembayaran ke nomor DANA ${phone}...`;
-
+        function openAiChat() { document.getElementById('aiChatModal').style.display = 'flex'; }
+        function closeAiChat() { document.getElementById('aiChatModal').style.display = 'none'; }
+        function sendAiMessage() {
+            const input = document.getElementById('chatInput');
+            if (!input.value.trim()) return;
+            const chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML += `<div class="chat-bubble user">${input.value}</div>`;
+            input.value = '';
             setTimeout(() => {
-                statusBox.style.color = '#4ade80';
-                statusBox.innerHTML = `✅ Notifikasi Login DANA terkirim ke HP! Silakan buka aplikasi DANA kamu untuk selesaikan pembayaran.`;
-            }, 1200);
-        }
-
-        function renderAdminOrders() {
-            activeOrders = JSON.parse(localStorage.getItem('ambaturico_orders')) || [];
-            const listContainer = document.getElementById('adminOrderList');
-            if (activeOrders.length === 0) {
-                listContainer.innerHTML = `<p style="font-size: 12px; color: #94a3b8; text-align: center;">Belum ada pesanan aktif.</p>`;
-                return;
-            }
-
-            listContainer.innerHTML = '';
-            activeOrders.forEach((ord, index) => {
-                const div = document.createElement('div');
-                div.style.cssText = "background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-bottom: 8px; font-size: 11px;";
-                div.innerHTML = `
-                    <div><b>${ord.id}</b> - ${ord.game} ${ord.region !== 'N/A' ? '('+ord.region+')' : ''}</div>
-                    <div>Akun: ${ord.account} (${ord.nickname})</div>
-                    <div>Produk: ${ord.product}</div>
-                    <div>Status: <span style="color: ${ord.status === 'Selesai' ? '#4ade80' : '#fde047'}; font-weight: 800;">${ord.status}</span></div>
-                    ${ord.status === 'Diproses' ? `<button onclick="markComplete(${index})" style="background: #22c55e; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-weight: 800; cursor: pointer; margin-top: 6px;">Konfirmasi Selesai ✓</button>` : '<div style="color: #4ade80; font-weight: 800; margin-top: 4px;">Selesai</div>'}
-                `;
-                listContainer.appendChild(div);
-            });
-        }
-
-        function markComplete(index) {
-            activeOrders[index].status = 'Selesai';
-            localStorage.setItem('ambaturico_orders', JSON.stringify(activeOrders));
-            renderAdminOrders();
-            alert('Pesanan ' + activeOrders[index].id + ' berhasil dikonfirmasi menjadi SELESAI!');
+                chatBody.innerHTML += `<div class="chat-bubble bot">Halo kak Rico! Ada yang bisa dibantu seputar streaming film, dracin, atau top up game?</div>`;
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 800);
         }
     </script>
-
 </body>
 </html>

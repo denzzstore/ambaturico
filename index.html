@@ -310,7 +310,7 @@
 <body>
 
     <div class="navbar">
-        <a href="#" class="brand-logo-container" onclick="goHome()">
+        <a href="javascript:void(0)" class="brand-logo-container" onclick="goHome()">
             <img src="https://cdn.phototourl.com/member/2026-10-10-052208a8-ffeb-40b5-8517-885b1e9a9eca.jpg" alt="Logo Ambaturico" class="brand-logo-img">
             <div class="brand-logo-text">AMBA<span>TURICO</span></div>
         </a>
@@ -494,7 +494,7 @@
                     <img id="bannerAvatar" src="" alt="Avatar" class="game-avatar">
                     <div>
                         <h2 id="selectedGameTitle" style="font-size: 15px; margin: 0; color: #f8fafc; font-weight: 900;">Top Up Game</h2>
-                        <a href="#" style="font-size: 11px; color: #60a5fa; text-decoration: none; font-weight: 800;">Lihat cara transaksi</a>
+                        <a href="javascript:void(0)" style="font-size: 11px; color: #60a5fa; text-decoration: none; font-weight: 800;">Lihat cara transaksi</a>
                     </div>
                 </div>
             </div>
@@ -638,7 +638,7 @@
                     <div style="color: #4ade80; margin-top: 4px;">🪙 Cashback 1%: <b id="resCashback">Rp 280</b></div>
                 </div>
 
-                <a id="waConfirmBtn" href="#" target="_blank" class="btn-checkout" style="display: block; text-decoration: none; text-align: center; background: #22c55e; padding: 12px;">
+                <a id="waConfirmBtn" href="javascript:void(0)" target="_blank" class="btn-checkout" style="display: block; text-decoration: none; text-align: center; background: #22c55e; padding: 12px;">
                     💬 Konfirmasi Pembayaran ke WhatsApp Admin
                 </a>
             </div>
@@ -651,7 +651,7 @@
             <span class="nav-icon">🏠</span> Home
         </div>
         <div class="nav-item" onclick="openAdminPanel()">
-            <span class="nav-icon">📋</span> Transaks
+            <span class="nav-icon">📋</span> Transaksi
         </div>
         <div class="nav-item" onclick="alert('Nikmati cashback 1% di setiap transaksi minimal Rp 50.000!')">
             <span class="nav-icon">🏷️</span> Promo
@@ -832,7 +832,7 @@
             document.getElementById('inputField2').value = '';
 
             const zoneContainer = document.getElementById('zoneIdContainer');
-            if (id2Label) {
+            if (id2Label && id2Label !== '') {
                 zoneContainer.style.display = 'block';
                 document.getElementById('labelId2').innerText = id2Label + ':';
                 document.getElementById('inputField2').placeholder = 'Masukkan ' + id2Label;
@@ -881,7 +881,7 @@
                 let randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)] + '_' + Math.floor(10 + Math.random() * 89);
                 let randomLevel = Math.floor(30 + Math.random() * 55);
 
-                verifiedNickname = `${randomName} (Lv.${randomLevel})`;
+                verifiedNickname = `${randomName} (Lv. ${randomLevel})`;
                 
                 resultBox.style.color = '#4ade80';
                 resultBox.innerHTML = `✅ Akun Ditemukan: <span>${verifiedNickname}</span>`;
@@ -1007,7 +1007,22 @@
                 const div = document.createElement('div');
                 div.style.cssText = "background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-bottom: 8px; font-size: 11px;";
                 div.innerHTML = `
-                    <div><b>${ord.id}</b> -${ord.game}</div>
+                    <div><b>${ord.id}</b> - ${ord.game}</div>
                     <div>Akun: ${ord.account} (${ord.nickname})</div>
                     <div>Produk: ${ord.product}</div>
-                    <div>Status: <span style="color: ${ord.status === 'Selesai' ? '#4ade80' : '#fde047'}; font-weight: 800;">${ord.status}</span></div>${ord.status ===
+                    <div>Status: <span style="color: ${ord.status === 'Selesai' ? '#4ade80' : '#fde047'}; font-weight: 800;">${ord.status}</span></div>
+                    ${ord.status === 'Diproses' ? `<button onclick="markComplete(${index})" style="background: #22c55e; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-weight: 800; cursor: pointer; margin-top: 6px;">Konfirmasi Selesai ✓</button>` : '<div style="color: #4ade80; font-weight: 800; margin-top: 4px;">Selesai</div>'}
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+
+        function markComplete(index) {
+            activeOrders[index].status = 'Selesai';
+            renderAdminOrders();
+            alert('Pesanan ' + activeOrders[index].id + ' berhasil dikonfirmasi menjadi SELESAI!');
+        }
+    </script>
+
+</body>
+</html>

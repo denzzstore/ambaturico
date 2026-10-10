@@ -10,9 +10,10 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             margin: 0; 
             padding-bottom: 80px; 
-            background: #f8fafc; 
+            background: #f1f5f9; 
             color: #0f172a; 
             min-height: 100vh;
+            font-weight: 600;
         }
         
         /* Top Navbar */
@@ -33,17 +34,29 @@
             color: #ef4444;
             letter-spacing: -0.5px;
             text-decoration: none;
+            cursor: pointer;
         }
         .brand-logo span { color: #2563eb; }
+        .nav-right { display: flex; align-items: center; gap: 8px; }
         .btn-masuk {
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
+            background: #2563eb;
+            border: none;
             padding: 6px 16px;
             border-radius: 20px;
             font-size: 12px;
-            font-weight: bold;
-            color: #1e293b;
+            font-weight: 800;
+            color: white;
             cursor: pointer;
+        }
+        .user-profile-badge {
+            font-size: 11px;
+            font-weight: 800;
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #bfdbfe;
+            display: none;
         }
 
         .container { 
@@ -62,6 +75,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            font-weight: 700;
         }
         .game-header-icon {
             font-size: 40px;
@@ -80,12 +94,12 @@
         }
         .tab-btn {
             background: #ffffff;
-            border: 1px solid #cbd5e1;
+            border: 1px solid #94a3b8;
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 12px;
-            font-weight: 600;
-            color: #475569;
+            font-weight: 800;
+            color: #334155;
             white-space: nowrap;
             cursor: pointer;
         }
@@ -97,13 +111,15 @@
 
         .section-header {
             font-size: 16px;
-            font-weight: 800;
+            font-weight: 900;
             margin-bottom: 12px;
             color: #0f172a;
         }
 
         /* Grid Game Home */
+        #homePage, #transactionPage, #successPage, #trackPage { display: none; }
         #homePage { display: block; }
+
         .game-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -113,56 +129,48 @@
             background: #ffffff;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
             cursor: pointer;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #cbd5e1;
             position: relative;
         }
         .game-card:hover { transform: translateY(-2px); }
         .game-img {
             width: 100%;
-            height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            color: white;
-            font-weight: bold;
+            height: 95px;
+            object-fit: cover;
+            background: #cbd5e1;
         }
         .game-info { padding: 8px; text-align: center; }
-        .game-title { font-weight: 700; font-size: 11px; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .game-tag { font-size: 9px; color: #64748b; margin-top: 2px; }
+        .game-title { font-weight: 800; font-size: 11px; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .game-tag { font-size: 10px; color: #475569; font-weight: 700; margin-top: 2px; }
         .discount-badge {
-            position: absolute; top: 6px; right: 6px; background: #ef4444; color: white; font-size: 9px; font-weight: bold; padding: 2px 5px; border-radius: 6px; z-index: 2;
+            position: absolute; top: 6px; right: 6px; background: #ef4444; color: white; font-size: 10px; font-weight: 900; padding: 2px 6px; border-radius: 6px; z-index: 2;
         }
 
-        /* Halaman Form Transaksi */
-        #transactionPage { display: none; }
         .back-btn {
-            background: #e2e8f0; color: #0f172a; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: bold; margin-bottom: 15px;
+            background: #e2e8f0; color: #0f172a; border: 1px solid #94a3b8; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 800; margin-bottom: 15px;
         }
 
         .card-box {
-            background: #ffffff; border-radius: 12px; padding: 15px; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); border: 1px solid #e2e8f0;
+            background: #ffffff; border-radius: 12px; padding: 15px; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); border: 1px solid #cbd5e1;
         }
-        .box-title { font-size: 13px; font-weight: 700; color: #2563eb; margin-bottom: 8px; text-transform: uppercase; }
+        .box-title { font-size: 13px; font-weight: 900; color: #2563eb; margin-bottom: 8px; text-transform: uppercase; }
         
-        label { display: block; margin-bottom: 5px; color: #475569; font-weight: 600; font-size: 12px; }
+        label { display: block; margin-bottom: 5px; color: #1e293b; font-weight: 800; font-size: 12px; }
         input { 
-            width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; background: #f8fafc; color: #0f172a; font-size: 13px; margin-bottom: 8px;
+            width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #94a3b8; background: #f8fafc; color: #0f172a; font-size: 13px; font-weight: 700; margin-bottom: 8px;
         }
         input:focus { outline: none; border-color: #2563eb; background: #fff; }
 
-        /* Kategori Sub-Tab Produk di dalam game */
         .sub-tabs {
             display: flex; gap: 6px; margin-bottom: 10px; overflow-x: auto; padding-bottom: 4px;
         }
         .sub-tab-btn {
-            background: #f1f5f9; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 16px; font-size: 11px; font-weight: 600; color: #475569; white-space: nowrap; cursor: pointer;
+            background: #f1f5f9; border: 1px solid #94a3b8; padding: 6px 12px; border-radius: 16px; font-size: 11px; font-weight: 800; color: #334155; white-space: nowrap; cursor: pointer;
         }
         .sub-tab-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
 
-        /* Grid Nominal Ala Lapakgaming */
         .nominal-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -173,7 +181,7 @@
         }
         .nominal-item {
             background: #f8fafc;
-            border: 1px solid #cbd5e1;
+            border: 1px solid #94a3b8;
             border-radius: 8px;
             padding: 10px;
             cursor: pointer;
@@ -182,25 +190,24 @@
         .nominal-item.selected {
             background: #eff6ff;
             border-color: #2563eb;
-            box-shadow: 0 0 0 1px #2563eb;
+            box-shadow: 0 0 0 2px #2563eb;
         }
-        .nom-name { font-size: 12px; font-weight: bold; color: #1e293b; }
-        .nom-old-price { font-size: 10px; color: #94a3b8; text-decoration: line-through; margin-top: 2px; }
-        .nom-price { font-size: 12px; color: #ef4444; font-weight: 700; margin-top: 1px; }
-        .nom-cashback { font-size: 9px; color: #16a34a; font-weight: bold; margin-top: 2px; }
+        .nom-name { font-size: 12px; font-weight: 900; color: #0f172a; }
+        .nom-old-price { font-size: 10px; color: #64748b; font-weight: 700; text-decoration: line-through; margin-top: 2px; }
+        .nom-price { font-size: 12px; color: #dc2626; font-weight: 900; margin-top: 1px; }
+        .nom-cashback { font-size: 10px; color: #15803d; font-weight: 900; margin-top: 2px; }
 
-        /* Pembayaran */
         .payment-list { display: flex; flex-direction: column; gap: 6px; }
         .payment-option { 
-            background: #f8fafc; padding: 10px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; font-size: 12px; border: 1px solid #cbd5e1; font-weight: 500;
+            background: #f8fafc; padding: 10px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; font-size: 12px; border: 1px solid #94a3b8; font-weight: 800; color: #0f172a;
         }
         .payment-option input { width: auto; margin-right: 10px; }
         
         .qris-box { 
-            background: #ffffff; padding: 12px; border-radius: 8px; margin-top: 10px; text-align: center; display: none; border: 1px solid #cbd5e1;
+            background: #ffffff; padding: 12px; border-radius: 8px; margin-top: 10px; text-align: center; display: none; border: 1px solid #94a3b8;
         }
         .qris-box img { width: 100%; max-width: 180px; height: auto; border-radius: 6px; }
-        .qris-box p { color: #475569; font-size: 11px; font-weight: bold; margin-top: 5px; margin-bottom: 0; }
+        .qris-box p { color: #0f172a; font-size: 11px; font-weight: 900; margin-top: 5px; margin-bottom: 0; }
 
         .btn-order {
             width: 100%;
@@ -210,52 +217,94 @@
             border: none;
             border-radius: 8px;
             font-size: 14px;
-            font-weight: bold;
+            font-weight: 900;
             cursor: pointer;
             margin-top: 10px;
         }
         .btn-order:hover { background: #1d4ed8; }
 
-        /* Tombol Mengapung WhatsApp (Pusat Bantuan) di Pojok Kanan Bawah */
+        /* Halaman Status Pesanan */
+        .status-card {
+            background: white; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid #cbd5e1;
+        }
+        .status-badge {
+            background: #fef08a; color: #854d0e; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 900; display: inline-block; margin-bottom: 12px;
+        }
+        .status-badge.success { background: #dcfce7; color: #166534; }
+
+        /* Modal Auth */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none; align-items: center; justify-content: center; z-index: 2000; padding: 15px;
+        }
+        .modal-box {
+            background: white; width: 100%; max-width: 380px; border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); position: relative;
+        }
+        .modal-title { font-size: 18px; font-weight: 900; color: #0f172a; margin-bottom: 5px; text-align: center; }
+        .modal-subtitle { font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 15px; text-align: center; }
+        .auth-btn {
+            width: 100%; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; border: 1px solid #cbd5e1; background: #ffffff; color: #1e293b;
+        }
+        .auth-btn-fb { background: #1877f2; color: white; border: none; }
+        .auth-btn-phone { background: #22c55e; color: white; border: none; }
+        .close-modal { position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 18px; font-weight: 900; cursor: pointer; color: #64748b; }
+
         .floating-wa {
-            position: fixed;
-            bottom: 65px;
-            right: 16px;
-            background: #25d366;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-            cursor: pointer;
-            z-index: 1000;
-            text-decoration: none;
+            position: fixed; bottom: 65px; right: 16px; background: #22c55e; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4); cursor: pointer; z-index: 1000; text-decoration: none;
         }
 
-        /* Bottom Nav Bar */
         .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-around; padding: 8px 0; z-index: 100;
+            position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; border-top: 1px solid #cbd5e1; display: flex; justify-content: space-around; padding: 8px 0; z-index: 100;
         }
-        .nav-item { text-align: center; font-size: 10px; color: #64748b; font-weight: 600; cursor: pointer; }
+        .nav-item { text-align: center; font-size: 11px; color: #334155; font-weight: 800; cursor: pointer; }
         .nav-item.active { color: #2563eb; }
         .nav-icon { font-size: 18px; display: block; margin-bottom: 2px; }
     </style>
 </head>
 <body>
 
-    <!-- Navbar Atas -->
     <div class="navbar">
         <a href="#" class="brand-logo" onclick="goHome()">AMBA<span>TURICO</span></a>
         <div class="nav-right">
-            <button class="btn-masuk" onclick="alert('Fitur akun segera hadir!')">Masuk</button>
+            <div id="userBadge" class="user-profile-badge">👤 <span id="userNameDisplay">Akun Saya</span></div>
+            <button id="btnLogin" class="btn-masuk" onclick="openAuthModal()">Masuk / Daftar</button>
         </div>
     </div>
 
-    <!-- Tombol Mengapung Pusat Bantuan WhatsApp -->
+    <!-- Modal Login -->
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeAuthModal()">✕</button>
+            <div class="modal-title">Masuk / Daftar Akun</div>
+            <div class="modal-subtitle">Pilih metode masuk untuk transaksi di Ambaturico Top Up!</div>
+            <button class="auth-btn" onclick="loginSuccess('Akun Google')">🌐 Masuk dengan Google</button>
+            <button class="auth-btn auth-btn-fb" onclick="loginSuccess('Akun Facebook')">📘 Masuk dengan Facebook</button>
+            <button class="auth-btn auth-btn-phone" onclick="loginSuccess('Nomor Telepon')">📱 Masuk dengan No. Telepon</button>
+            <div style="text-align: center; margin-top: 15px;">
+                <span style="font-size: 11px; color: #64748b; cursor: pointer; text-decoration: underline;" onclick="closeAuthModal()">Lewati dulu</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tombol Admin Panel Cek/Konfirmasi Pesanan -->
+    <div style="background: #0f172a; color: white; padding: 6px 16px; font-size: 11px; display: flex; justify-content: space-between; align-items: center;">
+        <span>👑 Admin Panel: Kelola Status Pesanan</span>
+        <button onclick="openAdminPanel()" style="background: #2563eb; color: white; border: none; padding: 3px 10px; border-radius: 4px; font-weight: 800; cursor: pointer;">Buka Panel</button>
+    </div>
+
+    <!-- Modal Admin Panel -->
+    <div id="adminModal" class="modal-overlay">
+        <div class="modal-box" style="max-width: 420px;">
+            <button class="close-modal" onclick="closeAdminPanel()">✕</button>
+            <div class="modal-title">Panel Konfirmasi Admin</div>
+            <div class="modal-subtitle">Ubah status pesanan pembeli menjadi Selesai di sini:</div>
+            <div id="adminOrderList" style="max-height: 250px; overflow-y: auto;">
+                <p style="font-size: 12px; color: #64748b; text-align: center;">Belum ada pesanan aktif.</p>
+            </div>
+        </div>
+    </div>
+
     <a href="https://wa.me/6283130724263?text=Halo%20Admin%20Ambaturico,%20saya%20butuh%20bantuan%20transaksi." class="floating-wa" target="_blank" title="Pusat Bantuan WhatsApp">
         💬
     </a>
@@ -273,11 +322,10 @@
 
             <div class="section-header">🔥 Lagi Populer</div>
 
-            <!-- Grid Game -->
             <div class="game-grid">
                 <div class="game-card" onclick="selectGame('Mobile Legends', 'User ID', 'Zone ID')">
                     <div class="discount-badge">-9%</div>
-                    <div class="game-img" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">⚔️</div>
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&auto=format&fit=crop&q=80" alt="Mobile Legends" class="game-img">
                     <div class="game-info">
                         <div class="game-title">Mobile Legends</div>
                         <div class="game-tag">Diamond & Pass</div>
@@ -286,15 +334,24 @@
 
                 <div class="game-card" onclick="selectGame('Free Fire', 'Player ID (UID)', '')">
                     <div class="discount-badge">-15%</div>
-                    <div class="game-img" style="background: linear-gradient(135deg, #ea580c, #c2410c);">🔥</div>
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=300&auto=format&fit=crop&q=80" alt="Free Fire" class="game-img">
                     <div class="game-info">
                         <div class="game-title">Free Fire</div>
                         <div class="game-tag">Diamond Murah</div>
                     </div>
                 </div>
 
+                <div class="game-card" onclick="selectGame('Roblox', 'Roblox Username', '')">
+                    <div class="discount-badge">HOT</div>
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300&auto=format&fit=crop&q=80" alt="Roblox" class="game-img">
+                    <div class="game-info">
+                        <div class="game-title">Roblox</div>
+                        <div class="game-tag">Robux & Pass</div>
+                    </div>
+                </div>
+
                 <div class="game-card" onclick="selectGame('PUBG Mobile', 'Character ID', '')">
-                    <div class="game-img" style="background: linear-gradient(135deg, #ca8a04, #a16207);">🎯</div>
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&auto=format&fit=crop&q=80" alt="PUBG Mobile" class="game-img">
                     <div class="game-info">
                         <div class="game-title">PUBG Mobile</div>
                         <div class="game-tag">UC Aman & Legal</div>
@@ -303,23 +360,15 @@
 
                 <div class="game-card" onclick="selectGame('Poppo Live Coins', 'Poppo ID', '')">
                     <div class="discount-badge">-21%</div>
-                    <div class="game-img" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">🟣</div>
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&auto=format&fit=crop&q=80" alt="Poppo Live" class="game-img">
                     <div class="game-info">
                         <div class="game-title">Poppo Live</div>
                         <div class="game-tag">Top Up Koin</div>
                     </div>
                 </div>
 
-                <div class="game-card" onclick="selectGame('Bigo Live Diamonds', 'Bigo ID', '')">
-                    <div class="game-img" style="background: linear-gradient(135deg, #06b6d4, #0e7490);">💎</div>
-                    <div class="game-info">
-                        <div class="game-title">Bigo Live</div>
-                        <div class="game-tag">Diamonds</div>
-                    </div>
-                </div>
-
                 <div class="game-card" onclick="selectGame('Steam Gift Card', 'Email / Steam ID', '')">
-                    <div class="game-img" style="background: linear-gradient(135deg, #334155, #0f172a);">🎮</div>
+                    <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=300&auto=format&fit=crop&q=80" alt="Steam" class="game-img">
                     <div class="game-info">
                         <div class="game-title">Steam Gift Card</div>
                         <div class="game-tag">Wallet USD/IDR</div>
@@ -333,19 +382,18 @@
             <button class="back-btn" onclick="goHome()">⬅ Kembali</button>
             
             <div class="game-header-banner">
-                <div class="game-header-icon" id="bannerIcon">⚔️</div>
+                <div class="game-header-icon" id="bannerIcon">🎮</div>
                 <div>
-                    <h2 id="selectedGameTitle" style="font-size: 16px; margin: 0; color: white;">Top Up Game</h2>
-                    <p style="font-size: 11px; margin: 2px 0 0 0; opacity: 0.9;">Proses cepat, aman, dan terpercaya 24 Jam.</p>
+                    <h2 id="selectedGameTitle" style="font-size: 16px; margin: 0; color: white; font-weight: 900;">Top Up Game</h2>
+                    <p style="font-size: 11px; margin: 2px 0 0 0; opacity: 0.95; font-weight: 800;">Proses cepat, aman, dan terpercaya 24 Jam.</p>
                 </div>
             </div>
 
-            <form id="topupForm" onsubmit="event.preventDefault(); sendWhatsApp();">
-                <!-- 1. Masukkan Akun -->
+            <form id="topupForm" onsubmit="event.preventDefault(); submitOrder();">
                 <div class="card-box">
                     <div class="box-title">1. Masukkan Data Akun</div>
                     <label id="labelId1" for="inputField1">User ID:</label>
-                    <input type="text" id="inputField1" placeholder="Masukkan User ID" required>
+                    <input type="text" id="inputField1" placeholder="Masukkan ID / Username" required>
                     
                     <div id="zoneIdContainer" style="display:none;">
                         <label id="labelId2" for="inputField2">Zone ID:</label>
@@ -353,20 +401,18 @@
                     </div>
                 </div>
 
-                <!-- 2. Pilih Nominal -->
                 <div class="card-box">
                     <div class="box-title">2. Pilih Nominal Pembelian</div>
                     
                     <div class="sub-tabs" id="subTabsContainer">
                         <button type="button" class="sub-tab-btn active" onclick="filterSubCategory('Semua')">Semua Produk</button>
                         <button type="button" class="sub-tab-btn" onclick="filterSubCategory('Pass')">Pass & Membership</button>
-                        <button type="button" class="sub-tab-btn" onclick="filterSubCategory('Diamonds')">Diamonds / UC / Koin</button>
+                        <button type="button" class="sub-tab-btn" onclick="filterSubCategory('Diamonds')">Produk Pilihan</button>
                     </div>
 
                     <div id="nominalContainer" class="nominal-grid"></div>
                 </div>
 
-                <!-- 3. Metode Pembayaran -->
                 <div class="card-box">
                     <div class="box-title">3. Metode Pembayaran</div>
                     <div class="payment-list">
@@ -379,26 +425,47 @@
 
                     <div id="qrisSection" class="qris-box">
                         <img src="Screenshot_20260321_085538.jpg" alt="QRIS Ambaturico">
-                        <p>Scan QR di atas lalu kirim bukti ke WhatsApp!</p>
+                        <p>Scan QR di atas lalu selesaikan pembayaran!</p>
                     </div>
                 </div>
 
-                <!-- Tombol Beli -->
-                <button type="submit" class="btn-order">Beli Sekarang & Konfirmasi WhatsApp</button>
+                <button type="submit" class="btn-order">Bayar & Buat Pesanan Sekarang</button>
             </form>
+        </div>
+
+        <!-- HALAMAN SUKSES / STATUS PESANAN -->
+        <div id="successPage">
+            <button class="back-btn" onclick="goHome()">⬅ Kembali ke Beranda</button>
+            <div class="status-card">
+                <div id="statusBadge" class="status-badge">⏳ SEDANG DIPROSES</div>
+                <h3 style="margin-top: 0; font-size: 18px; color: #0f172a;">Mohon Ditunggu Pesanan Anda</h3>
+                <p style="font-size: 12px; color: #475569; font-weight: 700;">Pesanan anda akan segera kami proses oleh tim Ambaturico Top Up!</p>
+                
+                <div style="background: #f8fafc; padding: 12px; border-radius: 8px; text-align: left; margin: 15px 0; border: 1px solid #cbd5e1; font-size: 12px;">
+                    <div>🆔 ID Pesanan: <b id="resOrderNo">AMB-88392</b></div>
+                    <div>🎮 Game: <b id="resGame">Mobile Legends</b></div>
+                    <div>👤 Akun ID: <b id="resId">12345678</b></div>
+                    <div>📦 Produk: <b id="resProduct">Weekly Pass</b></div>
+                    <div>💰 Harga: <b id="resPrice">Rp 28.000</b></div>
+                    <div style="color: #16a34a; margin-top: 4px;">🪙 Cashback 1%: <b id="resCashback">Rp 280</b></div>
+                </div>
+
+                <a id="waConfirmBtn" href="#" target="_blank" class="btn-order" style="display: block; text-decoration: none; text-align: center; background: #22c55e;">
+                    💬 Konfirmasi Pembayaran ke WhatsApp Admin
+                </a>
+            </div>
         </div>
 
     </div>
 
-    <!-- Bottom Nav Bar -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="goHome()">
             <span class="nav-icon">🏠</span> Home
         </div>
-        <div class="nav-item" onclick="alert('Silakan hubungi tombol WhatsApp di pojok kanan bawah untuk cek transaksi.')">
-            <span class="nav-icon">📋</span> Transaks
+        <div class="nav-item" onclick="openTrackPage()">
+            <span class="nav-icon">📋</span> Cek Pesanan
         </div>
-        <div class="nav-item" onclick="alert('Nikmati promo dan cashback menarik setiap hari di Ambaturico!')">
+        <div class="nav-item" onclick="alert('Nikmati cashback 1% di setiap transaksi minimal Rp 50.000!')">
             <span class="nav-icon">🏷️</span> Promo
         </div>
         <div class="nav-item" onclick="alert('Kumpulkan hadiah menarik setiap minggu!')">
@@ -410,27 +477,225 @@
     </div>
 
     <script>
-        // Data Produk SUPER BANYAK untuk semua game
         const productsData = {
             'Mobile Legends': [
-                { name: 'Weekly Diamond Pass', category: 'Pass', oldPrice: 'Rp 32.475', price: 'Rp 28.000', cashback: '+ 324 Coins' },
-                { name: 'Weekly Diamond Pass x2', category: 'Pass', oldPrice: 'Rp 65.282', price: 'Rp 55.000', cashback: '+ 652 Coins' },
-                { name: 'Twilight Pass', category: 'Pass', oldPrice: 'Rp 169.169', price: 'Rp 145.000', cashback: '+ 1.691 Coins' },
-                { name: '5 Diamonds', category: 'Diamonds', oldPrice: 'Rp 1.707', price: 'Rp 1.500', cashback: '+ 17 Coins' },
-                { name: '12 Diamonds', category: 'Diamonds', oldPrice: 'Rp 3.975', price: 'Rp 3.500', cashback: '+ 39 Coins' },
-                { name: '19 Diamonds', category: 'Diamonds', oldPrice: 'Rp 6.249', price: 'Rp 5.500', cashback: '+ 62 Coins' },
-                { name: '28 Diamonds', category: 'Diamonds', oldPrice: 'Rp 9.151', price: 'Rp 8.500', cashback: '+ 91 Coins' },
-                { name: '44 Diamonds', category: 'Diamonds', oldPrice: 'Rp 13.638', price: 'Rp 11.500', cashback: '+ 136 Coins' },
-                { name: '59 Diamonds', category: 'Diamonds', oldPrice: 'Rp 18.148', price: 'Rp 16.000', cashback: '+ 181 Coins' },
-                { name: '85 Diamonds', category: 'Diamonds', oldPrice: 'Rp 26.116', price: 'Rp 22.000', cashback: '+ 261 Coins' },
-                { name: '170 Diamonds', category: 'Diamonds', oldPrice: 'Rp 52.233', price: 'Rp 45.000', cashback: '+ 522 Coins' },
-                { name: '296 Diamonds', category: 'Diamonds', oldPrice: 'Rp 90.826', price: 'Rp 78.000', cashback: '+ 908 Coins' },
-                { name: '408 Diamonds', category: 'Diamonds', oldPrice: 'Rp 124.955', price: 'Rp 105.000', cashback: '+ 1.249 Coins' },
-                { name: '568 Diamonds', category: 'Diamonds', oldPrice: 'Rp 170.273', price: 'Rp 145.000', cashback: '+ 1.702 Coins' },
-                { name: '878 Diamonds', category: 'Diamonds', oldPrice: 'Rp 261.025', price: 'Rp 220.000', cashback: '+ 2.610 Coins' },
-                { name: '1135 Diamonds', category: 'Diamonds', oldPrice: 'Rp 342.127', price: 'Rp 290.000', cashback: '+ 3.421 Coins' },
-                { name: '2010 Diamonds', category: 'Diamonds', oldPrice: 'Rp 630.040', price: 'Rp 530.000', cashback: '+ 6.300 Coins' },
-                { name: '4830 Diamonds', category: 'Diamonds', oldPrice: 'Rp 1.365.146', price: 'Rp 1.150.000', cashback: '+ 13.651 Coins' }
+                { name: 'Weekly Diamond Pass', category: 'Pass', priceVal: 28000, oldPrice: 'Rp 32.475', price: 'Rp 28.000' },
+                { name: 'Twilight Pass', category: 'Pass', priceVal: 145000, oldPrice: 'Rp 169.169', price: 'Rp 145.000' },
+                { name: '5 Diamonds', category: 'Diamonds', priceVal: 1500, oldPrice: 'Rp 1.707', price: 'Rp 1.500' },
+                { name: '85 Diamonds', category: 'Diamonds', priceVal: 22000, oldPrice: 'Rp 26.116', price: 'Rp 22.000' },
+                { name: '170 Diamonds', category: 'Diamonds', priceVal: 45000, oldPrice: 'Rp 52.233', price: 'Rp 45.000' },
+                { name: '296 Diamonds', category: 'Diamonds', priceVal: 78000, oldPrice: 'Rp 90.826', price: 'Rp 78.000' },
+                { name: '568 Diamonds', category: 'Diamonds', priceVal: 145000, oldPrice: 'Rp 170.273', price: 'Rp 145.000' },
+                { name: '2010 Diamonds', category: 'Diamonds', priceVal: 530000, oldPrice: 'Rp 630.040', price: 'Rp 530.000' }
             ],
             'Free Fire': [
-                { name: 'Membership Mingguan', category: 'Pass', oldPr
+                { name: 'Membership Mingguan', category: 'Pass', priceVal: 29000, oldPrice: 'Rp 32.000', price: 'Rp 29.000' },
+                { name: 'Membership Bulanan', category: 'Pass', priceVal: 90000, oldPrice: 'Rp 98.000', price: 'Rp 90.000' },
+                { name: '70 Diamonds', category: 'Diamonds', priceVal: 9500, oldPrice: 'Rp 10.500', price: 'Rp 9.500' },
+                { name: '140 Diamonds', category: 'Diamonds', priceVal: 19000, oldPrice: 'Rp 21.000', price: 'Rp 19.000' },
+                { name: '355 Diamonds', category: 'Diamonds', priceVal: 48000, oldPrice: 'Rp 52.000', price: 'Rp 48.000' },
+                { name: '720 Diamonds', category: 'Diamonds', priceVal: 95000, oldPrice: 'Rp 105.000', price: 'Rp 95.000' }
+            ],
+            'Roblox': [
+                { name: 'Roblox Premium 450', category: 'Pass', priceVal: 68000, oldPrice: 'Rp 75.000', price: 'Rp 68.000' },
+                { name: '400 Robux', category: 'Diamonds', priceVal: 72000, oldPrice: 'Rp 80.000', price: 'Rp 72.000' },
+                { name: '800 Robux', category: 'Diamonds', priceVal: 140000, oldPrice: 'Rp 155.000', price: 'Rp 140.000' },
+                { name: '1700 Robux', category: 'Diamonds', priceVal: 280000, oldPrice: 'Rp 310.000', price: 'Rp 280.000' },
+                { name: '4500 Robux', category: 'Diamonds', priceVal: 710000, oldPrice: 'Rp 780.000', price: 'Rp 710.000' }
+            ],
+            'PUBG Mobile': [
+                { name: 'Royale Pass', category: 'Pass', priceVal: 145000, oldPrice: 'Rp 160.000', price: 'Rp 145.000' },
+                { name: '60 UC', category: 'Diamonds', priceVal: 14500, oldPrice: 'Rp 16.000', price: 'Rp 14.500' },
+                { name: '325 UC', category: 'Diamonds', priceVal: 72000, oldPrice: 'Rp 80.000', price: 'Rp 72.000' },
+                { name: '660 UC', category: 'Diamonds', priceVal: 145000, oldPrice: 'Rp 160.000', price: 'Rp 145.000' },
+                { name: '1800 UC', category: 'Diamonds', priceVal: 365000, oldPrice: 'Rp 400.000', price: 'Rp 365.000' }
+            ],
+            'Poppo Live Coins': [
+                { name: '10.000 Coins', category: 'Diamonds', priceVal: 20000, oldPrice: 'Rp 22.000', price: 'Rp 20.000' },
+                { name: '50.000 Coins', category: 'Diamonds', priceVal: 92000, oldPrice: 'Rp 100.000', price: 'Rp 92.000' },
+                { name: '100.000 Coins', category: 'Diamonds', priceVal: 180000, oldPrice: 'Rp 195.000', price: 'Rp 180.000' }
+            ],
+            'Steam Gift Card': [
+                { name: 'Steam Wallet IDR 45.000', category: 'Diamonds', priceVal: 47000, oldPrice: 'Rp 50.000', price: 'Rp 47.000' },
+                { name: 'Steam Wallet IDR 90.000', category: 'Diamonds', priceVal: 94000, oldPrice: 'Rp 100.000', price: 'Rp 94.000' },
+                { name: 'Steam Wallet IDR 250.000', category: 'Diamonds', priceVal: 258000, oldPrice: 'Rp 275.000', price: 'Rp 258.000' }
+            ]
+        };
+
+        let currentActiveGame = '';
+        let selectedProductData = null;
+        let activeOrders = []; // Menyimpan daftar pesanan untuk admin
+
+        function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
+        function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
+        function loginSuccess(method) {
+            document.getElementById('userNameDisplay').innerText = method;
+            document.getElementById('userBadge').style.display = 'inline-block';
+            document.getElementById('btnLogin').style.display = 'none';
+            closeAuthModal();
+            alert('Berhasil masuk menggunakan ' + method + '!');
+        }
+
+        function openAdminPanel() {
+            renderAdminOrders();
+            document.getElementById('adminModal').style.display = 'flex';
+        }
+        function closeAdminPanel() { document.getElementById('adminModal').style.display = 'none'; }
+
+        function selectGame(gameName, id1Label, id2Label) {
+            currentActiveGame = gameName;
+            document.getElementById('selectedGameTitle').innerText = gameName;
+            document.getElementById('labelId1').innerText = id1Label + ':';
+            document.getElementById('inputField1').placeholder = 'Masukkan ' + id1Label;
+
+            const zoneContainer = document.getElementById('zoneIdContainer');
+            if (id2Label) {
+                zoneContainer.style.display = 'block';
+                document.getElementById('labelId2').innerText = id2Label + ':';
+                document.getElementById('inputField2').placeholder = 'Masukkan ' + id2Label;
+            } else {
+                zoneContainer.style.display = 'none';
+                document.getElementById('inputField2').value = '';
+            }
+
+            renderNominals('Semua');
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('successPage').style.display = 'none';
+            document.getElementById('transactionPage').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function renderNominals(category) {
+            const container = document.getElementById('nominalContainer');
+            container.innerHTML = '';
+            const list = productsData[currentActiveGame] || [];
+            list.forEach((item) => {
+                if (category !== 'Semua' && item.category !== category) return;
+                
+                // Hitung cashback 1% otomatis
+                let cbVal = Math.round(item.priceVal * 0.01);
+
+                const div = document.createElement('div');
+                div.className = 'nominal-item';
+                div.innerHTML = `
+                    <div class="nom-name">${item.name}</div>
+                    <div class="nom-old-price">${item.oldPrice}</div>
+                    <div class="nom-price">${item.price}</div>
+                    <div class="nom-cashback">🪙 Cashback 1% (Rp ${cbVal.toLocaleString('id-ID')})</div>
+                `;
+                div.onclick = function() {
+                    document.querySelectorAll('.nominal-item').forEach(el => el.classList.remove('selected'));
+                    div.classList.add('selected');
+                    selectedProductData = { ...item, cashbackVal: cbVal };
+                };
+                container.appendChild(div);
+            });
+        }
+
+        function filterSubCategory(cat) {
+            document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderNominals(cat);
+        }
+
+        function goHome() {
+            document.getElementById('transactionPage').style.display = 'none';
+            document.getElementById('successPage').style.display = 'none';
+            document.getElementById('homePage').style.display = 'block';
+            selectedProductData = null;
+            document.getElementById('topupForm').reset();
+            toggleQris(false);
+            window.scrollTo(0, 0);
+        }
+
+        function toggleQris(show) {
+            document.getElementById('qrisSection').style.display = show ? 'block' : 'none';
+        }
+
+        function submitOrder() {
+            const id1 = document.getElementById('inputField1').value;
+            const id2 = document.getElementById('inputField2').value;
+            const paymentEl = document.querySelector('input[name="payment"]:checked');
+
+            if (!id1 || !selectedProductData || !paymentEl) {
+                alert('Mohon lengkapi Data Akun, pilih nominal produk, dan pilih metode pembayaran ya kak!');
+                return;
+            }
+
+            const orderNo = 'AMB-' + Math.floor(100000 + Math.random() * 900000);
+            const payment = paymentEl.value;
+            let akunInfo = `${id1}` + (id2 ? ` (${id2})` : '');
+
+            // Simpan ke daftar pesanan aktif admin
+            const newOrder = {
+                id: orderNo,
+                game: currentActiveGame,
+                account: akunInfo,
+                product: selectedProductData.name,
+                price: selectedProductData.price,
+                status: 'Diproses'
+            };
+            activeOrders.push(newOrder);
+
+            // Tampilkan di halaman sukses
+            document.getElementById('resOrderNo').innerText = orderNo;
+            document.getElementById('resGame').innerText = currentActiveGame;
+            document.getElementById('resId').innerText = akunInfo;
+            document.getElementById('resProduct').innerText = selectedProductData.name;
+            document.getElementById('resPrice').innerText = selectedProductData.price;
+            document.getElementById('resCashback').innerText = 'Rp ' + selectedProductData.cashbackVal.toLocaleString('id-ID');
+
+            const waMsg = `Halo Admin Ambaturico,%0A%0ASaya ingin konfirmasi pesanan:%0A` +
+                          `• No. Pesanan: *${orderNo}*%0A` +
+                          `• Game: *${currentActiveGame}*%0A` +
+                          `• ID Akun: *${akunInfo}*%0A` +
+                          `• Produk: *${selectedProductData.name}* (${selectedProductData.price})%0A` +
+                          `• Pembayaran: *${payment}*%0A%0A` +
+                          `Berikut bukti pembayaran saya. Mohon diproses ya kak!`;
+
+            document.getElementById('waConfirmBtn').href = `https://wa.me/6283130724263?text=${waMsg}`;
+
+            document.getElementById('transactionPage').style.display = 'none';
+            document.getElementById('successPage').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function openTrackPage() {
+            if (activeOrders.length === 0) {
+                alert('Belum ada riwayat pesanan aktif. Silakan lakukan transaksi terlebih dahulu.');
+            } else {
+                openAdminPanel();
+            }
+        }
+
+        function renderAdminOrders() {
+            const listContainer = document.getElementById('adminOrderList');
+            if (activeOrders.length === 0) {
+                listContainer.innerHTML = `<p style="font-size: 12px; color: #64748b; text-align: center;">Belum ada pesanan aktif.</p>`;
+                return;
+            }
+
+            listContainer.innerHTML = '';
+            activeOrders.forEach((ord, index) => {
+                const div = document.createElement('div');
+                div.style.cssText = "background: #f8fafc; border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; margin-bottom: 8px; font-size: 11px;";
+                div.innerHTML = `
+                    <div><b>${ord.id}</b> - ${ord.game}</div>
+                    <div>Akun: ${ord.account} | ${ord.product}</div>
+                    <div>Status: <span style="color: ${ord.status === 'Selesai' ? '#16a34a' : '#ca8a04'}; font-weight: 800;">${ord.status}</span></div>
+                    ${ord.status === 'Diproses' ? `<button onclick="markComplete(${index})" style="background: #22c55e; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-weight: 800; cursor: pointer; margin-top: 6px;">Konfirmasi Selesai ✓</button>` : '<div style="color: #16a34a; font-weight: 800; margin-top: 4px;">Selesai</div>'}
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+
+        function markComplete(index) {
+            activeOrders[index].status = 'Selesai';
+            renderAdminOrders();
+            alert('Pesanan ' + activeOrders[index].id + ' berhasil dikonfirmasi menjadi SELESAI!');
+        }
+    </script>
+
+</body>
+</html>
+

@@ -1,88 +1,409 @@
-     <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ambaturico Top Up - All Payment Center</title>
+    <title>Ambaturico Top Up - Official Store</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #0f172a; color: #f8fafc; }
-        .container { max-width: 500px; margin: 0 auto; background: #1e293b; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); border: 1px solid #334155; }
-        h1 { color: #38bdf8; text-align: center; margin-bottom: 5px; font-size: 24px; }
-        p.subtitle { color: #94a3b8; text-align: center; margin-top: 0; font-size: 14px; margin-bottom: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; color: #cbd5e1; font-weight: bold; font-size: 14px; }
-        input, select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: white; box-sizing: border-box; font-size: 14px; }
-        .payment-list { display: flex; flex-direction: column; gap: 8px; margin-top: 5px; }
-        .payment-option { background: #334155; padding: 10px 12px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; font-size: 14px; }
-        .payment-option input { width: auto; margin-right: 10px; }
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 15px; 
+            background: linear-gradient(135deg, #0b0f19, #1e1b4b); 
+            color: #f8fafc; 
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 520px; 
+            margin: 0 auto; 
+            background: rgba(30, 41, 59, 0.9); 
+            backdrop-filter: blur(10px);
+            padding: 20px; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        .header-logo {
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        h1 { 
+            color: #38bdf8; 
+            margin: 0; 
+            font-size: 26px; 
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 10px rgba(56, 189, 248, 0.3);
+        }
+        p.subtitle { 
+            color: #94a3b8; 
+            margin-top: 5px; 
+            font-size: 13px; 
+        }
         
-        .qris-box { background: #334155; padding: 15px; border-radius: 8px; margin-top: 10px; text-align: center; display: none; }
-        .qris-box img { width: 180px; height: auto; border-radius: 6px; background: white; padding: 5px; }
+        /* Halaman Pilih Game (Home) */
+        #homePage { display: block; }
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .game-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .game-card:hover {
+            transform: translateY(-3px);
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+        }
+        .game-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .game-title {
+            font-weight: bold;
+            font-size: 14px;
+            color: #f8fafc;
+        }
+        .game-desc {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        /* Halaman Form Transaksi */
+        #transactionPage { display: none; }
+        .back-btn {
+            background: #334155;
+            color: #38bdf8;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .back-btn:hover { background: #475569; }
+
+        .section-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .section-title {
+            font-size: 13px;
+            color: #38bdf8;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         
-        .whatsapp-select { display: flex; gap: 10px; margin-top: 20px; }
-        .btn-wa { flex: 1; background: #22c55e; color: white; padding: 12px; border: none; border-radius: 6px; font-weight: bold; font-size: 14px; cursor: pointer; text-align: center; text-decoration: none; display: block; }
-        .btn-wa:hover { background: #16a34a; }
-        .btn-wa-alt { background: #0284c7; }
-        .btn-wa-alt:hover { background: #0369a1; }
+        label { display: block; margin-bottom: 6px; color: #cbd5e1; font-weight: 600; font-size: 13px; }
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            border-radius: 8px; 
+            border: 1px solid #475569; 
+            background: #0f172a; 
+            color: white; 
+            font-size: 14px; 
+        }
+        input:focus { outline: none; border-color: #38bdf8; box-shadow: 0 0 8px rgba(56, 189, 248, 0.3); }
+
+        /* Grid Pilihan Nominal Diamond ala Codashop */
+        .nominal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            max-height: 240px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .nominal-item {
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .nominal-item:hover {
+            border-color: #38bdf8;
+        }
+        .nominal-item.selected {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.2);
+        }
+        .nom-name { font-size: 13px; font-weight: bold; color: #f8fafc; }
+        .nom-price { font-size: 12px; color: #38bdf8; margin-top: 4px; }
+        .bonus-badge {
+            font-size: 10px;
+            background: #22c55e;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 4px;
+            font-weight: bold;
+        }
+
+        /* Pilihan Pembayaran */
+        .payment-list { display: flex; flex-direction: column; gap: 8px; }
+        .payment-option { 
+            background: rgba(51, 65, 85, 0.5); 
+            padding: 10px 12px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            font-size: 13px; 
+            border: 1px solid transparent;
+        }
+        .payment-option:hover { background: rgba(51, 65, 85, 0.9); border-color: #475569; }
+        .payment-option input { width: auto; margin-right: 10px; accent-color: #38bdf8; }
+        
+        .qris-box { 
+            background: #ffffff; 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin-top: 12px; 
+            text-align: center; 
+            display: none; 
+        }
+        .qris-box img { width: 100%; max-width: 190px; height: auto; border-radius: 6px; }
+        .qris-box p { color: #0f172a; font-size: 11px; font-weight: bold; margin-top: 6px; margin-bottom: 0; }
+
+        .whatsapp-select { display: flex; gap: 10px; margin-top: 8px; }
+        .btn-wa { 
+            flex: 1; 
+            background: linear-gradient(135deg, #22c55e, #16a34a); 
+            color: white; 
+            padding: 12px; 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 13px; 
+            cursor: pointer; 
+            text-align: center; 
+            text-decoration: none; 
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+        }
+        .btn-wa:hover { opacity: 0.9; }
+        .btn-wa-alt { 
+            background: linear-gradient(135deg, #0284c7, #0369a1); 
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Ambaturico Top Up</h1>
-        <p class="subtitle">Pusat Top Up Game & All Payment Terpercaya</p>
+        <!-- Header Logo -->
+        <div class="header-logo" onclick="goHome()">
+            <h1>AMBATURICO</h1>
+            <p class="subtitle">⚡ Instant Game Top Up & All Payment Center ⚡</p>
+        </div>
 
-        <form id="topupForm">
-            <!-- 1. Input ID Game -->
-            <div class="form-group">
-                <label for="gameId">ID Tujuan (User ID / Server ID):</label>
-                <input type="text" id="gameId" placeholder="Contoh: 12345678 (1234)" required>
-            </div>
-
-            <!-- 2. Pilih Nominal Produk -->
-            <div class="form-group">
-                <label for="product">Pilih Produk & Nominal:</label>
-                <select id="product" required>
-                    <option value="">-- Pilih Produk --</option>
-                    <option value="Mobile Legends - 85 Diamonds (Rp 20.000)">Mobile Legends: 85 Diamonds - Rp 20.000</option>
-                    <option value="Mobile Legends - 170 Diamonds (Rp 40.000)">Mobile Legends: 170 Diamonds - Rp 40.000</option>
-                    <option value="Free Fire - 140 Diamonds (Rp 20.000)">Free Fire: 140 Diamonds - Rp 20.000</option>
-                    <option value="Mobile Legends - Starlight Member (Rp 150.000)">Mobile Legends: Starlight Member - Rp 150.000</option>
-                    <option value="PUBG Mobile - 8100 UC (Rp 1.550.000)">PUBG Mobile: 8100 UC - Rp 1.550.000</option>
-                    <option value="Joki / Akun Sultan Bundle All Games (Rp 5.000.000)">Sultan Bundle / Joki All Games - Rp 5.000.000</option>
-                </select>
-            </div>
-
-            <!-- 3. Pilih Metode Pembayaran (QRIS, GoPay, OVO pakai QRIS) -->
-            <div class="form-group">
-                <label>Pilih Metode Pembayaran:</label>
-                <div class="payment-list">
-                    <label class="payment-option"><input type="radio" name="payment" value="QRIS (All Payment)" onclick="toggleQris(true)" required> 📱 QRIS (Scan Semua Dompet Digital / Bank)</label>
-                    <label class="payment-option"><input type="radio" name="payment" value="GoPay (via QRIS)" onclick="toggleQris(true)"> 🟢 GoPay (Scan QRIS Otomatis)</label>
-                    <label class="payment-option"><input type="radio" name="payment" value="OVO (via QRIS)" onclick="toggleQris(true)"> 🟣 OVO (Scan QRIS Otomatis)</label>
-                    <label class="payment-option"><input type="radio" name="payment" value="DANA" onclick="toggleQris(false)"> 🟢 DANA</label>
-                    <label class="payment-option"><input type="radio" name="payment" value="Bank BCA" onclick="toggleQris(false)"> 🔵 Bank BCA</label>
-                    <label class="payment-option"><input type="radio" name="payment" value="Bank BRI" onclick="toggleQris(false)"> 🔵 Bank BRI</label>
+        <!-- HALAMAN 1: PILIH GAME -->
+        <div id="homePage">
+            <div class="section-title">Pilih Game / Layanan Top Up</div>
+            <div class="game-grid">
+                <div class="game-card" onclick="selectGame('Mobile Legends', 'User ID & Server ID')">
+                    <div class="game-icon">⚔️</div>
+                    <div class="game-title">Mobile Legends</div>
+                    <div class="game-desc">Diamond & Starlight</div>
+                </div>
+                <div class="game-card" onclick="selectGame('Free Fire', 'Player ID (UID)')">
+                    <div class="game-icon">🔥</div>
+                    <div class="game-title">Free Fire</div>
+                    <div class="game-desc">Diamond Murah</div>
+                </div>
+                <div class="game-card" onclick="selectGame('PUBG Mobile', 'Character ID')">
+                    <div class="game-icon">🎯</div>
+                    <div class="game-title">PUBG Mobile</div>
+                    <div class="game-desc">UC Aman & Legal</div>
+                </div>
+                <div class="game-card" onclick="selectGame('Joki & Akun Sultan', 'Kontak / Username')">
+                    <div class="game-icon">👑</div>
+                    <div class="game-title">Joki & Akun</div>
+                    <div class="game-desc">Joki Rank / Jual Akun</div>
                 </div>
             </div>
+        </div>
 
-            <!-- Kotak Tampil Gambar QRIS (Muncul jika QRIS, GoPay, atau OVO dipilih) -->
-            <div id="qrisSection" class="qris-box">
-                <p style="color: #f8fafc; font-weight: bold; margin-bottom: 8px; font-size: 13px;">Scan QRIS di Bawah Ini:</p>
-                <img src="Screenshot_20260321_085538.jpg" alt="QRIS Ambaturico">
-                <p style="font-size: 11px; color: #cbd5e1; margin-top: 6px;">Bisa pakai QRIS, GoPay, atau OVO. Setelah bayar, kirim bukti ke WhatsApp.</p>
-            </div>
+        <!-- HALAMAN 2: FORM TRANSAKSI -->
+        <div id="transactionPage">
+            <button class="button back-btn" onclick="goHome()">⬅ Kembali Pilih Game</button>
+            
+            <h2 id="selectedGameTitle" style="color: #38bdf8; font-size: 18px; margin-top: 0; margin-bottom: 15px; text-align: center;">Top Up Game</h2>
 
-            <!-- 4. Tombol Kirim ke WhatsApp (2 Nomor Pilihan) -->
-            <label style="margin-top: 20px;">Pilih Tujuan WhatsApp Admin:</label>
-            <div class="whatsapp-select">
-                <button type="button" class="btn-wa" onclick="sendWhatsApp('6283130724263')">Order ke WA 1</button>
-                <button type="button" class="btn-wa btn-wa-alt" onclick="sendWhatsApp('6283865519736')">Order ke WA 2</button>
-            </div>
-        </form>
+            <form id="topupForm">
+                <!-- 1. Input ID -->
+                <div class="section-box">
+                    <div class="section-title">1. Masukan Data Akun</div>
+                    <div class="form-group">
+                        <label id="idLabel" for="gameId">User ID:</label>
+                        <input type="text" id="gameId" placeholder="Masukkan ID Anda" required>
+                    </div>
+                </div>
+
+                <!-- 2. Pilih Nominal (Grid ala Codashop) -->
+                <div class="section-box">
+                    <div class="section-title">2. Pilih Nominal Top Up</div>
+                    <div id="nominalContainer" class="nominal-grid">
+                        <!-- Pilihan nominal akan di-generate otomatis via script -->
+                    </div>
+                </div>
+
+                <!-- 3. Metode Pembayaran -->
+                <div class="section-box">
+                    <div class="section-title">3. Metode Pembayaran</div>
+                    <div class="payment-list">
+                        <label class="payment-option"><input type="radio" name="payment" value="QRIS (All Payment)" onclick="toggleQris(true)" required> 📱 QRIS (Scan Semua E-Wallet / Bank)</label>
+                        <label class="payment-option"><input type="radio" name="payment" value="GoPay (via QRIS)" onclick="toggleQris(true)"> 🟢 GoPay (Scan QRIS Otomatis)</label>
+                        <label class="payment-option"><input type="radio" name="payment" value="OVO (via QRIS)" onclick="toggleQris(true)"> 🟣 OVO (Scan QRIS Otomatis)</label>
+                        <label class="payment-option"><input type="radio" name="payment" value="DANA" onclick="toggleQris(false)"> 🟢 DANA (Manual Transfer)</label>
+                        <label class="payment-option"><input type="radio" name="payment" value="Bank BCA" onclick="toggleQris(false)"> 🔵 Bank BCA (Manual Transfer)</label>
+                        <label class="payment-option"><input type="radio" name="payment" value="Bank BRI" onclick="toggleQris(false)"> 🔵 Bank BRI (Manual Transfer)</label>
+                    </div>
+
+                    <!-- Kotak QRIS -->
+                    <div id="qrisSection" class="qris-box">
+                        <img src="Screenshot_20260321_085538.jpg" alt="QRIS Ambaturico">
+                        <p>Scan QR di atas. Kirim bukti ke WA setelah transfer!</p>
+                    </div>
+                </div>
+
+                <!-- 4. Tombol WhatsApp -->
+                <div style="margin-top: 15px;">
+                    <label style="margin-bottom: 5px;">Pilih Admin WhatsApp:</label>
+                    <div class="whatsapp-select">
+                        <button type="button" class="btn-wa" onclick="sendWhatsApp('6283130724263')">Order Admin 1</button>
+                        <button type="button" class="btn-wa btn-wa-alt" onclick="sendWhatsApp('6283865519736')">Order Admin 2</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
+        // Data Produk per Game (Khusus Mobile Legends ditambahkan bonus ekstra diamond)
+        const productsData = {
+            'Mobile Legends': [
+                { name: '5 Diamonds', price: 'Rp 1.500', bonus: '' },
+                { name: '19 Diamonds', price: 'Rp 5.000', bonus: '' },
+                { name: '44 Diamonds', price: 'Rp 11.000', bonus: '+ Bonus 3 DM' },
+                { name: '85 Diamonds', price: 'Rp 20.000', bonus: '+ Bonus 5 DM' },
+                { name: '170 Diamonds', price: 'Rp 40.000', bonus: '+ Bonus 12 DM' },
+                { name: '240 Diamonds', price: 'Rp 58.000', bonus: '+ Bonus 15 DM' },
+                { name: '296 Diamonds', price: 'Rp 70.000', bonus: '+ Bonus 20 DM' },
+                { name: '408 Diamonds', price: 'Rp 95.000', bonus: '+ Bonus 30 DM' },
+                { name: '568 Diamonds', price: 'Rp 130.000', bonus: '+ Bonus 45 DM' },
+                { name: 'Starlight Member', price: 'Rp 150.000', bonus: '🔥 Bonus Skin Eksklusif' },
+                { name: '878 Diamonds', price: 'Rp 200.000', bonus: '+ Bonus 75 DM' },
+                { name: '1158 Diamonds', price: 'Rp 265.000', bonus: '+ Bonus 100 DM' },
+                { name: '2010 Diamonds', price: 'Rp 450.000', bonus: '+ Bonus 180 DM' },
+                { name: '3500 Diamonds', price: 'Rp 780.000', bonus: '+ Bonus 350 DM' },
+                { name: 'Twilight Pass', price: 'Rp 140.000', bonus: '⭐ Bonus Hadiah Harian' }
+            ],
+            'Free Fire': [
+                { name: '5 Diamonds', price: 'Rp 1.000', bonus: '' },
+                { name: '12 Diamonds', price: 'Rp 2.000', bonus: '' },
+                { name: '50 Diamonds', price: 'Rp 7.500', bonus: '' },
+                { name: '70 Diamonds', price: 'Rp 10.000', bonus: '' },
+                { name: '140 Diamonds', price: 'Rp 20.000', bonus: '' },
+                { name: '355 Diamonds', price: 'Rp 50.000', bonus: '' },
+                { name: '720 Diamonds', price: 'Rp 100.000', bonus: '' },
+                { name: '1450 Diamonds', price: 'Rp 200.000', bonus: '' },
+                { name: 'Membership Mingguan', price: 'Rp 30.000', bonus: '' },
+                { name: 'Membership Bulanan', price: 'Rp 95.000', bonus: '' }
+            ],
+            'PUBG Mobile': [
+                { name: '60 UC', price: 'Rp 15.000', bonus: '' },
+                { name: '325 UC', price: 'Rp 75.000', bonus: '' },
+                { name: '660 UC', price: 'Rp 150.000', bonus: '' },
+                { name: '1800 UC', price: 'Rp 380.000', bonus: '' },
+                { name: '3850 UC', price: 'Rp 750.000', bonus: '' },
+                { name: '8100 UC', price: 'Rp 1.550.000', bonus: '' },
+                { name: 'Royale Pass', price: 'Rp 150.000', bonus: '' }
+            ],
+            'Joki & Akun Sultan': [
+                { name: 'Joki Epic ke Legend', price: 'Rp 50.000', bonus: '' },
+                { name: 'Joki Legend ke Mythic', price: 'Rp 90.000', bonus: '' },
+                { name: 'Joki Mythic per Bintang', price: 'Rp 8.000', bonus: '' },
+                { name: 'Joki Rank FF Master', price: 'Rp 75.000', bonus: '' },
+                { name: 'Akun Sultan ML Random', price: 'Rp 250.000', bonus: '' },
+                { name: 'Sultan Bundle All Games', price: 'Rp 5.000.000', bonus: '' }
+            ]
+        };
+
+        let selectedGameName = '';
+        let selectedProductValue = '';
+
+        function selectGame(gameName, idLabelText) {
+            selectedGameName = gameName;
+            document.getElementById('selectedGameTitle').innerText = 'Top Up ' + gameName;
+            document.getElementById('idLabel').innerText = idLabelText + ':';
+            
+            // Render pilihan produk grid
+            const container = document.getElementById('nominalContainer');
+            container.innerHTML = '';
+            
+            productsData[gameName].forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'nominal-item';
+                
+                let bonusHtml = item.bonus ? `<div class="bonus-badge">${item.bonus}</div>` : '';
+                
+                div.innerHTML = `
+                    <div class="nom-name">${item.name}</div>
+                    <div class="nom-price">${item.price}</div>
+                    ${bonusHtml}
+                `;
+                div.onclick = function() {
+                    // Hapus kelas selected dari semua item
+                    document.querySelectorAll('.nominal-item').forEach(el => el.classList.remove('selected'));
+                    // Tambah ke item yang diklik
+                    div.classList.add('selected');
+                    selectedProductValue = `${item.name} ${item.bonus ? '(' + item.bonus + ')' : ''} - ${item.price}`;
+                };
+                container.appendChild(div);
+            });
+
+            // Ganti halaman
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('transactionPage').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function goHome() {
+            document.getElementById('transactionPage').style.display = 'none';
+            document.getElementById('homePage').style.display = 'block';
+            selectedProductValue = '';
+            document.getElementById('topupForm').reset();
+            toggleQris(false);
+            window.scrollTo(0, 0);
+        }
+
         function toggleQris(show) {
             const qrisBox = document.getElementById('qrisSection');
             qrisBox.style.display = show ? 'block' : 'none';
@@ -90,20 +411,19 @@
 
         function sendWhatsApp(phoneNum) {
             const gameId = document.getElementById('gameId').value;
-            const productSelect = document.getElementById('product');
-            const product = productSelect.value;
             const paymentEl = document.querySelector('input[name="payment"]:checked');
 
-            if (!gameId || !product || !paymentEl) {
-                alert('Mohon lengkapi ID Game, pilih Produk, dan Metode Pembayaran terlebih dahulu!');
+            if (!gameId || !selectedProductValue || !paymentEl) {
+                alert('Mohon lengkapi ID Akun, pilih nominal produk, dan pilih metode pembayaran terlebih dahulu ya kak!');
                 return;
             }
 
             const payment = paymentEl.value;
 
             const message = `Halo Ambaturico, saya ingin konfirmasi top-up:%0A%0A` +
-                            `• ID Game: *${gameId}*%0A` +
-                            `• Produk: *${product}*%0A` +
+                            `• Game: *${selectedGameName}*%0A` +
+                            `• ID Akun: *${gameId}*%0A` +
+                            `• Produk: *${selectedProductValue}*%0A` +
                             `• Pembayaran via: *${payment}*%0A%0A` +
                             `Berikut saya lampirkan bukti pembayarannya. Mohon segera diproses ya kak!`;
 
@@ -113,4 +433,3 @@
 
 </body>
 </html>
-                                               

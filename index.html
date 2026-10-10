@@ -253,13 +253,13 @@
         }
 
         /* Modals */
-        .ai-chat-overlay, .modal-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.75); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 15px; backdrop-filter: blur(5px);
+        .ai-chat-overlay, .modal-overlay, .premium-wall-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 15px; backdrop-filter: blur(6px);
         }
-        .ai-chat-box, .modal-box, .info-modal-box {
-            background: rgba(30, 41, 59, 0.95); color: white; width: 100%; max-width: 380px; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); position: relative;
+        .ai-chat-box, .modal-box, .info-modal-box, .premium-box {
+            background: rgba(30, 41, 59, 0.98); color: white; width: 100%; max-width: 380px; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); border: 1px solid rgba(234, 179, 8, 0.4); position: relative; text-align: center;
         }
-        .ai-chat-box { height: 450px; display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+        .ai-chat-box { height: 450px; display: flex; flex-direction: column; padding: 0; overflow: hidden; text-align: left; }
         .ai-chat-header { background: #3b82f6; color: white; padding: 12px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; }
         .ai-chat-body { flex: 1; padding: 12px; overflow-y: auto; background: #0f172a; font-size: 12px; display: flex; flex-direction: column; gap: 8px; }
         .chat-bubble { padding: 8px 12px; border-radius: 10px; max-width: 80%; line-height: 1.4; font-weight: 700; }
@@ -317,6 +317,23 @@
         💬
     </div>
 
+    <!-- POPUP PEMBATASAN 3X MENONTON (UPGRADE PREMIUM) -->
+    <div id="premiumWallModal" class="premium-wall-overlay">
+        <div class="premium-box">
+            <div style="font-size: 40px; margin-bottom: 10px;">🔒</div>
+            <div class="modal-title" style="color: #fde047; font-size: 18px;">Batas Menonton Telah Habis!</div>
+            <div class="modal-subtitle" style="color: #cbd5e1; margin-top: 8px;">
+                Kamu sudah menonton film sebanyak <b>3 kali</b>. Akses gratis kamu telah berakhir. Silakan upgrade ke akun **Premium Ambaturico** untuk menonton sepuasnya tanpa batas!
+            </div>
+            <button onclick="upgradeToPremium()" style="background: linear-gradient(90deg, #f59e0b, #d97706); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 900; font-size: 13px; width: 100%; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);">
+                ⭐ Upgrade ke Premium Sekarang
+            </button>
+            <div style="margin-top: 12px;">
+                <span onclick="resetWatchLimitForDemo()" style="font-size: 10px; color: #94a3b8; cursor: pointer; text-decoration: underline;">[Reset Batasan untuk Demo]</span>
+            </div>
+        </div>
+    </div>
+
     <div class="navbar">
         <a href="javascript:void(0)" class="brand-logo-container" onclick="goHome()">
             <img src="https://cdn.phototourl.com/member/2026-10-10-052208a8-ffeb-40b5-8517-885b1e9a9eca.jpg" alt="Logo Ambaturico" class="brand-logo-img">
@@ -330,7 +347,7 @@
 
     <!-- Modal Login -->
     <div id="authModal" class="modal-overlay">
-        <div class="modal-box">
+        <div class="modal-box" style="text-align: left;">
             <button class="close-modal" onclick="closeAuthModal()">✕</button>
             <div class="modal-title">Masuk / Daftar Akun</div>
             <div class="modal-subtitle">Pilih metode masuk untuk transaksi di Ambaturico Top Up!</div>
@@ -351,7 +368,7 @@
 
     <!-- Modal Admin Panel -->
     <div id="adminModal" class="modal-overlay">
-        <div class="modal-box" style="max-width: 420px;">
+        <div class="modal-box" style="max-width: 420px; text-align: left;">
             <button class="close-modal" onclick="closeAdminPanel()">✕</button>
             <div class="modal-title">Panel Konfirmasi Admin</div>
             <div class="modal-subtitle">Ubah status pesanan pembeli menjadi Selesai di sini:</div>
@@ -380,7 +397,7 @@
 
     <!-- Modal Informasi Popup -->
     <div id="infoModal" class="modal-overlay">
-        <div class="info-modal-box">
+        <div class="info-modal-box" style="text-align: left;">
             <button class="close-modal" onclick="closeInfoModal()">✕</button>
             <div class="modal-title" id="infoTitle">Informasi Ambaturico</div>
             <div id="infoContent" style="font-size: 12px; color: #cbd5e1; line-height: 1.6; font-weight: 700; margin-top: 10px;">
@@ -393,6 +410,12 @@
 
         <!-- HALAMAN UTAMA -->
         <div id="homePage">
+            <!-- Indikator Batas Nonton -->
+            <div id="watchCounterBadge" style="background: rgba(37, 99, 235, 0.25); border: 1px solid rgba(59, 130, 246, 0.4); padding: 8px 12px; border-radius: 8px; font-size: 11px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; font-weight: 800;">
+                <span>🎬 Sisa Kuota Menonton Gratis: <b id="watchCountText" style="color: #60a5fa;">3/3</b></span>
+                <span style="color: #fde047; cursor: pointer; text-decoration: underline;" onclick="upgradeToPremium()">Upgrade Premium</span>
+            </div>
+
             <div class="filter-tabs">
                 <button class="tab-btn active">🔥 Lagi Populer</button>
                 <button class="tab-btn">⚔️ Mobile Games</button>
@@ -782,12 +805,33 @@
         let paymentTimer = null;
         let isPlayingMusic = false;
 
-        // Fungsi Otomatis Putar Musik & Set Volume Maksimal 100% (1.0) Saat Pengguna Pertama Kali Menyentuh/Klik Layar
+        // Sistem Pembatasan Menonton Film (Maksimal 3x)
+        let watchCount = parseInt(localStorage.getItem('ambaturico_watch_count')) || 0;
+        let isPremiumUser = localStorage.getItem('ambaturico_is_premium') === 'true';
+
+        window.onload = function() {
+            updateWatchBadge();
+        };
+
+        function updateWatchBadge() {
+            const badgeText = document.getElementById('watchCountText');
+            const badgeContainer = document.getElementById('watchCounterBadge');
+            if (isPremiumUser) {
+                badgeContainer.style.background = 'rgba(234, 179, 8, 0.25)';
+                badgeContainer.style.borderColor = 'rgba(234, 179, 8, 0.5)';
+                badgeText.innerHTML = '👑 AKUN PREMIUM (Tanpa Batas)';
+                badgeText.style.color = '#fde047';
+            } else {
+                let remaining = 3 - watchCount;
+                if (remaining < 0) remaining = 0;
+                badgeText.innerText = `${watchCount}/3 (Sisa ${remaining}x)`;
+            }
+        }
+
+        // Fungsi Otomatis Putar Musik & Set Volume Maksimal
         function triggerAutoFullscreenAndMusic() {
             const music = document.getElementById('bgMusic');
             const btn = document.getElementById('musicBtn');
-            
-            // Atur volume audio web ke tingkat paling maksimal (100%)
             music.volume = 1.0;
 
             if (!isPlayingMusic) {
@@ -796,12 +840,11 @@
                     btn.innerHTML = '🔊';
                     isPlayingMusic = true;
                 }).catch(e => {
-                    console.log("Menunggu interaksi lanjutan.");
+                    console.log("Menunggu interaksi.");
                 });
             }
         }
 
-        // Fungsi Tombol Manual Musik
         function toggleMusic() {
             const music = document.getElementById('bgMusic');
             const btn = document.getElementById('musicBtn');
@@ -820,17 +863,99 @@
             }
         }
 
-        // Fungsi Layar Penuh (Fullscreen)
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen().catch(err => {
-                    console.log("Mode fullscreen dibatasi perangkat.");
+                    console.log("Fullscreen dibatasi perangkat.");
                 });
             } else {
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
                 }
             }
+        }
+
+        // Cek Batasan Saat Klik / Memilih Konten Film/Game
+        function selectGame(gameName, id1Label, id2Label, imgUrl) {
+            // Cek apakah bukan user premium dan kuota nonton sudah mencapai 3x
+            if (!isPremiumUser && watchCount >= 3) {
+                document.getElementById('premiumWallModal').style.display = 'flex';
+                return;
+            }
+
+            // Jika belum premium, tambahkan hitungan menonton
+            if (!isPremiumUser) {
+                watchCount++;
+                localStorage.setItem('ambaturico_watch_count', watchCount);
+                updateWatchBadge();
+            }
+
+            currentActiveGame = gameName;
+            verifiedNickname = '-';
+            document.getElementById('accountCheckResult').style.display = 'none';
+            document.getElementById('selectedGameTitle').innerText = gameName;
+            document.getElementById('bannerImg').src = imgUrl;
+            document.getElementById('bannerAvatar').src = imgUrl;
+            document.getElementById('labelId1').innerText = id1Label + ':';
+            document.getElementById('inputField1').placeholder = 'Masukkan ' + id1Label;
+            document.getElementById('inputField1').value = '';
+            document.getElementById('inputField2').value = '';
+
+            const regionBox = document.getElementById('regionBox');
+            if (gameName === 'Mobile Legends') {
+                regionBox.style.display = 'block';
+                document.getElementById('stepAccountNum').innerText = '3️⃣';
+                document.getElementById('stepContactNum').innerText = '4️⃣';
+                document.getElementById('stepPaymentNum').innerText = '5️⃣';
+                document.getElementById('warningText').innerText = 'Tersedia pilihan All Region / bebas semua negara untuk Mobile Legends.';
+            } else {
+                regionBox.style.display = 'none';
+                document.getElementById('stepAccountNum').innerText = '2️⃣';
+                document.getElementById('stepContactNum').innerText = '3️⃣';
+                document.getElementById('stepPaymentNum').innerText = '4️⃣';
+                document.getElementById('warningText').innerText = 'Pastikan data akun sudah benar sebelum melakukan transaksi.';
+            }
+
+            const zoneContainer = document.getElementById('zoneIdContainer');
+            if (id2Label && id2Label !== '') {
+                zoneContainer.style.display = 'block';
+                document.getElementById('labelId2').innerText = id2Label + ':';
+                document.getElementById('inputField2').placeholder = 'Masukkan ' + id2Label;
+                document.getElementById('idHelpText').innerText = 'Tap menu profile di pojok kiri atas dari menu utama game buat lihat ID.';
+            } else {
+                zoneContainer.style.display = 'none';
+                if (gameName === 'Free Fire') {
+                    document.getElementById('idHelpText').innerText = 'Klik profil akun Free Fire kamu di pojok kiri atas untuk melihat UID.';
+                } else if (gameName === 'Roblox') {
+                    document.getElementById('idHelpText').innerText = 'Masukkan username akun Roblox kamu dengan benar.';
+                } else {
+                    document.getElementById('idHelpText').innerText = 'Masukkan ID akun dengan benar.';
+                }
+            }
+
+            renderNominals('Harga Spesial');
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('successPage').style.display = 'none';
+            document.getElementById('transactionPage').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function upgradeToPremium() {
+            document.getElementById('premiumWallModal').style.display = 'none';
+            isPremiumUser = true;
+            localStorage.setItem('ambaturico_is_premium', 'true');
+            updateWatchBadge();
+            alert('🎉 Selamat! Akun kamu berhasil di-upgrade ke status PREMIUM. Nikmati akses tanpa batas!');
+        }
+
+        function resetWatchLimitForDemo() {
+            watchCount = 0;
+            isPremiumUser = false;
+            localStorage.setItem('ambaturico_watch_count', 0);
+            localStorage.setItem('ambaturico_is_premium', 'false');
+            updateWatchBadge();
+            document.getElementById('premiumWallModal').style.display = 'none';
+            alert('🔄 Batasan tontonan direset kembali ke 0/3.');
         }
 
         function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
@@ -895,57 +1020,6 @@
             document.getElementById('infoModal').style.display = 'flex';
         }
         function closeInfoModal() { document.getElementById('infoModal').style.display = 'none'; }
-
-        function selectGame(gameName, id1Label, id2Label, imgUrl) {
-            currentActiveGame = gameName;
-            verifiedNickname = '-';
-            document.getElementById('accountCheckResult').style.display = 'none';
-            document.getElementById('selectedGameTitle').innerText = gameName;
-            document.getElementById('bannerImg').src = imgUrl;
-            document.getElementById('bannerAvatar').src = imgUrl;
-            document.getElementById('labelId1').innerText = id1Label + ':';
-            document.getElementById('inputField1').placeholder = 'Masukkan ' + id1Label;
-            document.getElementById('inputField1').value = '';
-            document.getElementById('inputField2').value = '';
-
-            const regionBox = document.getElementById('regionBox');
-            if (gameName === 'Mobile Legends') {
-                regionBox.style.display = 'block';
-                document.getElementById('stepAccountNum').innerText = '3️⃣';
-                document.getElementById('stepContactNum').innerText = '4️⃣';
-                document.getElementById('stepPaymentNum').innerText = '5️⃣';
-                document.getElementById('warningText').innerText = 'Tersedia pilihan All Region / bebas semua negara untuk Mobile Legends.';
-            } else {
-                regionBox.style.display = 'none';
-                document.getElementById('stepAccountNum').innerText = '2️⃣';
-                document.getElementById('stepContactNum').innerText = '3️⃣';
-                document.getElementById('stepPaymentNum').innerText = '4️⃣';
-                document.getElementById('warningText').innerText = 'Pastikan data akun sudah benar sebelum melakukan transaksi.';
-            }
-
-            const zoneContainer = document.getElementById('zoneIdContainer');
-            if (id2Label && id2Label !== '') {
-                zoneContainer.style.display = 'block';
-                document.getElementById('labelId2').innerText = id2Label + ':';
-                document.getElementById('inputField2').placeholder = 'Masukkan ' + id2Label;
-                document.getElementById('idHelpText').innerText = 'Tap menu profile di pojok kiri atas dari menu utama game buat lihat ID.';
-            } else {
-                zoneContainer.style.display = 'none';
-                if (gameName === 'Free Fire') {
-                    document.getElementById('idHelpText').innerText = 'Klik profil akun Free Fire kamu di pojok kiri atas untuk melihat UID.';
-                } else if (gameName === 'Roblox') {
-                    document.getElementById('idHelpText').innerText = 'Masukkan username akun Roblox kamu dengan benar.';
-                } else {
-                    document.getElementById('idHelpText').innerText = 'Masukkan ID akun dengan benar.';
-                }
-            }
-
-            renderNominals('Harga Spesial');
-            document.getElementById('homePage').style.display = 'none';
-            document.getElementById('successPage').style.display = 'none';
-            document.getElementById('transactionPage').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
 
         function checkAccount() {
             const id1 = document.getElementById('inputField1').value.trim();

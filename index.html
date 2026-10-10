@@ -219,15 +219,6 @@
         }
         .payment-left { display: flex; align-items: center; gap: 8px; }
         .payment-option input { width: auto; margin: 0; }
-        
-        .qris-box { 
-            background: rgba(15, 23, 42, 0.9); padding: 12px; border-radius: 8px; margin-top: 10px; text-align: center; display: none; border: 1px solid rgba(255,255,255,0.2);
-        }
-        .qris-box img { width: 100%; max-width: 180px; height: auto; border-radius: 6px; }
-        .qris-box p { color: #f8fafc; font-size: 11px; font-weight: 900; margin-top: 5px; margin-bottom: 0; }
-        .qris-note {
-            background: rgba(153, 27, 27, 0.3); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); padding: 8px; border-radius: 6px; font-size: 11px; font-weight: 800; margin-top: 8px; text-align: center; display: none;
-        }
 
         /* Footer Style */
         .footer-section {
@@ -283,13 +274,13 @@
         .info-modal-box {
             background: #1e293b; color: white; width: 100%; max-width: 380px; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; max-height: 80vh; overflow-y: auto; border: 1px solid rgba(255,255,255,0.1);
         }
-        .status-card { background: rgba(30, 41, 59, 0.9); border-radius: 12px; padding: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
-        .status-badge { background: rgba(234, 179, 8, 0.2); color: #fde047; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 900; display: inline-block; margin-bottom: 12px; }
+        .status-card { background: rgba(30, 41, 59, 0.9); border-radius: 12px; padding: 15px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .status-badge { background: rgba(234, 179, 8, 0.2); color: #fde047; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 900; display: inline-block; margin-bottom: 8px; }
         .modal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 15px;
         }
-        .modal-title { font-size: 18px; font-weight: 900; color: #f8fafc; margin-bottom: 5px; text-align: center; }
-        .modal-subtitle { font-size: 12px; font-weight: 700; color: #94a3b8; margin-bottom: 15px; text-align: center; }
+        .modal-title { font-size: 16px; font-weight: 900; color: #f8fafc; margin-bottom: 5px; text-align: center; }
+        .modal-subtitle { font-size: 11px; font-weight: 700; color: #94a3b8; margin-bottom: 12px; text-align: center; }
         .auth-btn { width: 100%; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(15, 23, 42, 0.8); color: white; }
         .auth-btn-fb { background: #1877f2; border: none; }
         .auth-btn-phone { background: #22c55e; border: none; }
@@ -298,6 +289,12 @@
         .floating-wa {
             position: fixed; bottom: 115px; right: 16px; background: #3b82f6; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); cursor: pointer; z-index: 1000; text-decoration: none;
         }
+
+        /* Tombol Musik Melayang */
+        .floating-music {
+            position: fixed; bottom: 170px; right: 16px; background: #ef4444; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); cursor: pointer; z-index: 1000; border: 2px solid white; animation: pulseMusic 2s infinite;
+        }
+        @keyframes pulseMusic { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
 
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-around; padding: 6px 0; z-index: 100;
@@ -308,6 +305,17 @@
     </style>
 </head>
 <body>
+
+    <!-- ELEMEN AUDIO / MUSIK LATAR BELAKANG -->
+    <audio id="bgMusic" loop>
+        <source src="https://mp3tourl.com/audio/1791631849745-630f7454-9bcd-4cb1-830a-cbfd3f5a8d24.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Tombol Kontrol Musik Mengapung -->
+    <div class="floating-music" id="musicBtn" onclick="toggleMusic()" title="Putar / Matikan Musik">
+        🎵
+    </div>
 
     <div class="navbar">
         <a href="javascript:void(0)" class="brand-logo-container" onclick="goHome()">
@@ -564,30 +572,11 @@
                 <div class="card-box">
                     <div class="box-title"><span id="stepPaymentNum">4️⃣</span> Pilih Metode Pembayaran</div>
                     <div class="payment-list">
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="QRIS" onclick="handlePaymentChange('QRIS')" required> 📱 QRIS (All Payment)</div> <span style="color:#f87171;" id="payQrisPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="GoPay" onclick="handlePaymentChange('GoPay')"> 🟢 GoPay (via QRIS)</div> <span style="color:#f87171;" id="payGopayPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="OVO" onclick="handlePaymentChange('OVO')"> 🟣 OVO (via QRIS)</div> <span style="color:#f87171;" id="payOvoPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="DANA" onclick="handlePaymentChange('DANA')"> 🟢 DANA (Buka Aplikasi / Transfer)</div> <span style="color:#f87171;" id="payDanaPrv">Rp 0</span></label>
-                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="Bank BCA" onclick="handlePaymentChange('Bank BCA')"> 🔵 Bank BCA (Manual Transfer)</div> <span style="color:#f87171;" id="payBcaPrv">Rp 0</span></label>
-                    </div>
-
-                    <!-- Kotak Gambar QRIS -->
-                    <div id="qrisSection" class="qris-box">
-                        <img src="https://cdn.phototourl.com/member/2026-10-10-bfb2147e-6044-4548-aa63-e6f285c140a8.jpg" alt="QRIS Ambaturico">
-                        <p>Scan QR di atas lalu selesaikan pembayaran!</p>
-                    </div>
-
-                    <!-- Kotak Panduan & Tombol Otomatis Buka Aplikasi DANA -->
-                    <div id="danaSection" class="qris-note" style="display: none; background: rgba(37, 99, 235, 0.2); color: #93c5fd; border-color: rgba(59, 130, 246, 0.4); text-align: center; padding: 12px;">
-                        🟢 <b>Pembayaran via DANA:</b> Klik tombol di bawah untuk langsung membuka aplikasi DANA di HP kamu dan selesaikan pembayaran.
-                        <br><br>
-                        <a id="danaAppBtn" href="https://link.dana.id/" target="_blank" style="display: inline-block; background: #2563eb; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 900; font-size: 12px;">
-                            🚀 Buka Aplikasi DANA Sekarang
-                        </a>
-                    </div>
-
-                    <div id="qrisNote" class="qris-note">
-                        ⚠️ Catatan: Mohon lebihkan 500p saat pembayaran via QRIS agar tidak terkena potongan!
+                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="QRIS" required> 📱 QRIS (All Payment)</div> <span style="color:#f87171;" id="payQrisPrv">Rp 0</span></label>
+                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="GoPay"> 🟢 GoPay (via QRIS)</div> <span style="color:#f87171;" id="payGopayPrv">Rp 0</span></label>
+                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="OVO"> 🟣 OVO (via QRIS)</div> <span style="color:#f87171;" id="payOvoPrv">Rp 0</span></label>
+                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="DANA"> 🟢 DANA (Otomatis / Bayar Langsung)</div> <span style="color:#f87171;" id="payDanaPrv">Rp 0</span></label>
+                        <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="Bank BCA"> 🔵 Bank BCA (Manual Transfer)</div> <span style="color:#f87171;" id="payBcaPrv">Rp 0</span></label>
                     </div>
                 </div>
 
@@ -642,28 +631,45 @@
             </form>
         </div>
 
-        <!-- HALAMAN SUKSES / STATUS PESANAN -->
+        <!-- HALAMAN SUKSES / KONFIRMASI PEMBAYARAN -->
         <div id="successPage">
             <button class="back-btn" onclick="goHome()">⬅ Kembali ke Beranda</button>
             <div class="status-card">
-                <div id="statusBadge" class="status-badge">⏳ SEDANG DIPROSES</div>
-                <h3 style="margin-top: 0; font-size: 18px; color: #f8fafc;">Mohon Ditunggu Pesanan Anda</h3>
-                <p style="font-size: 12px; color: #94a3b8; font-weight: 700;">Pesanan anda akan segera kami proses oleh tim Ambaturico Top Up!</p>
+                <div id="statusBadge" class="status-badge">⏳ MENUNGGU PEMBAYARAN</div>
+                <h3 style="margin-top: 0; font-size: 16px; color: #f8fafc;">Detail Informasi & Pembayaran</h3>
+                <p style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 12px;">Periksa kembali data akun Anda di bawah ini:</p>
                 
-                <div style="background: rgba(15, 23, 42, 0.8); padding: 12px; border-radius: 8px; text-align: left; margin: 15px 0; border: 1px solid rgba(255,255,255,0.1); font-size: 12px;">
+                <div style="background: rgba(15, 23, 42, 0.9); padding: 12px; border-radius: 8px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1); font-size: 11px; line-height: 1.5;">
                     <div>🆔 ID Pesanan: <b id="resOrderNo">AMB-88392</b></div>
                     <div>🎮 Game: <b id="resGame">Mobile Legends</b></div>
-                    <div id="resRegionContainer">🌍 Region: <b id="resRegion">-</b></div>
-                    <div>👤 Akun ID: <b id="resId">12345678</b></div>
-                    <div>🏷️ Nama Akun: <b id="resNickname" style="color: #4ade80;">-</b></div>
-                    <div>📦 Produk: <b id="resProduct">Weekly Pass</b></div>
-                    <div>💰 Harga: <b id="resPrice">Rp 28.000</b></div>
-                    <div style="color: #4ade80; margin-top: 4px;">🪙 Cashback 1%: <b id="resCashback">Rp 280</b></div>
+                    <div id="resRegionContainer">🌍 Region Akun: <b id="resRegion" style="color: #60a5fa;">-</b></div>
+                    <div>👤 ID Akun: <b id="resId">12345678</b></div>
+                    <div>🏷️ Nama Nickname Akun: <b id="resNickname" style="color: #4ade80; font-size: 12px;">-</b></div>
+                    <div>📦 Produk Dipilih: <b id="resProduct">Weekly Pass</b></div>
+                    <div>💰 Total Harga: <b id="resPrice" style="color: #f87171; font-size: 13px;">Rp 28.000</b></div>
+                    <div style="color: #4ade80; margin-top: 2px;">🪙 Bonus Cashback 1%: <b id="resCashback">Rp 280</b></div>
                 </div>
 
-                <a id="waConfirmBtn" href="javascript:void(0)" target="_blank" class="btn-checkout" style="display: block; text-decoration: none; text-align: center; background: #22c55e; padding: 12px;">
-                    💬 Konfirmasi Pembayaran ke WhatsApp Admin
-                </a>
+                <!-- BAGIAN PEMBAYARAN DINAMIS -->
+                <div id="paymentDisplayContainer" style="text-align: center; margin-bottom: 15px; background: rgba(15, 23, 42, 0.7); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                </div>
+
+                <!-- KOTAK PERTANYAAN SETELAH 3-5 MENIT -->
+                <div id="paymentPromptBox" style="display: none; background: rgba(37, 99, 235, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); padding: 12px; border-radius: 8px; margin-bottom: 15px; text-align: center;">
+                    <div style="font-size: 12px; font-weight: 900; color: #f8fafc; margin-bottom: 8px;">🤔 Apakah Anda sudah melakukan pembayaran?</div>
+                    <div style="display: flex; gap: 8px; justify-content: center;">
+                        <button type="button" onclick="handlePaidAnswer(true)" style="background: #22c55e; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 900; font-size: 11px; cursor: pointer;">Ya, Saya Sudah Membayar</button>
+                        <button type="button" onclick="handlePaidAnswer(false)" style="background: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 900; font-size: 11px; cursor: pointer;">Belum</button>
+                    </div>
+                </div>
+
+                <!-- TOMBOL KONFIRMASI WA (MUNCUL JIKA SUDAH KLIK "YA") -->
+                <div id="waConfirmContainer" style="display: none;">
+                    <p style="font-size: 11px; color: #4ade80; font-weight: 800; text-align: center; margin-bottom: 8px;">✅ Silakan berikan bukti ke Ambaturico agar pesanan kamu bisa langsung diproses!</p>
+                    <a id="waConfirmBtn" href="javascript:void(0)" target="_blank" class="btn-checkout" style="display: block; text-decoration: none; text-align: center; background: #22c55e; padding: 12px; font-weight: 900;">
+                        💬 Konfirmasi & Kirim Bukti ke WhatsApp Admin
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -776,8 +782,30 @@
 
         let currentActiveGame = '';
         let selectedProductData = null;
-        let activeOrders = [];
+        let activeOrders = JSON.parse(localStorage.getItem('ambaturico_orders')) || [];
         let verifiedNickname = '-';
+        let paymentTimer = null;
+        let isPlayingMusic = false;
+
+        // Fungsi Kontrol Musik Latar
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const btn = document.getElementById('musicBtn');
+            if (isPlayingMusic) {
+                music.pause();
+                btn.style.background = '#ef4444';
+                btn.innerHTML = '🎵';
+                isPlayingMusic = false;
+            } else {
+                music.play().then(() => {
+                    btn.style.background = '#22c55e';
+                    btn.innerHTML = '🔊';
+                    isPlayingMusic = true;
+                }).catch(e => {
+                    alert('Gagal memutar musik otomatis oleh browser.');
+                });
+            }
+        }
 
         function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
         function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
@@ -961,6 +989,7 @@
         }
 
         function goHome() {
+            if (paymentTimer) clearTimeout(paymentTimer);
             document.getElementById('transactionPage').style.display = 'none';
             document.getElementById('successPage').style.display = 'none';
             document.getElementById('homePage').style.display = 'block';
@@ -968,28 +997,7 @@
             verifiedNickname = '-';
             document.getElementById('topupForm').reset();
             document.getElementById('accountCheckResult').style.display = 'none';
-            handlePaymentChange('');
             window.scrollTo(0, 0);
-        }
-
-        function handlePaymentChange(method) {
-            const qrisBox = document.getElementById('qrisSection');
-            const qrisNote = document.getElementById('qrisNote');
-            const danaBox = document.getElementById('danaSection');
-
-            if (method === 'QRIS' || method === 'GoPay' || method === 'OVO') {
-                qrisBox.style.display = 'block';
-                qrisNote.style.display = 'block';
-                danaBox.style.display = 'none';
-            } else if (method === 'DANA') {
-                qrisBox.style.display = 'none';
-                qrisNote.style.display = 'none';
-                danaBox.style.display = 'block';
-            } else {
-                qrisBox.style.display = 'none';
-                qrisNote.style.display = 'none';
-                danaBox.style.display = 'none';
-            }
         }
 
         function submitOrder() {
@@ -1012,12 +1020,13 @@
                 game: currentActiveGame,
                 region: currentActiveGame === 'Mobile Legends' ? regionVal : 'N/A',
                 account: akunInfo,
-                nickname: verifiedNickname,
+                nickname: verifiedNickname !== '-' ? verifiedNickname : `${id1} (Cek Manual)`,
                 product: selectedProductData.name,
                 price: selectedProductData.price,
                 status: 'Diproses'
             };
             activeOrders.push(newOrder);
+            localStorage.setItem('ambaturico_orders', JSON.stringify(activeOrders));
 
             document.getElementById('resOrderNo').innerText = orderNo;
             document.getElementById('resGame').innerText = currentActiveGame;
@@ -1031,10 +1040,35 @@
             }
 
             document.getElementById('resId').innerText = akunInfo;
-            document.getElementById('resNickname').innerText = verifiedNickname;
+            document.getElementById('resNickname').innerText = newOrder.nickname;
             document.getElementById('resProduct').innerText = selectedProductData.name;
             document.getElementById('resPrice').innerText = selectedProductData.price;
             document.getElementById('resCashback').innerText = 'Rp ' + selectedProductData.cashbackVal.toLocaleString('id-ID');
+
+            // Tampilkan Instruksi / Gambar Pembayaran
+            const paymentDisplayContainer = document.getElementById('paymentDisplayContainer');
+            if (payment === 'QRIS' || payment === 'GoPay' || payment === 'OVO') {
+                paymentDisplayContainer.innerHTML = `
+                    <div style="font-size: 12px; font-weight: 900; color: #f8fafc; margin-bottom: 8px;">📱 Silakan Scan QRIS Di Bawah Ini:</div>
+                    <img src="https://cdn.phototourl.com/member/2026-10-10-bfb2147e-6044-4548-aa63-e6f285c140a8.jpg" alt="QRIS Ambaturico" style="width: 100%; max-width: 180px; border-radius: 6px; margin-bottom: 6px;">
+                    <div style="font-size: 10px; color: #fca5a5; font-weight: 800;">⚠️ Mohon lebihkan 500p saat pembayaran via QRIS agar tidak terkena potongan!</div>
+                `;
+            } else if (payment === 'DANA') {
+                paymentDisplayContainer.innerHTML = `
+                    <div style="font-size: 12px; font-weight: 900; color: #60a5fa; margin-bottom: 8px;">🟢 Pembayaran Otomatis DANA</div>
+                    <div style="font-size: 11px; color: #cbd5e1; margin-bottom: 10px;">Masukkan nomor DANA kamu untuk menerima otorisasi pembayaran otomatis:</div>
+                    <input type="text" id="buyerDanaNumber" placeholder="Contoh: 081234567890" style="padding: 8px; font-size: 12px; margin-bottom: 8px; text-align: center;">
+                    <button type="button" onclick="triggerDanaPayment()" style="background: #2563eb; color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 900; font-size: 12px; cursor: pointer; width: 100%;">
+                        🚀 Bayar Otomatis via DANA
+                    </button>
+                    <div id="danaNotificationStatus" style="font-size: 11px; color: #4ade80; font-weight: 800; margin-top: 8px; display: none;"></div>
+                `;
+            } else {
+                paymentDisplayContainer.innerHTML = `
+                    <div style="font-size: 12px; font-weight: 900; color: #60a5fa; margin-bottom: 6px;">🔵 Transfer Bank BCA</div>
+                    <div style="font-size: 11px; color: #f8fafc;">Silakan transfer manual ke Rekening BCA: <b>1234567890</b> a.n. Ambaturico Store senilai <b>${selectedProductData.price}</b></div>
+                `;
+            }
 
             let regionTextMsg = currentActiveGame === 'Mobile Legends' ? `%0A• Region: *${regionVal}*` : '';
 
@@ -1042,20 +1076,62 @@
                           `• No. Pesanan: *${orderNo}*%0A` +
                           `• Game: *${currentActiveGame}*` + regionTextMsg + `%0A` +
                           `• ID Akun: *${akunInfo}*%0A` +
-                          `• Nama Akun: *${verifiedNickname}*%0A` +
+                          `• Nama Akun: *${newOrder.nickname}*%0A` +
                           `• Produk: *${selectedProductData.name}* (${selectedProductData.price})%0A` +
                           `• Pembayaran: *${payment}*%0A%0A` +
                           `Berikut bukti pembayaran saya. Mohon diproses ya kak!`;
 
-            // Arahkan chat WhatsApp ke nomor HP admin
             document.getElementById('waConfirmBtn').href = `https://wa.me/6283130724263?text=${waMsg}`;
+
+            // Sembunyikan prompt & tombol WA terlebih dahulu
+            document.getElementById('paymentPromptBox').style.display = 'none';
+            document.getElementById('waConfirmContainer').style.display = 'none';
 
             document.getElementById('transactionPage').style.display = 'none';
             document.getElementById('successPage').style.display = 'block';
             window.scrollTo(0, 0);
+
+            // Set timer 4 menit (240.000 milidetik) untuk memunculkan pertanyaan apakah sudah bayar
+            if (paymentTimer) clearTimeout(paymentTimer);
+            paymentTimer = setTimeout(() => {
+                document.getElementById('paymentPromptBox').style.display = 'block';
+            }, 240000); 
+        }
+
+        function handlePaidAnswer(isPaid) {
+            const promptBox = document.getElementById('paymentPromptBox');
+            const waContainer = document.getElementById('waConfirmContainer');
+
+            if (isPaid) {
+                promptBox.style.display = 'none';
+                waContainer.style.display = 'block';
+            } else {
+                alert('Silakan selesaikan pembayaran Anda terlebih dahulu sebelum mengonfirmasi.');
+                promptBox.style.display = 'none';
+            }
+        }
+
+        function triggerDanaPayment() {
+            const phone = document.getElementById('buyerDanaNumber').value.trim();
+            const statusBox = document.getElementById('danaNotificationStatus');
+
+            if (!phone || phone.length < 10) {
+                alert('Mohon masukkan nomor DANA yang valid terlebih dahulu!');
+                return;
+            }
+
+            statusBox.style.display = 'block';
+            statusBox.style.color = '#fde047';
+            statusBox.innerHTML = `⏳ Mengirim permintaan pembayaran ke nomor DANA ${phone}...`;
+
+            setTimeout(() => {
+                statusBox.style.color = '#4ade80';
+                statusBox.innerHTML = `✅ Notifikasi Login DANA terkirim ke HP! Silakan buka aplikasi DANA kamu untuk selesaikan pembayaran.`;
+            }, 1200);
         }
 
         function renderAdminOrders() {
+            activeOrders = JSON.parse(localStorage.getItem('ambaturico_orders')) || [];
             const listContainer = document.getElementById('adminOrderList');
             if (activeOrders.length === 0) {
                 listContainer.innerHTML = `<p style="font-size: 12px; color: #94a3b8; text-align: center;">Belum ada pesanan aktif.</p>`;
@@ -1079,6 +1155,7 @@
 
         function markComplete(index) {
             activeOrders[index].status = 'Selesai';
+            localStorage.setItem('ambaturico_orders', JSON.stringify(activeOrders));
             renderAdminOrders();
             alert('Pesanan ' + activeOrders[index].id + ' berhasil dikonfirmasi menjadi SELESAI!');
         }

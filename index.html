@@ -83,30 +83,54 @@
             padding: 12px; 
         }
 
-        /* Tombol Cepat Streaming Film & TV Dracin */
+        /* Banner Aktifkan Suara Musik */
+        .sound-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.85), rgba(220, 38, 38, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+            cursor: pointer;
+            animation: pulseSound 2s infinite;
+        }
+        @keyframes pulseSound { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+        .sound-banner-left { display: flex; align-items: center; gap: 10px; }
+        .sound-banner-icon { font-size: 26px; }
+        .sound-banner-title { font-size: 13px; font-weight: 900; color: white; }
+        .sound-banner-desc { font-size: 10px; color: #fee2e2; font-weight: 700; }
+        .sound-banner-btn { background: white; color: #dc2626; border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 900; cursor: pointer; }
+
+        /* Tombol Cepat Streaming Film & TV Dracin (Dibuat Lebih Besar) */
         .quick-stream-banner {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 15px;
         }
         .quick-btn-card {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(30, 41, 59, 0.9));
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 12px;
-            padding: 12px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(30, 41, 59, 0.95));
+            border: 2px solid rgba(96, 165, 250, 0.4);
+            border-radius: 16px;
+            padding: 18px 14px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
+            text-align: center;
+            gap: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            transition: transform 0.2s, border-color 0.2s;
         }
-        .quick-btn-card:hover { transform: translateY(-2px); border-color: #60a5fa; }
-        .quick-btn-card.tv { background: linear-gradient(135deg, rgba(220, 38, 38, 0.85), rgba(30, 41, 59, 0.9)); }
-        .quick-icon { font-size: 24px; }
-        .quick-text-title { font-size: 13px; font-weight: 900; color: #f8fafc; }
-        .quick-text-desc { font-size: 10px; color: #cbd5e1; font-weight: 700; }
+        .quick-btn-card:hover { transform: translateY(-3px); border-color: #60a5fa; background: linear-gradient(135deg, rgba(37, 99, 235, 1), rgba(30, 41, 59, 1)); }
+        .quick-btn-card.tv { background: linear-gradient(135deg, rgba(220, 38, 38, 0.9), rgba(30, 41, 59, 0.95)); border-color: rgba(248, 113, 113, 0.4); }
+        .quick-btn-card.tv:hover { border-color: #f87171; background: linear-gradient(135deg, rgba(220, 38, 38, 1), rgba(30, 41, 59, 1)); }
+        .quick-icon { font-size: 38px; margin-bottom: 2px; }
+        .quick-text-title { font-size: 15px; font-weight: 900; color: #f8fafc; }
+        .quick-text-desc { font-size: 11px; color: #cbd5e1; font-weight: 700; }
 
         /* Banner Detail Game */
         .game-hero-banner {
@@ -118,20 +142,9 @@
             margin-bottom: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .game-hero-img {
-            width: 100%;
-            height: 130px;
-            object-fit: cover;
-        }
-        .game-hero-content {
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .game-avatar {
-            width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid rgba(255,255,255,0.2);
-        }
+        .game-hero-img { width: 100%; height: 130px; object-fit: cover; }
+        .game-hero-content { padding: 12px; display: flex; align-items: center; gap: 12px; }
+        .game-avatar { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid rgba(255,255,255,0.2); }
 
         .warning-box {
             background: rgba(234, 179, 8, 0.2);
@@ -148,9 +161,7 @@
             margin-bottom: 12px;
         }
 
-        .filter-tabs {
-            display: flex; gap: 8px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 4px;
-        }
+        .filter-tabs { display: flex; gap: 8px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 4px; }
         .tab-btn {
             background: rgba(30, 41, 59, 0.75); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; color: #cbd5e1; white-space: nowrap; cursor: pointer;
         }
@@ -164,27 +175,20 @@
         #homePage { display: block; }
 
         /* Grid Kartu Game */
-        .game-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-        }
+        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
         .game-card {
             background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(6px); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; border: 1px solid rgba(255,255,255,0.2); display: flex; flex-direction: column; align-items: center; padding: 8px; text-align: center;
         }
         .game-card:hover { transform: translateY(-2px); border-color: #3b82f6; background: rgba(30, 41, 59, 0.9); }
-        
         .game-img-wrapper {
             width: 100%; aspect-ratio: 3 / 4; border-radius: 10px; overflow: hidden; position: relative; background: #1e293b; margin-bottom: 6px; border: 1px solid rgba(255,255,255,0.1);
         }
         .game-img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .discount-badge {
-            position: absolute; top: 4px; right: 4px; background: #ef4444; color: white; font-size: 9px; font-weight: 900; padding: 2px 5px; border-radius: 4px; z-index: 2;
-        }
+        .discount-badge { position: absolute; top: 4px; right: 4px; background: #ef4444; color: white; font-size: 9px; font-weight: 900; padding: 2px 5px; border-radius: 4px; z-index: 2; }
         .cashback-badge {
-            position: absolute; bottom: 4px; left: 4px; right: 4px; background: linear-gradient(90deg, #dc2626, #b91c1c); color: white; font-size: 8px; font-weight: 900; padding: 3px 2px; border-radius: 4px; z-index: 2; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: absolute; bottom: 4px; left: 4px; right: 4px; background: linear-gradient(90deg, #dc2626, #b91c1c); color: white; font-size: 8px; font-weight: 900; padding: 3px 2px; border-radius: 4px; z-index: 2; text-align: center; text-transform: uppercase; letter-spacing: 0.5px;
         }
-
-        .game-title { font-weight: 800; font-size: 11px; color: #f8fafc; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+        .game-title { font-weight: 800; font-size: 11px; color: #f8fafc; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
         .back-btn {
             background: rgba(30, 41, 59, 0.85); color: #f8fafc; border: 1px solid rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 800; margin-bottom: 12px;
@@ -333,7 +337,7 @@
         </div>
     </div>
 
-    <!-- Modal Masuk / Daftar Resmi (Google, No HP, Email) -->
+    <!-- Modal Masuk / Daftar Resmi -->
     <div id="authModal" class="modal-overlay">
         <div class="modal-box">
             <button class="close-modal" onclick="closeAuthModal()">✕</button>
@@ -411,12 +415,24 @@
         <!-- HALAMAN UTAMA -->
         <div id="homePage">
             <!-- Indikator Batas Nonton -->
-            <div id="watchCounterBadge" style="background: rgba(37, 99, 235, 0.25); border: 1px solid rgba(59, 130, 246, 0.4); padding: 8px 12px; border-radius: 8px; font-size: 11px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; font-weight: 800;">
+            <div id="watchCounterBadge" style="background: rgba(37, 99, 235, 0.25); border: 1px solid rgba(59, 130, 246, 0.4); padding: 8px 12px; border-radius: 8px; font-size: 11px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-weight: 800;">
                 <span>🎬 Sisa Kuota Menonton Gratis: <b id="watchCountText" style="color: #60a5fa;">3/3</b></span>
                 <span style="color: #fde047; cursor: pointer; text-decoration: underline;" onclick="upgradeToPremium()">Upgrade Premium</span>
             </div>
 
-            <!-- Tombol Cepat Streaming Film & TV Dracin -->
+            <!-- Tombol Aktifkan Musik / Sound -->
+            <div class="sound-banner" onclick="toggleMusic()">
+                <div class="sound-banner-left">
+                    <div class="sound-banner-icon">🔊</div>
+                    <div>
+                        <div class="sound-banner-title">Putar Musik & Suara</div>
+                        <div class="sound-banner-desc">Ketuk untuk aktifkan audio web</div>
+                    </div>
+                </div>
+                <button class="sound-banner-btn" id="soundBtnText">Nyalakan</button>
+            </div>
+
+            <!-- Tombol Cepat Streaming Film & TV Dracin (Dibuat Lebih Besar & Jelas) -->
             <div class="quick-stream-banner">
                 <div class="quick-btn-card" onclick="openStreamingPage('Bioskop Ambaturico - Film Terbaru')">
                     <div class="quick-icon">🎬</div>
@@ -649,7 +665,6 @@
         let verifiedNickname = '-';
         let isPlayingMusic = false;
 
-        // Sistem Pembatasan Menonton (Maksimal 3x)
         let watchCount = parseInt(localStorage.getItem('ambaturico_watch_count')) || 0;
         let isPremiumUser = localStorage.getItem('ambaturico_is_premium') === 'true';
 
@@ -672,7 +687,6 @@
             }
         }
 
-        // Fungsi Login & Pendaftaran Resmi
         function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
         function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
         
@@ -693,7 +707,6 @@
             alert('Berhasil masuk/mendaftar dengan email: ' + email + '!');
         }
 
-        // Fungsi Streaming Film / Dracin Sekali Klik (Cek Limit 3x)
         function openStreamingPage(title) {
             if (!isPremiumUser && watchCount >= 3) {
                 document.getElementById('premiumWallModal').style.display = 'flex';
@@ -735,11 +748,13 @@
         function triggerAutoFullscreenAndMusic() {
             const music = document.getElementById('bgMusic');
             const btn = document.getElementById('musicBtn');
+            const soundBtnText = document.getElementById('soundBtnText');
             music.volume = 1.0;
             if (!isPlayingMusic) {
                 music.play().then(() => {
                     btn.style.background = '#22c55e';
                     btn.innerHTML = '🔊';
+                    soundBtnText.innerText = 'Aktif ✓';
                     isPlayingMusic = true;
                 }).catch(e => {});
             }
@@ -748,16 +763,19 @@
         function toggleMusic() {
             const music = document.getElementById('bgMusic');
             const btn = document.getElementById('musicBtn');
+            const soundBtnText = document.getElementById('soundBtnText');
             music.volume = 1.0;
             if (isPlayingMusic) {
                 music.pause();
                 btn.style.background = '#ef4444';
                 btn.innerHTML = '🎵';
+                soundBtnText.innerText = 'Nyalakan';
                 isPlayingMusic = false;
             } else {
                 music.play().then(() => {
                     btn.style.background = '#22c55e';
                     btn.innerHTML = '🔊';
+                    soundBtnText.innerText = 'Aktif ✓';
                     isPlayingMusic = true;
                 });
             }

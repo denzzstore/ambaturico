@@ -172,7 +172,7 @@
         input, select { 
             width: 100%; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(15, 23, 42, 0.8); color: white; font-size: 13px; font-weight: 700; margin-bottom: 8px;
         }
-        input:focus { outline: none; border-color: #3b82f6; background: rgba(15, 23, 42, 0.95); }
+        input:focus, select:focus { outline: none; border-color: #3b82f6; background: rgba(15, 23, 42, 0.95); }
 
         /* Kotak Info Hasil Cek Nickname Akun */
         .account-check-result {
@@ -521,9 +521,21 @@
                     <div id="nominalContainer" class="nominal-grid"></div>
                 </div>
 
-                <!-- 2. Masukkan Data Akun & Cek Otomatis -->
+                <!-- 2. Pilih Region / Server (KHUSUS MOBILE LEGENDS) -->
+                <div class="card-box" id="regionBox" style="display: none;">
+                    <div class="box-title"><span>🌍</span> Pilih Region Akun (Mobile Legends)</div>
+                    <label for="selectRegion">Region / Negara Akun:</label>
+                    <select id="selectRegion">
+                        <option value="Indonesia (ID)">🇮🇩 Indonesia (ID)</option>
+                        <option value="Malaysia / SG (SEA)">🇲🇾 Malaysia / Singapura / SEA</option>
+                        <option value="Filipina (PH)">🇵🇭 Filipina (PH)</option>
+                        <option value="Global / All Region (Bebas)">🌐 Global / All Region (Bebas Semua Negara)</option>
+                    </select>
+                </div>
+
+                <!-- 3. Masukkan Data Akun & Cek Otomatis -->
                 <div class="card-box">
-                    <div class="box-title"><span>2️⃣</span> Masukkan Data Akun</div>
+                    <div class="box-title"><span id="stepAccountNum">2️⃣</span> Masukkan Data Akun</div>
                     <label id="labelId1" for="inputField1">User ID:</label>
                     <input type="text" id="inputField1" placeholder="Masukkan User ID" onblur="checkAccount()" required>
                     
@@ -540,17 +552,17 @@
                     <span id="idHelpText" style="font-size: 10px; color: #94a3b8; font-weight: 700;">Ketuk di luar kolom ID untuk cek nama akun otomatis.</span>
                 </div>
 
-                <!-- 3. Masukkan Info Kontak (Email) -->
+                <!-- 4. Masukkan Info Kontak (Email) -->
                 <div class="card-box">
-                    <div class="box-title"><span>3️⃣</span> Masukkan Info Kontak</div>
+                    <div class="box-title"><span id="stepContactNum">3️⃣</span> Masukkan Info Kontak</div>
                     <label for="userEmail">Email (opsional):</label>
                     <input type="email" id="userEmail" placeholder="akunepepdenzz@gmail.com">
                     <span style="font-size: 10px; color: #94a3b8; font-weight: 700;">Kamu bisa isi ini ya buat terima bukti transaksi.</span>
                 </div>
 
-                <!-- 4. Pilih Metode Pembayaran -->
+                <!-- 5. Pilih Metode Pembayaran -->
                 <div class="card-box">
-                    <div class="box-title"><span>4️⃣</span> Pilih Metode Pembayaran</div>
+                    <div class="box-title"><span id="stepPaymentNum">4️⃣</span> Pilih Metode Pembayaran</div>
                     <div class="payment-list">
                         <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="QRIS" onclick="handlePaymentChange('QRIS')" required> 📱 QRIS (All Payment)</div> <span style="color:#f87171;" id="payQrisPrv">Rp 0</span></label>
                         <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="GoPay" onclick="handlePaymentChange('GoPay')"> 🟢 GoPay (via QRIS)</div> <span style="color:#f87171;" id="payGopayPrv">Rp 0</span></label>
@@ -559,15 +571,19 @@
                         <label class="payment-option"><div class="payment-left"><input type="radio" name="payment" value="Bank BCA" onclick="handlePaymentChange('Bank BCA')"> 🔵 Bank BCA (Manual Transfer)</div> <span style="color:#f87171;" id="payBcaPrv">Rp 0</span></label>
                     </div>
 
-                    <!-- Kotak QRIS dengan link baru yang kamu berikan -->
+                    <!-- Kotak Gambar QRIS -->
                     <div id="qrisSection" class="qris-box">
                         <img src="https://cdn.phototourl.com/member/2026-10-10-bfb2147e-6044-4548-aa63-e6f285c140a8.jpg" alt="QRIS Ambaturico">
                         <p>Scan QR di atas lalu selesaikan pembayaran!</p>
                     </div>
 
-                    <!-- Kotak khusus panduan DANA -->
-                    <div id="danaSection" class="qris-note" style="display: none; background: rgba(37, 99, 235, 0.2); color: #93c5fd; border-color: rgba(59, 130, 246, 0.4);">
-                        🟢 <b>Instruksi DANA:</b> Silakan klik tombol Beli Sekarang, lalu lakukan transfer ke nomor DANA Admin atau buka aplikasi DANA untuk menyelesaikan pembayaran.
+                    <!-- Kotak Panduan & Tombol Otomatis Buka Aplikasi DANA -->
+                    <div id="danaSection" class="qris-note" style="display: none; background: rgba(37, 99, 235, 0.2); color: #93c5fd; border-color: rgba(59, 130, 246, 0.4); text-align: center; padding: 12px;">
+                        🟢 <b>Pembayaran via DANA:</b> Klik tombol di bawah untuk langsung membuka aplikasi DANA di HP kamu dan selesaikan pembayaran.
+                        <br><br>
+                        <a id="danaAppBtn" href="https://link.dana.id/" target="_blank" style="display: inline-block; background: #2563eb; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 900; font-size: 12px;">
+                            🚀 Buka Aplikasi DANA Sekarang
+                        </a>
                     </div>
 
                     <div id="qrisNote" class="qris-note">
@@ -637,6 +653,7 @@
                 <div style="background: rgba(15, 23, 42, 0.8); padding: 12px; border-radius: 8px; text-align: left; margin: 15px 0; border: 1px solid rgba(255,255,255,0.1); font-size: 12px;">
                     <div>🆔 ID Pesanan: <b id="resOrderNo">AMB-88392</b></div>
                     <div>🎮 Game: <b id="resGame">Mobile Legends</b></div>
+                    <div id="resRegionContainer">🌍 Region: <b id="resRegion">-</b></div>
                     <div>👤 Akun ID: <b id="resId">12345678</b></div>
                     <div>🏷️ Nama Akun: <b id="resNickname" style="color: #4ade80;">-</b></div>
                     <div>📦 Produk: <b id="resProduct">Weekly Pass</b></div>
@@ -837,26 +854,34 @@
             document.getElementById('inputField1').value = '';
             document.getElementById('inputField2').value = '';
 
+            const regionBox = document.getElementById('regionBox');
+            if (gameName === 'Mobile Legends') {
+                regionBox.style.display = 'block';
+                document.getElementById('stepAccountNum').innerText = '3️⃣';
+                document.getElementById('stepContactNum').innerText = '4️⃣';
+                document.getElementById('stepPaymentNum').innerText = '5️⃣';
+                document.getElementById('warningText').innerText = 'Tersedia pilihan All Region / bebas semua negara untuk Mobile Legends.';
+            } else {
+                regionBox.style.display = 'none';
+                document.getElementById('stepAccountNum').innerText = '2️⃣';
+                document.getElementById('stepContactNum').innerText = '3️⃣';
+                document.getElementById('stepPaymentNum').innerText = '4️⃣';
+                document.getElementById('warningText').innerText = 'Pastikan data akun sudah benar sebelum melakukan transaksi.';
+            }
+
             const zoneContainer = document.getElementById('zoneIdContainer');
             if (id2Label && id2Label !== '') {
                 zoneContainer.style.display = 'block';
                 document.getElementById('labelId2').innerText = id2Label + ':';
                 document.getElementById('inputField2').placeholder = 'Masukkan ' + id2Label;
-                document.getElementById('warningText').innerText = 'Akun harus region Indonesia, Weekly Diamond Pass max 10x dalam 70 hari.';
                 document.getElementById('idHelpText').innerText = 'Tap menu profile di pojok kiri atas dari menu utama game buat lihat ID.';
             } else {
                 zoneContainer.style.display = 'none';
                 if (gameName === 'Free Fire') {
-                    document.getElementById('warningText').innerText = 'Masukkan Player ID (UID) Free Fire dengan benar.';
                     document.getElementById('idHelpText').innerText = 'Klik profil akun Free Fire kamu di pojok kiri atas untuk melihat UID.';
                 } else if (gameName === 'Roblox') {
-                    document.getElementById('warningText').innerText = 'Pastikan Username Roblox sudah benar dan public saat proses pengisian Robux.';
                     document.getElementById('idHelpText').innerText = 'Masukkan username akun Roblox kamu dengan benar.';
-                } else if (gameName === 'PUBG Mobile') {
-                    document.getElementById('warningText').innerText = 'Masukkan Character ID PUBG Mobile dengan benar.';
-                    document.getElementById('idHelpText').innerText = 'Lihat Character ID pada profil akun PUBG Mobile kamu.';
                 } else {
-                    document.getElementById('warningText').innerText = 'Pastikan data akun sudah benar sebelum melakukan transaksi.';
                     document.getElementById('idHelpText').innerText = 'Masukkan ID akun dengan benar.';
                 }
             }
@@ -868,7 +893,7 @@
             window.scrollTo(0, 0);
         }
 
-        // Fitur Cek ID Otomatis Berdasarkan Input User untuk SEMUA Game
+        // Fitur Cek ID Otomatis Berdasarkan Input User
         function checkAccount() {
             const id1 = document.getElementById('inputField1').value.trim();
             const resultBox = document.getElementById('accountCheckResult');
@@ -971,6 +996,7 @@
             const id1 = document.getElementById('inputField1').value;
             const id2 = document.getElementById('inputField2').value;
             const paymentEl = document.querySelector('input[name="payment"]:checked');
+            const regionVal = document.getElementById('selectRegion').value;
 
             if (!id1 || !selectedProductData || !paymentEl) {
                 alert('Mohon lengkapi Data Akun, pilih nominal produk, dan pilih metode pembayaran ya kak!');
@@ -984,6 +1010,7 @@
             const newOrder = {
                 id: orderNo,
                 game: currentActiveGame,
+                region: currentActiveGame === 'Mobile Legends' ? regionVal : 'N/A',
                 account: akunInfo,
                 nickname: verifiedNickname,
                 product: selectedProductData.name,
@@ -994,15 +1021,26 @@
 
             document.getElementById('resOrderNo').innerText = orderNo;
             document.getElementById('resGame').innerText = currentActiveGame;
+            
+            const resRegionContainer = document.getElementById('resRegionContainer');
+            if (currentActiveGame === 'Mobile Legends') {
+                resRegionContainer.style.display = 'block';
+                document.getElementById('resRegion').innerText = regionVal;
+            } else {
+                resRegionContainer.style.display = 'none';
+            }
+
             document.getElementById('resId').innerText = akunInfo;
             document.getElementById('resNickname').innerText = verifiedNickname;
             document.getElementById('resProduct').innerText = selectedProductData.name;
             document.getElementById('resPrice').innerText = selectedProductData.price;
             document.getElementById('resCashback').innerText = 'Rp ' + selectedProductData.cashbackVal.toLocaleString('id-ID');
 
+            let regionTextMsg = currentActiveGame === 'Mobile Legends' ? `%0A• Region: *${regionVal}*` : '';
+
             const waMsg = `Halo Admin Ambaturico,%0A%0ASaya ingin konfirmasi pesanan:%0A` +
                           `• No. Pesanan: *${orderNo}*%0A` +
-                          `• Game: *${currentActiveGame}*%0A` +
+                          `• Game: *${currentActiveGame}*` + regionTextMsg + `%0A` +
                           `• ID Akun: *${akunInfo}*%0A` +
                           `• Nama Akun: *${verifiedNickname}*%0A` +
                           `• Produk: *${selectedProductData.name}* (${selectedProductData.price})%0A` +
@@ -1029,7 +1067,7 @@
                 const div = document.createElement('div');
                 div.style.cssText = "background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-bottom: 8px; font-size: 11px;";
                 div.innerHTML = `
-                    <div><b>${ord.id}</b> - ${ord.game}</div>
+                    <div><b>${ord.id}</b> - ${ord.game} ${ord.region !== 'N/A' ? '('+ord.region+')' : ''}</div>
                     <div>Akun: ${ord.account} (${ord.nickname})</div>
                     <div>Produk: ${ord.product}</div>
                     <div>Status: <span style="color: ${ord.status === 'Selesai' ? '#4ade80' : '#fde047'}; font-weight: 800;">${ord.status}</span></div>
